@@ -9,7 +9,7 @@ from pydantic import ValidationError
 
 from app.core.config import Settings, get_settings
 
-HTTP_METHODS = {"get", "post", "put", "patch", "delete"}
+HTTP_METHODS = {"get", "head", "post", "put", "patch", "delete"}
 PROD = {
     "APP_ENV": "production",
     "AUTH_MODE": "supabase",

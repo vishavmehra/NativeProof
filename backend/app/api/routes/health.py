@@ -7,7 +7,7 @@ from app.services.providers import readiness
 router = APIRouter(tags=["health"])
 
 
-@router.get("/health", response_model=Health)
+@router.api_route("/health", methods=["GET", "HEAD"], response_model=Health)  # uptime monitors probe with HEAD
 async def health() -> Health:
     return Health(status="ok")
 
