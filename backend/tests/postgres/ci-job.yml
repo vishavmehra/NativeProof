@@ -1,0 +1,42 @@
+# GitHub Actions job (G): the Alembic sequence, existing-data safety, RLS, and G's API/security suites on PostgreSQL 17.
+# Copy into .github/workflows/ when CI is set up. The Supabase stub is applied per test database by the suite itself
+# (tests/postgres/supabase_stub.sql); it is never applied to Supabase.
+name: backend-postgres
+
+on:
+  pull_request:
+  push:
+    branches: [main, integration]
+
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust # disposable CI database only
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    env:
+      TEST_POSTGRES_URL: postgresql+asyncpg://postgres@127.0.0.1:5432/postgres
+      QA_POSTGRES: "1"
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.13"
+      - run: uv sync --frozen
+      - name: Alembic sequence, data safety, RLS
+        run: uv run pytest -q -m postgres tests/postgres
+      - name: G's API and security suites on Postgres
+        run: uv run pytest -q tests/integration tests/security

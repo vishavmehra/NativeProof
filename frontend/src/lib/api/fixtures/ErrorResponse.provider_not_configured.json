@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "PROVIDER_NOT_CONFIGURED",
+    "message": "Live discovery is unavailable: Qloo is not configured on the server. Use a demo project or configure Qloo.",
+    "details": [],
+    "request_id": "req_fixture_provider"
+  }
+}

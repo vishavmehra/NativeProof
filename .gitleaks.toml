@@ -1,0 +1,12 @@
+# Default gitleaks rules, plus an allowlist for test files that use labeled dummy credentials on purpose
+# (they check that configured secrets never reach responses, logs, or the frontend bundle).
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Labeled dummy credentials in tests"
+paths = [
+  '''backend/tests/security/test_secrets\.py''',
+  '''backend/tests/unit/qloo/test_qloo_executor\.py''',
+  '''e2e/scripts/scan_next\.py''',
+]

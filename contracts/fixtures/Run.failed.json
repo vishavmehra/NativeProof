@@ -1,0 +1,25 @@
+{
+  "id": "4c72bb12-383c-571f-afd4-14a9b76cb800",
+  "project_id": "6ced936e-7ec2-5d2f-bed9-2abce2c53a0e",
+  "campaign_id": "7144bb4d-ba91-5dda-b725-661401ca027e",
+  "study_id": "5a073990-09d3-5ab0-94f7-902b6a979770",
+  "run_type": "campaign_rehearsal",
+  "status": "failed",
+  "mode": "live",
+  "progress": {
+    "stage": "generating_reactions",
+    "completed_steps": 1,
+    "total_steps": 4,
+    "message": "Generating synthetic reactions."
+  },
+  "result": null,
+  "error": {
+    "code": "PROVIDER_TIMEOUT",
+    "message": "The model provider did not respond within 60 seconds. No reactions were saved; retrying is safe.",
+    "stage": "generating_reactions",
+    "retryable": true
+  },
+  "created_at": "2026-10-25T08:46:40Z",
+  "started_at": "2026-10-25T08:46:41Z",
+  "completed_at": "2026-10-25T08:47:42Z"
+}

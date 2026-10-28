@@ -1,0 +1,251 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens: docs/08_UI_UX_SPEC.md §3 (v2 visual system).
+ * Barely-warm canvas, white cards, navy ink, indigo primary, Fraunces headings, warm neutrals.
+ * Feature tokens: text-{f} (accent), bg-{f}-soft (tint), text-{f}-ink (AA text on canvas/tint). Feature hues appear only
+ * on the page eyebrow and the active nav marker; amber is reserved for Unverified, partial, and DEMO/fixture states.
+ */
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-heading: var(--font-inter);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-ink: var(--ink);
+  --color-ink-body: var(--ink-body);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-accent-hover: var(--accent-hover);
+  --color-lavender: var(--lavender);
+  --color-lavender-ink: var(--lavender-ink);
+  --radius-card: 0.875rem;
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --color-atlas: var(--f-atlas);
+  --color-atlas-soft: var(--f-atlas-soft);
+  --color-atlas-ink: var(--f-atlas-ink);
+  --color-dna: var(--f-dna);
+  --color-dna-soft: var(--f-dna-soft);
+  --color-dna-ink: var(--f-dna-ink);
+  --color-markets: var(--f-markets);
+  --color-markets-soft: var(--f-markets-soft);
+  --color-markets-ink: var(--f-markets-ink);
+  --color-trends: var(--f-trends);
+  --color-trends-soft: var(--f-trends-soft);
+  --color-trends-ink: var(--f-trends-ink);
+  --color-audience: var(--f-audience);
+  --color-audience-soft: var(--f-audience-soft);
+  --color-audience-ink: var(--f-audience-ink);
+  --color-arena: var(--f-arena);
+  --color-arena-soft: var(--f-arena-soft);
+  --color-arena-ink: var(--f-arena-ink);
+  --color-risk: var(--f-risk);
+  --color-risk-soft: var(--f-risk-soft);
+  --color-risk-ink: var(--f-risk-ink);
+  --color-risk-amber: var(--f-risk-amber);
+  --color-voice: var(--f-voice);
+  --color-voice-soft: var(--f-voice-soft);
+  --color-voice-ink: var(--f-voice-ink);
+  --color-loop: var(--f-loop);
+  --color-loop-soft: var(--f-loop-soft);
+  --color-loop-ink: var(--f-loop-ink);
+  --color-brand: var(--f-brand);
+  --color-brand-soft: var(--f-brand-soft);
+  --color-brand-ink: var(--f-brand-ink);
+  --color-proof: var(--f-proof);
+  --color-proof-soft: var(--f-proof-soft);
+  --color-proof-ink: var(--f-proof-ink);
+  --color-graph: var(--f-graph);
+  --color-graph-soft: var(--f-graph-soft);
+  --color-graph-ink: var(--f-graph-ink);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 14px -6px rgb(15 23 42 / 0.06);
+  --shadow-raised: 0 4px 16px -4px rgb(15 23 42 / 0.08), 0 1px 2px rgb(15 23 42 / 0.04);
+}
+
+:root {
+  /* Foundation (final, 2026-10-26): barely-warm white canvas; cards, surfaces, and sidebar stay pure white so they
+     lift off it; sand only for subtle insets and table headers. Navy on canvas 17.1:1, slate 10.1:1, gray 4.6:1. */
+  --canvas: #ffffff; /* the sidebar shares it */
+  --surface: #ffffff;
+  --lavender: #efebfe; /* active nav pill, next-step bar */
+  --lavender-ink: #4338ca;
+  --surface-muted: #f6f4ef; /* warm sand: insets, table headers, hover */
+  --ink: #0f172a; /* deep navy */
+  --ink-body: #334155; /* slate */
+  --ink-secondary: #5f5b54; /* warm stone: 6.8:1 on white, 6.6:1 on canvas, 6.1:1 on sand */
+  --accent-hover: #4338ca;
+
+  /* Status (text shades chosen for WCAG AA on their soft tints) */
+  --success: #047857;
+  --success-soft: #ecfdf5;
+  --warning: #92400e;
+  --warning-soft: #fef3c7;
+  --danger: #be123c;
+  --danger-soft: #fff1f2;
+  --info: #0369a1;
+  --info-soft: #f0f9ff;
+
+  /* Feature icon colors from the reference sidebar (docs/16 §1): accent / soft tint / AA text */
+  --f-atlas: #e5484d; /* red target */
+  --f-atlas-soft: #fdecec;
+  --f-atlas-ink: #b4232c;
+  --f-dna: #4f46e5; /* indigo */
+  --f-dna-soft: #eef0fe;
+  --f-dna-ink: #4338ca;
+  --f-markets: #14b8a6; /* teal */
+  --f-markets-soft: #e7f8f5;
+  --f-markets-ink: #0f766e;
+  --f-trends: #6366f1; /* indigo sparkle */
+  --f-trends-soft: #eef0fe;
+  --f-trends-ink: #4338ca;
+  --f-audience: #4f46e5; /* indigo */
+  --f-audience-soft: #eef0fe;
+  --f-audience-ink: #4338ca;
+  --f-arena: #ef4444; /* red */
+  --f-arena-soft: #fdecec;
+  --f-arena-ink: #b91c1c;
+  --f-risk: #e5484d; /* red diamond */
+  --f-risk-soft: #fdecec;
+  --f-risk-ink: #b4232c;
+  --f-risk-amber: #f59e0b;
+  --f-voice: #f97316; /* orange */
+  --f-voice-soft: #fff1e6;
+  --f-voice-ink: #c2410c;
+  --f-loop: #f97316; /* orange */
+  --f-loop-soft: #fff1e6;
+  --f-loop-ink: #c2410c;
+  --f-brand: #f97316; /* orange */
+  --f-brand-soft: #fff1e6;
+  --f-brand-ink: #c2410c;
+  --f-proof: #2563eb; /* blue */
+  --f-proof-soft: #eaf1fe;
+  --f-proof-ink: #1d4ed8;
+  --f-graph: #2563eb; /* blue */
+  --f-graph-soft: #eaf1fe;
+  --f-graph-ink: #1d4ed8;
+
+  /* shadcn/ui semantic slots (primary = indigo, accent = indigo tint) */
+  --background: var(--canvas);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-muted);
+  --secondary-foreground: var(--ink);
+  --muted: #f3f1ec;
+  --muted-foreground: var(--ink-secondary);
+  --accent: #eef2ff;
+  --accent-foreground: var(--ink);
+  --destructive: var(--danger);
+  --border: #e7e3dc; /* warm stone */
+  --input: #dfdad1;
+  --ring: #4f46e5;
+  --chart-1: #4f46e5;
+  --chart-2: #14b8a6;
+  --chart-3: #f59e0b;
+  --chart-4: #0ea5e9;
+  --chart-5: #f43f5e;
+  --radius: 0.625rem;
+  --sidebar: var(--canvas);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: #4f46e5;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f6f4ef;
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: #e7e3dc;
+  --sidebar-ring: #4f46e5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv11", "ss01";
+  }
+  html {
+    @apply font-sans;
+  }
+  /* Room for the fixed MOCK API banner (components/app-shell/mock-banner.tsx). */
+  body[data-mock] {
+    --mock-offset: 1.5rem;
+    padding-bottom: var(--mock-offset);
+  }
+}
+
+/*
+ * Focus indicator for every interactive element: full-strength 2px ring color with a 2px offset (WCAG 2.4.7, 2.4.11).
+ * Deliberately unlayered so component `outline-none` utilities cannot remove it; outlines also survive forced-colors mode.
+ * Rows inside overflow-hidden lists opt into an inset outline with `focus-visible:-outline-offset-2!`.
+ */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

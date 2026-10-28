@@ -1,0 +1,367 @@
+{
+  "run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+  "status": "completed",
+  "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+  "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+  "market": {
+    "country_code": "JP",
+    "display_name": "Japan"
+  },
+  "product_category": "outdoor lifestyle apparel",
+  "research_question": "Which cultural interests could inform this launch?",
+  "reference_terms": [
+    "hiking",
+    "minimal design",
+    "great escape"
+  ],
+  "references": [
+    {
+      "id": "ref-1",
+      "query_term": "hiking",
+      "match_status": "resolved",
+      "name": "Hiking",
+      "entity_id": "fixture:tag:hiking",
+      "entity_type": "tag",
+      "candidates": [],
+      "attributes": [],
+      "relevance_explanation": "Hiking matches the campaign's journey framing and the brand's outdoor positioning.",
+      "evidence_ids": [
+        "e04b2403-0567-5450-8986-9fc91a7fa414"
+      ],
+      "limitations": [
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ]
+    },
+    {
+      "id": "ref-2",
+      "query_term": "related to Hiking",
+      "match_status": "resolved",
+      "name": "Kumo Trail Co. (fictional)",
+      "entity_id": "fixture:brand:kumo-trail",
+      "entity_type": "brand",
+      "candidates": [],
+      "attributes": [
+        {
+          "key": "affinity",
+          "label": "Affinity",
+          "value": 0.71,
+          "description": "Illustrative fixture value. The live adapter preserves Qloo's own field meaning; not a probability."
+        }
+      ],
+      "relevance_explanation": "A related outdoor brand may indicate adjacent tastes; fictional demo entity.",
+      "evidence_ids": [
+        "9212263d-d44a-5dc5-854b-7181b6a2f5f6"
+      ],
+      "limitations": [
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ]
+    },
+    {
+      "id": "ref-3",
+      "query_term": "minimal design",
+      "match_status": "ambiguous",
+      "name": null,
+      "entity_id": null,
+      "entity_type": null,
+      "candidates": [
+        {
+          "entity_id": "fixture:tag:minimalism",
+          "name": "Minimalism",
+          "entity_type": "tag"
+        },
+        {
+          "entity_id": "fixture:tag:minimalist-architecture",
+          "name": "Minimalist architecture",
+          "entity_type": "tag"
+        }
+      ],
+      "attributes": [],
+      "relevance_explanation": null,
+      "evidence_ids": [
+        "e1f2cb2b-6978-5e98-b290-3ab6aee43fe2"
+      ],
+      "limitations": [
+        "Ambiguous: refine the term before relying on it."
+      ]
+    },
+    {
+      "id": "ref-4",
+      "query_term": "great escape",
+      "match_status": "unresolved",
+      "name": null,
+      "entity_id": null,
+      "entity_type": null,
+      "candidates": [],
+      "attributes": [],
+      "relevance_explanation": null,
+      "evidence_ids": [],
+      "limitations": [
+        "No usable Qloo match; any interpretation of this phrase is a hypothesis."
+      ]
+    }
+  ],
+  "market_brief": {
+    "summary": "Hiking is the clearest supported signal for this launch. The campaign's 'great escape' phrasing did not resolve to any cultural reference and should be tested.",
+    "observations": [
+      {
+        "id": "obs-1",
+        "title": "Hiking resolved as a relevant tag",
+        "explanation": "'hiking' resolved to the Hiking tag, with a related outdoor brand (fictional demo entity).",
+        "claim_type": "observed",
+        "evidence_ids": [
+          "e04b2403-0567-5450-8986-9fc91a7fa414",
+          "9212263d-d44a-5dc5-854b-7181b6a2f5f6"
+        ],
+        "confidence_label": "moderate",
+        "validation_question": null
+      }
+    ],
+    "opportunities": [
+      {
+        "id": "opp-1",
+        "title": "Lead with trail-focused framing",
+        "explanation": "Framing the launch around trail use connects the copy to the supported signals.",
+        "claim_type": "interpreted",
+        "evidence_ids": [
+          "e04b2403-0567-5450-8986-9fc91a7fa414",
+          "9212263d-d44a-5dc5-854b-7181b6a2f5f6",
+          "5da4aa30-1ac8-5801-aeb9-cc63cd14e6fa"
+        ],
+        "confidence_label": "limited",
+        "validation_question": "Does trail-focused copy resonate more than escape framing with weekend hikers?"
+      }
+    ],
+    "risks": [
+      {
+        "id": "risk-1",
+        "title": "'Great escape' may not carry over",
+        "explanation": "The phrase did not resolve; its connotation in Japan is untested.",
+        "claim_type": "hypothesis",
+        "evidence_ids": [],
+        "confidence_label": "insufficient",
+        "validation_question": "How do Japanese consumers read 'great escape' in an outdoor-apparel ad?"
+      }
+    ],
+    "validation_questions": [
+      "How do Japanese consumers read 'great escape' in an outdoor-apparel ad?"
+    ],
+    "limitations": [
+      "Cultural affinity does not establish market demand.",
+      "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo."
+    ]
+  },
+  "evidence": [
+    {
+      "id": "e04b2403-0567-5450-8986-9fc91a7fa414",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Resolved tag: Hiking",
+      "summary": "The term 'hiking' resolved to the Hiking tag (near-exact match).",
+      "source_provider": "qloo",
+      "source_workflow": "find_tags",
+      "source_reference": "fixture:tag:hiking",
+      "subject": {
+        "entity_id": "fixture:tag:hiking",
+        "name": "Hiking",
+        "entity_type": "tag"
+      },
+      "related_entity": null,
+      "attributes": [
+        {
+          "key": "match_rank",
+          "label": "Match rank",
+          "value": 1,
+          "description": "Position in the returned candidates."
+        }
+      ],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:01Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:01Z"
+    },
+    {
+      "id": "9212263d-d44a-5dc5-854b-7181b6a2f5f6",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Related brand: Kumo Trail Co. (fictional)",
+      "summary": "A fictional demo brand standing in for a recommend result for audiences with a Hiking affinity.",
+      "source_provider": "qloo",
+      "source_workflow": "recommend",
+      "source_reference": "fixture:brand:kumo-trail",
+      "subject": {
+        "entity_id": "fixture:tag:hiking",
+        "name": "Hiking",
+        "entity_type": "tag"
+      },
+      "related_entity": {
+        "entity_id": "fixture:brand:kumo-trail",
+        "name": "Kumo Trail Co. (fictional)",
+        "entity_type": "brand"
+      },
+      "attributes": [
+        {
+          "key": "affinity",
+          "label": "Affinity",
+          "value": 0.71,
+          "description": "Illustrative fixture value. The live adapter preserves Qloo's own field meaning; not a probability."
+        }
+      ],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:02Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:02Z"
+    },
+    {
+      "id": "e1f2cb2b-6978-5e98-b290-3ab6aee43fe2",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Ambiguous match: 'minimal design'",
+      "summary": "Two plausible tags were returned; Nativeproof did not choose one.",
+      "source_provider": "qloo",
+      "source_workflow": "find_tags",
+      "source_reference": null,
+      "subject": null,
+      "related_entity": null,
+      "attributes": [],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:01Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:01Z"
+    },
+    {
+      "id": "5da4aa30-1ac8-5801-aeb9-cc63cd14e6fa",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "model_interpretation",
+      "claim_type": "interpreted",
+      "title": "Interpretation: trail-focused framing",
+      "summary": "The Hiking signal suggests framing the launch around trail use rather than escape.",
+      "source_provider": "fixture",
+      "source_workflow": null,
+      "source_reference": null,
+      "subject": null,
+      "related_entity": null,
+      "attributes": [],
+      "method": "model_interpretation",
+      "retrieval_mode": "generated",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": null,
+      "limitations": [
+        "Model interpretation of the evidence above; not a Qloo observation.",
+        "Demo fixture output, not a live model response."
+      ],
+      "provenance": null,
+      "created_at": "2026-10-25T08:32:03Z"
+    }
+  ],
+  "limitations": [
+    "Demo mode: every provider result in this run is a fixture."
+  ],
+  "run_metadata": {
+    "run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+    "mode": "demo",
+    "started_at": "2026-10-25T08:32:00Z",
+    "completed_at": "2026-10-25T08:32:04Z",
+    "steps": [
+      {
+        "stage": "resolving_references",
+        "agent": "atlas",
+        "status": "completed",
+        "provider": "fixture",
+        "model_id": null,
+        "prompt_version": null,
+        "schema_version": null,
+        "latency_ms": 12,
+        "retries": 0,
+        "fallback_used": false,
+        "sampling": null,
+        "usage": null,
+        "error_code": null
+      },
+      {
+        "stage": "retrieving_affinities",
+        "agent": "atlas",
+        "status": "completed",
+        "provider": "fixture",
+        "model_id": null,
+        "prompt_version": null,
+        "schema_version": null,
+        "latency_ms": 12,
+        "retries": 0,
+        "fallback_used": false,
+        "sampling": null,
+        "usage": null,
+        "error_code": null
+      },
+      {
+        "stage": "normalizing_evidence",
+        "agent": "atlas",
+        "status": "completed",
+        "provider": "nativeproof",
+        "model_id": null,
+        "prompt_version": null,
+        "schema_version": null,
+        "latency_ms": 12,
+        "retries": 0,
+        "fallback_used": false,
+        "sampling": null,
+        "usage": null,
+        "error_code": null
+      },
+      {
+        "stage": "generating_brief",
+        "agent": "atlas",
+        "status": "completed",
+        "provider": "fixture",
+        "model_id": null,
+        "prompt_version": "atlas-brief-v1",
+        "schema_version": "market-brief-v1",
+        "latency_ms": 12,
+        "retries": 0,
+        "fallback_used": false,
+        "sampling": null,
+        "usage": null,
+        "error_code": null
+      }
+    ]
+  }
+}

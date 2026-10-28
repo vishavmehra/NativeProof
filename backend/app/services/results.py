@@ -1,0 +1,228 @@
+"""Read side: runs, evidence, and the stored results of each run type.
+
+Results embed the evidence records they reference (D-009). Each stored result keeps an
+`evidence_ids` list, hydrated here in one query and always scoped to the run's project.
+"""
+
+from typing import Any
+from uuid import UUID
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db import models as m
+from app.db.session import read_session
+from app.schemas.adaptations import Adaptation, AdaptationPage
+from app.schemas.common import RunMetadata
+from app.schemas.discovery import DiscoveryResult
+from app.schemas.evaluations import EvaluationResult
+from app.schemas.evidence import EvidencePage, EvidenceRecord, EvidenceType
+from app.schemas.runs import Run, RunPage, RunStatus, RunType
+from app.schemas.studies import DimensionResults, RehearsalResult, SimulationDisclosure, SyntheticReaction
+from app.services.common import get_owned, get_project, not_found, paginate
+
+API = "/api/v1"
+
+
+# --- converters ------------------------------------------------------------------------
+
+
+def to_run(run: m.AgentRun) -> Run:
+    return Run(
+        id=run.id, project_id=run.project_id, campaign_id=run.campaign_id, study_id=run.study_id,
+        run_type=run.run_type, status=run.status, mode=run.mode,  # type: ignore[arg-type]
+        progress=run.progress, result=run.result_ref, error=run.error,  # type: ignore[arg-type]
+        created_at=run.created_at, started_at=run.started_at, completed_at=run.completed_at,
+    )
+
+
+def run_metadata(run: m.AgentRun) -> RunMetadata:
+    return RunMetadata(
+        run_id=run.id, mode=run.mode, started_at=run.started_at, completed_at=run.completed_at,  # type: ignore[arg-type]
+        steps=run.steps,  # type: ignore[arg-type]
+    )
+
+
+def to_evidence(row: m.EvidenceRecord) -> EvidenceRecord:
+    return EvidenceRecord.model_validate(row, from_attributes=True)
+
+
+async def evidence_by_ids(s: AsyncSession, project_id: UUID, ids: list[Any]) -> list[EvidenceRecord]:
+    """Evidence in the given order, restricted to the project; unknown ids are skipped."""
+    wanted = list(dict.fromkeys(UUID(str(i)) for i in ids))
+    if not wanted:
+        return []
+    stmt = select(m.EvidenceRecord).where(m.EvidenceRecord.project_id == project_id, m.EvidenceRecord.id.in_(wanted))
+    rows = {row.id: row for row in (await s.execute(stmt)).scalars()}
+    return [to_evidence(rows[i]) for i in wanted if i in rows]
+
+
+async def to_adaptations(s: AsyncSession, rows: list[m.Adaptation]) -> list[Adaptation]:
+    if not rows:
+        return []
+    evidence = {
+        e.id: e for e in await evidence_by_ids(s, rows[0].project_id, [i for row in rows for i in row.evidence_ids])
+    }
+    return [
+        Adaptation(
+            id=row.id, project_id=row.project_id, campaign_id=row.campaign_id, run_id=row.run_id,
+            source_content_version_id=row.source_content_version_id, parent_adaptation_id=row.parent_adaptation_id,
+            origin=row.origin, mode=row.mode, market=row.market, label=row.label,  # type: ignore[arg-type]
+            strategy=row.strategy, content=row.content, changes=row.changes, checks=row.checks,  # type: ignore[arg-type]
+            warnings=row.warnings, limitations=row.limitations, context=row.context,  # type: ignore[arg-type]
+            evidence=[evidence[UUID(str(i))] for i in row.evidence_ids if UUID(str(i)) in evidence],
+            created_at=row.created_at,
+        )
+        for row in rows
+    ]
+
+
+def _limitations(run: m.AgentRun, stored: dict[str, Any]) -> list[str]:
+    if "limitations" in stored:
+        return list(stored["limitations"])
+    return [run.error["message"]] if run.error else []
+
+
+async def discovery_result(s: AsyncSession, run: m.AgentRun) -> DiscoveryResult:
+    request, stored = run.inputs["request"], run.result or {}
+    return DiscoveryResult(
+        run_id=run.id, status=run.status, project_id=run.project_id, campaign_id=run.campaign_id,  # type: ignore[arg-type]
+        market=request["market"], product_category=request["product_category"],
+        research_question=request["research_question"], reference_terms=request["reference_terms"],
+        references=stored.get("references", []), market_brief=stored.get("market_brief"),
+        evidence=await evidence_by_ids(s, run.project_id, stored.get("evidence_ids", [])),
+        limitations=_limitations(run, stored), run_metadata=run_metadata(run),
+    )
+
+
+async def rehearsal_result(s: AsyncSession, run: m.AgentRun, study: m.Study) -> RehearsalResult:
+    inputs, stored = run.inputs, run.result or {}
+    reactions = (
+        await s.execute(
+            select(m.SyntheticResponse).where(m.SyntheticResponse.run_id == run.id).order_by(m.SyntheticResponse.position)
+        )
+    ).scalars()
+    disclosure = stored.get("simulation_disclosure") or SimulationDisclosure(
+        description="Synthetic reactions are generated by an AI model; they are not responses from real people.",
+        requested_responses=inputs["simulation_config"]["response_count"],
+        generated_responses=0,
+        grounded=bool(inputs["grounding_evidence_ids"]),
+        grounding_evidence_count=len(inputs["grounding_evidence_ids"]),
+    )
+    return RehearsalResult(
+        run_id=run.id, status=run.status, study_id=study.id, campaign_id=study.campaign_id,  # type: ignore[arg-type]
+        content_version_id=inputs["content_version_id"], content=inputs["content"], market=study.market,  # type: ignore[arg-type]
+        simulation_disclosure=disclosure, segments=stored.get("segments", []),
+        reactions=[SyntheticReaction.model_validate(r.payload) for r in reactions],
+        dimension_results=stored.get("dimension_results") or DimensionResults(), summary=stored.get("summary"),
+        evidence=await evidence_by_ids(s, run.project_id, stored.get("evidence_ids", [])),
+        limitations=_limitations(run, stored), run_metadata=run_metadata(run),
+    )
+
+
+async def evaluation_result(s: AsyncSession, row: m.Evaluation, run: m.AgentRun) -> EvaluationResult:
+    return EvaluationResult(
+        id=row.id, run_id=row.run_id, status=row.status, project_id=row.project_id,  # type: ignore[arg-type]
+        campaign_id=row.campaign_id, source_content_version_id=row.source_content_version_id,
+        market=row.market, criteria=row.criteria, results=row.results,  # type: ignore[arg-type]
+        recommendation=row.recommendation, comparability=row.comparability,  # type: ignore[arg-type]
+        scoring_version=row.scoring_version, scoring_definition=row.scoring_definition,  # type: ignore[arg-type]
+        evidence=await evidence_by_ids(s, row.project_id, row.evidence_ids), limitations=row.limitations,
+        run_metadata=run_metadata(run), created_at=row.created_at,
+    )
+
+
+async def find_run(s: AsyncSession, run_id: UUID, run_type: str, **scope: UUID) -> m.AgentRun:
+    stmt = select(m.AgentRun).where(m.AgentRun.id == run_id, m.AgentRun.run_type == run_type)
+    for column, value in scope.items():
+        stmt = stmt.where(getattr(m.AgentRun, column) == value)
+    run = (await s.execute(stmt)).scalar_one_or_none()
+    if run is None:
+        raise not_found("Run")
+    return run
+
+
+# --- endpoints -------------------------------------------------------------------------
+
+
+async def get_run(user_id: UUID, run_id: UUID) -> Run:
+    async with read_session() as s:
+        run, _ = await get_owned(s, m.AgentRun, run_id, user_id, "Run")
+    return to_run(run)
+
+
+async def list_runs(
+    user_id: UUID, project_id: UUID, limit: int, offset: int, run_type: RunType | None, campaign_id: UUID | None,
+    study_id: UUID | None, status: RunStatus | None,
+) -> RunPage:
+    async with read_session() as s:
+        await get_project(s, user_id, project_id)
+        stmt = select(m.AgentRun).where(m.AgentRun.project_id == project_id)
+        for column, value in (("run_type", run_type), ("campaign_id", campaign_id), ("study_id", study_id), ("status", status)):
+            if value is not None:
+                stmt = stmt.where(getattr(m.AgentRun, column) == value)
+        rows, total = await paginate(s, stmt.order_by(m.AgentRun.created_at.desc(), m.AgentRun.id), limit, offset)
+    return RunPage(items=[to_run(r) for r in rows], limit=limit, offset=offset, total=total)
+
+
+async def get_discovery(user_id: UUID, project_id: UUID, run_id: UUID) -> DiscoveryResult:
+    async with read_session() as s:
+        await get_project(s, user_id, project_id)
+        run = await find_run(s, run_id, "market_discovery", project_id=project_id)
+        return await discovery_result(s, run)
+
+
+async def get_rehearsal(user_id: UUID, study_id: UUID, run_id: UUID) -> RehearsalResult:
+    async with read_session() as s:
+        study, _ = await get_owned(s, m.Study, study_id, user_id, "Study")
+        run = await find_run(s, run_id, "campaign_rehearsal", study_id=study_id)
+        return await rehearsal_result(s, run, study)
+
+
+async def list_adaptations(user_id: UUID, campaign_id: UUID, limit: int, offset: int, run_id: UUID | None) -> AdaptationPage:
+    async with read_session() as s:
+        await get_owned(s, m.Campaign, campaign_id, user_id, "Campaign")
+        stmt = select(m.Adaptation).where(m.Adaptation.campaign_id == campaign_id)
+        if run_id is not None:
+            stmt = stmt.where(m.Adaptation.run_id == run_id)
+        stmt = stmt.order_by(m.Adaptation.created_at.desc(), m.Adaptation.position, m.Adaptation.id)
+        rows, total = await paginate(s, stmt, limit, offset)
+        items = await to_adaptations(s, rows)
+    return AdaptationPage(items=items, limit=limit, offset=offset, total=total)
+
+
+async def get_adaptation(user_id: UUID, adaptation_id: UUID) -> Adaptation:
+    async with read_session() as s:
+        row, _ = await get_owned(s, m.Adaptation, adaptation_id, user_id, "Adaptation")
+        return (await to_adaptations(s, [row]))[0]
+
+
+async def get_evaluation(user_id: UUID, campaign_id: UUID, evaluation_id: UUID) -> EvaluationResult:
+    async with read_session() as s:
+        row, _ = await get_owned(s, m.Evaluation, evaluation_id, user_id, "Evaluation")
+        if row.campaign_id != campaign_id:
+            raise not_found("Evaluation")
+        run = await s.get(m.AgentRun, row.run_id)
+        assert run is not None
+        return await evaluation_result(s, row, run)
+
+
+async def list_evidence(
+    user_id: UUID, project_id: UUID, limit: int, offset: int, run_id: UUID | None, evidence_type: EvidenceType | None
+) -> EvidencePage:
+    async with read_session() as s:
+        await get_project(s, user_id, project_id)
+        stmt = select(m.EvidenceRecord).where(m.EvidenceRecord.project_id == project_id)
+        if run_id is not None:
+            stmt = stmt.where(m.EvidenceRecord.source_run_id == run_id)
+        if evidence_type is not None:
+            stmt = stmt.where(m.EvidenceRecord.evidence_type == evidence_type)
+        stmt = stmt.order_by(m.EvidenceRecord.created_at.desc(), m.EvidenceRecord.id)
+        rows, total = await paginate(s, stmt, limit, offset)
+    return EvidencePage(items=[to_evidence(r) for r in rows], limit=limit, offset=offset, total=total)
+
+
+async def get_evidence(user_id: UUID, evidence_id: UUID) -> EvidenceRecord:
+    async with read_session() as s:
+        row, _ = await get_owned(s, m.EvidenceRecord, evidence_id, user_id, "Evidence record")
+    return to_evidence(row)

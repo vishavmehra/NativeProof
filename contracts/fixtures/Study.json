@@ -1,0 +1,43 @@
+{
+  "id": "17e4bafb-bed2-5ddd-8e95-11a619c0b66a",
+  "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+  "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+  "name": "Japan Launch Rehearsal",
+  "market": {
+    "country_code": "JP",
+    "display_name": "Japan"
+  },
+  "research_questions": [
+    "Is the main message clear?",
+    "What interpretations could the headline trigger?",
+    "Which references might be confusing or inappropriate?"
+  ],
+  "dimensions": [
+    "clarity",
+    "brand_fidelity",
+    "cultural_relevance",
+    "cultural_risk"
+  ],
+  "segments": [
+    {
+      "label": "Weekend hikers",
+      "description": "Metropolitan professionals who hike one or two weekends a month."
+    },
+    {
+      "label": "Design-led urban buyers",
+      "description": "Style-conscious city residents who value minimal design."
+    },
+    {
+      "label": "Experienced mountaineers",
+      "description": "Technical climbers who judge gear on performance claims."
+    }
+  ],
+  "simulation_config": {
+    "response_count": 6,
+    "segment_count": 3,
+    "random_seed": 42
+  },
+  "latest_rehearsal_run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+  "created_at": "2026-10-25T08:35:00Z",
+  "updated_at": "2026-10-25T08:36:50Z"
+}

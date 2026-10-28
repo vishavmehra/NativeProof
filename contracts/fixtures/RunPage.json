@@ -1,0 +1,112 @@
+{
+  "items": [
+    {
+      "id": "14780c51-0db1-5e49-8efc-3700dd9ded43",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "study_id": null,
+      "run_type": "campaign_evaluation",
+      "status": "completed",
+      "mode": "demo",
+      "progress": {
+        "stage": "completed",
+        "completed_steps": 4,
+        "total_steps": 4,
+        "message": "Complete (demo fixtures)."
+      },
+      "result": {
+        "resource": "evaluation",
+        "ids": [
+          "867be7bb-4ec1-559b-b6b5-fc430a8cb0c3"
+        ],
+        "url": "/api/v1/campaigns/183bcafe-452c-5db9-a11b-8973c871ce6e/evaluations/867be7bb-4ec1-559b-b6b5-fc430a8cb0c3"
+      },
+      "error": null,
+      "created_at": "2026-10-25T08:39:59Z",
+      "started_at": "2026-10-25T08:40:00Z",
+      "completed_at": "2026-10-25T08:40:15Z"
+    },
+    {
+      "id": "38d15f9f-6178-556b-8ffe-238894aa5e30",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "study_id": null,
+      "run_type": "campaign_adaptation",
+      "status": "completed",
+      "mode": "demo",
+      "progress": {
+        "stage": "completed",
+        "completed_steps": 4,
+        "total_steps": 4,
+        "message": "Complete (demo fixtures)."
+      },
+      "result": {
+        "resource": "adaptations",
+        "ids": [
+          "feb0b592-a0d7-592d-8f5c-f5acb8f05bdc",
+          "04ae8c97-4195-523a-8fbd-7c74e5a45c37"
+        ],
+        "url": "/api/v1/campaigns/183bcafe-452c-5db9-a11b-8973c871ce6e/adaptations?run_id=38d15f9f-6178-556b-8ffe-238894aa5e30"
+      },
+      "error": null,
+      "created_at": "2026-10-25T08:38:19Z",
+      "started_at": "2026-10-25T08:38:20Z",
+      "completed_at": "2026-10-25T08:38:32Z"
+    },
+    {
+      "id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "study_id": "17e4bafb-bed2-5ddd-8e95-11a619c0b66a",
+      "run_type": "campaign_rehearsal",
+      "status": "completed",
+      "mode": "demo",
+      "progress": {
+        "stage": "completed",
+        "completed_steps": 4,
+        "total_steps": 4,
+        "message": "Complete (demo fixtures)."
+      },
+      "result": {
+        "resource": "rehearsal",
+        "ids": [
+          "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1"
+        ],
+        "url": "/api/v1/studies/17e4bafb-bed2-5ddd-8e95-11a619c0b66a/rehearsals/77c11ae4-f941-5a8c-974b-2d97e3f1e0e1"
+      },
+      "error": null,
+      "created_at": "2026-10-25T08:36:39Z",
+      "started_at": "2026-10-25T08:36:40Z",
+      "completed_at": "2026-10-25T08:36:50Z"
+    },
+    {
+      "id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "study_id": null,
+      "run_type": "market_discovery",
+      "status": "completed",
+      "mode": "demo",
+      "progress": {
+        "stage": "completed",
+        "completed_steps": 4,
+        "total_steps": 4,
+        "message": "Complete (demo fixtures)."
+      },
+      "result": {
+        "resource": "discovery",
+        "ids": [
+          "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b"
+        ],
+        "url": "/api/v1/projects/f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc/discoveries/a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b"
+      },
+      "error": null,
+      "created_at": "2026-10-25T08:31:59Z",
+      "started_at": "2026-10-25T08:32:00Z",
+      "completed_at": "2026-10-25T08:32:04Z"
+    }
+  ],
+  "limit": 20,
+  "offset": 0,
+  "total": 4
+}

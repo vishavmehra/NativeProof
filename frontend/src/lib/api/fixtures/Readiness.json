@@ -1,0 +1,15 @@
+{
+  "status": "degraded",
+  "dependencies": {
+    "database": "available",
+    "llm_provider": "not_configured",
+    "qloo": "not_configured"
+  },
+  "capabilities": {
+    "embeddings": "not_configured",
+    "vision": "not_configured",
+    "reranking": "not_required"
+  },
+  "live_mode_available": false,
+  "demo_mode_available": true
+}

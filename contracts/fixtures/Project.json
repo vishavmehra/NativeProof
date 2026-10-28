@@ -1,0 +1,50 @@
+{
+  "id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+  "name": "Japan Market Launch",
+  "description": "Evaluate the autumn launch campaign for Japan.",
+  "objective": "Decide whether the autumn campaign needs adaptation before a Japan launch.",
+  "mode": "demo",
+  "status": "active",
+  "brand": {
+    "id": "c1f7c9fa-8bd8-547b-abc4-5e5762ff591c",
+    "name": "Northstar",
+    "description": "A premium outdoor lifestyle brand",
+    "positioning": "Premium outdoor gear for people who return to the trail every weekend.",
+    "voice": [
+      "confident",
+      "minimal",
+      "adventurous"
+    ],
+    "communication_style": "Short, confident sentences. No hype and no superlatives.",
+    "target_audience": "Urban professionals who hike on weekends",
+    "audience_preferences": "Craft and minimal design over technical jargon.",
+    "preferred_terms": [
+      "trail",
+      "craft"
+    ],
+    "prohibited_terms": [
+      "cheap"
+    ],
+    "protected_terms": [
+      "Northstar"
+    ],
+    "approved_examples": [
+      {
+        "text": "Built for the journeys that change you.",
+        "note": "Approved tagline"
+      }
+    ],
+    "constraints": [
+      "Never promise performance we have not tested."
+    ],
+    "updated_at": "2026-10-25T08:30:00Z"
+  },
+  "target_markets": [
+    {
+      "country_code": "JP",
+      "display_name": "Japan"
+    }
+  ],
+  "created_at": "2026-10-25T08:30:00Z",
+  "updated_at": "2026-10-25T08:45:00Z"
+}

@@ -1,0 +1,1364 @@
+{
+  "id": "a83155ee-4235-5437-b5a3-f1032a20d178",
+  "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+  "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+  "title": "Japan Launch Cultural Review",
+  "status": "completed",
+  "version_number": 1,
+  "mode": "demo",
+  "created_at": "2026-10-25T08:45:00Z",
+  "market": {
+    "country_code": "JP",
+    "display_name": "Japan"
+  },
+  "executive_summary": {
+    "investigated": "Whether Northstar's autumn campaign 'Find your next great escape' fits the Japanese market.",
+    "findings": [
+      "Hiking was the clearest supported cultural signal (demo fixtures).",
+      "Synthetic reactions split on what the headline promises."
+    ],
+    "changes": [
+      "'Clearer message' replaces 'great escape' with trail-focused copy and names the product."
+    ],
+    "uncertainties": [
+      "No real consumers were consulted; every reaction is AI-generated.",
+      "'Great escape' could not be resolved to a cultural reference."
+    ],
+    "next_steps": [
+      "Test the original and 'Clearer message' headlines with Japanese weekend hikers.",
+      "Have a native-speaking copywriter review the adapted copy."
+    ]
+  },
+  "campaign": {
+    "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+    "name": "Autumn Launch Campaign",
+    "campaign_type": "advertisement",
+    "content_version_id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+    "content": {
+      "headline": "Find your next great escape",
+      "body": "Built for the journeys that change you.",
+      "call_to_action": "Explore the collection",
+      "reference_terms": [
+        "great escape"
+      ]
+    }
+  },
+  "discovery": {
+    "run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+    "market": {
+      "country_code": "JP",
+      "display_name": "Japan"
+    },
+    "research_question": "Which cultural interests could inform this launch?",
+    "references": [
+      {
+        "id": "ref-1",
+        "query_term": "hiking",
+        "match_status": "resolved",
+        "name": "Hiking",
+        "entity_id": "fixture:tag:hiking",
+        "entity_type": "tag",
+        "candidates": [],
+        "attributes": [],
+        "relevance_explanation": "Hiking matches the campaign's journey framing and the brand's outdoor positioning.",
+        "evidence_ids": [
+          "e04b2403-0567-5450-8986-9fc91a7fa414"
+        ],
+        "limitations": [
+          "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+        ]
+      },
+      {
+        "id": "ref-2",
+        "query_term": "related to Hiking",
+        "match_status": "resolved",
+        "name": "Kumo Trail Co. (fictional)",
+        "entity_id": "fixture:brand:kumo-trail",
+        "entity_type": "brand",
+        "candidates": [],
+        "attributes": [
+          {
+            "key": "affinity",
+            "label": "Affinity",
+            "value": 0.71,
+            "description": "Illustrative fixture value. The live adapter preserves Qloo's own field meaning; not a probability."
+          }
+        ],
+        "relevance_explanation": "A related outdoor brand may indicate adjacent tastes; fictional demo entity.",
+        "evidence_ids": [
+          "9212263d-d44a-5dc5-854b-7181b6a2f5f6"
+        ],
+        "limitations": [
+          "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+        ]
+      },
+      {
+        "id": "ref-3",
+        "query_term": "minimal design",
+        "match_status": "ambiguous",
+        "name": null,
+        "entity_id": null,
+        "entity_type": null,
+        "candidates": [
+          {
+            "entity_id": "fixture:tag:minimalism",
+            "name": "Minimalism",
+            "entity_type": "tag"
+          },
+          {
+            "entity_id": "fixture:tag:minimalist-architecture",
+            "name": "Minimalist architecture",
+            "entity_type": "tag"
+          }
+        ],
+        "attributes": [],
+        "relevance_explanation": null,
+        "evidence_ids": [
+          "e1f2cb2b-6978-5e98-b290-3ab6aee43fe2"
+        ],
+        "limitations": [
+          "Ambiguous: refine the term before relying on it."
+        ]
+      },
+      {
+        "id": "ref-4",
+        "query_term": "great escape",
+        "match_status": "unresolved",
+        "name": null,
+        "entity_id": null,
+        "entity_type": null,
+        "candidates": [],
+        "attributes": [],
+        "relevance_explanation": null,
+        "evidence_ids": [],
+        "limitations": [
+          "No usable Qloo match; any interpretation of this phrase is a hypothesis."
+        ]
+      }
+    ],
+    "market_brief": {
+      "summary": "Hiking is the clearest supported signal for this launch. The campaign's 'great escape' phrasing did not resolve to any cultural reference and should be tested.",
+      "observations": [
+        {
+          "id": "obs-1",
+          "title": "Hiking resolved as a relevant tag",
+          "explanation": "'hiking' resolved to the Hiking tag, with a related outdoor brand (fictional demo entity).",
+          "claim_type": "observed",
+          "evidence_ids": [
+            "e04b2403-0567-5450-8986-9fc91a7fa414",
+            "9212263d-d44a-5dc5-854b-7181b6a2f5f6"
+          ],
+          "confidence_label": "moderate",
+          "validation_question": null
+        }
+      ],
+      "opportunities": [
+        {
+          "id": "opp-1",
+          "title": "Lead with trail-focused framing",
+          "explanation": "Framing the launch around trail use connects the copy to the supported signals.",
+          "claim_type": "interpreted",
+          "evidence_ids": [
+            "e04b2403-0567-5450-8986-9fc91a7fa414",
+            "9212263d-d44a-5dc5-854b-7181b6a2f5f6",
+            "5da4aa30-1ac8-5801-aeb9-cc63cd14e6fa"
+          ],
+          "confidence_label": "limited",
+          "validation_question": "Does trail-focused copy resonate more than escape framing with weekend hikers?"
+        }
+      ],
+      "risks": [
+        {
+          "id": "risk-1",
+          "title": "'Great escape' may not carry over",
+          "explanation": "The phrase did not resolve; its connotation in Japan is untested.",
+          "claim_type": "hypothesis",
+          "evidence_ids": [],
+          "confidence_label": "insufficient",
+          "validation_question": "How do Japanese consumers read 'great escape' in an outdoor-apparel ad?"
+        }
+      ],
+      "validation_questions": [
+        "How do Japanese consumers read 'great escape' in an outdoor-apparel ad?"
+      ],
+      "limitations": [
+        "Cultural affinity does not establish market demand.",
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo."
+      ]
+    }
+  },
+  "rehearsal": {
+    "run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+    "simulation_disclosure": {
+      "is_synthetic": true,
+      "independent_human_sample": false,
+      "description": "These reactions were generated by an AI model (demo fixtures) and are not responses from real people.",
+      "requested_responses": 6,
+      "generated_responses": 6,
+      "grounded": true,
+      "grounding_evidence_count": 2
+    },
+    "dimension_results": {
+      "clarity": {
+        "dimension": "clarity",
+        "score": 50.0,
+        "higher_is_better": true,
+        "n": 6,
+        "distribution": [
+          0,
+          2,
+          2,
+          2,
+          0
+        ],
+        "spread": 0.82,
+        "disagreement": true,
+        "method": "deterministic_aggregation",
+        "definition": "How easily the intended message is understood.",
+        "interpretation": "Synthetic reactions averaged 3.00 of 5 (n=6). Ratings diverge; see the disagreement analysis.",
+        "limitations": [
+          "Derived from AI-generated reactions; not a measurement of real people."
+        ]
+      },
+      "brand_fidelity": {
+        "dimension": "brand_fidelity",
+        "score": 70.8,
+        "higher_is_better": true,
+        "n": 6,
+        "distribution": [
+          0,
+          0,
+          2,
+          3,
+          1
+        ],
+        "spread": 0.69,
+        "disagreement": false,
+        "method": "deterministic_aggregation",
+        "definition": "How well the content keeps the brand's voice and protected terms.",
+        "interpretation": "Synthetic reactions averaged 3.83 of 5 (n=6).",
+        "limitations": [
+          "Derived from AI-generated reactions; not a measurement of real people."
+        ]
+      },
+      "cultural_relevance": {
+        "dimension": "cultural_relevance",
+        "score": 45.8,
+        "higher_is_better": true,
+        "n": 6,
+        "distribution": [
+          0,
+          2,
+          3,
+          1,
+          0
+        ],
+        "spread": 0.69,
+        "disagreement": false,
+        "method": "deterministic_aggregation",
+        "definition": "How relevant the content's references are to the target market.",
+        "interpretation": "Synthetic reactions averaged 2.83 of 5 (n=6).",
+        "limitations": [
+          "Derived from AI-generated reactions; not a measurement of real people."
+        ]
+      },
+      "cultural_risk": {
+        "dimension": "cultural_risk",
+        "score": 29.2,
+        "higher_is_better": false,
+        "n": 6,
+        "distribution": [
+          1,
+          3,
+          2,
+          0,
+          0
+        ],
+        "spread": 0.69,
+        "disagreement": false,
+        "method": "deterministic_aggregation",
+        "definition": "Potential for misinterpretation, offense, or sensitivity issues. Higher means more risk.",
+        "interpretation": "Synthetic reactions averaged 2.17 of 5 (n=6).",
+        "limitations": [
+          "Derived from AI-generated reactions; not a measurement of real people."
+        ]
+      }
+    },
+    "summary": {
+      "key_findings": [
+        {
+          "id": "kf-1",
+          "category": "disagreement",
+          "title": "The headline splits interpretations",
+          "summary": "Reactions diverged on what 'great escape' promises: gear for trips, a holiday, or leaving work.",
+          "supporting_response_ids": [
+            "13826dc5-ff65-53fc-9750-0b6a50cd3ade",
+            "b65bcb68-2b17-5a76-be6f-557fd35d0194",
+            "6f4cbaa6-40ef-5271-9d18-3eb8766ccbe4"
+          ],
+          "evidence_ids": [
+            "cd677f85-8e20-5806-a7d1-d7221bb615ca"
+          ],
+          "method": "synthetic_response_analysis",
+          "claim_type": "synthetic",
+          "confidence_label": "limited",
+          "limitations": [
+            "Derived from AI-generated reactions; not a measurement of real people."
+          ]
+        },
+        {
+          "id": "kf-2",
+          "category": "brand_fidelity",
+          "title": "The brand voice lands",
+          "summary": "Most reactions described the tone as minimal and confident.",
+          "supporting_response_ids": [
+            "13826dc5-ff65-53fc-9750-0b6a50cd3ade",
+            "bc991901-9b2b-537f-ac74-4afe971b2057"
+          ],
+          "evidence_ids": [],
+          "method": "synthetic_response_analysis",
+          "claim_type": "synthetic",
+          "confidence_label": "limited",
+          "limitations": [
+            "Derived from AI-generated reactions; not a measurement of real people."
+          ]
+        },
+        {
+          "id": "kf-3",
+          "category": "cultural_relevance",
+          "title": "Technical buyers see no product claim",
+          "summary": "Mountaineer perspectives found no concrete reason to choose the gear.",
+          "supporting_response_ids": [
+            "f660dfec-6a8b-5570-9b92-b13575e4e536",
+            "43084b8b-ec54-5922-bb09-ae8cd13e07c7"
+          ],
+          "evidence_ids": [],
+          "method": "synthetic_response_analysis",
+          "claim_type": "synthetic",
+          "confidence_label": "limited",
+          "limitations": [
+            "Derived from AI-generated reactions; not a measurement of real people."
+          ]
+        }
+      ],
+      "potential_confusions": [
+        {
+          "id": "cf-1",
+          "category": "confusion",
+          "title": "'Escape' read as travel or escapism",
+          "summary": "Two reactions read the headline as a holiday offer or as leaving responsibilities.",
+          "supporting_response_ids": [
+            "b65bcb68-2b17-5a76-be6f-557fd35d0194",
+            "6f4cbaa6-40ef-5271-9d18-3eb8766ccbe4"
+          ],
+          "evidence_ids": [],
+          "method": "synthetic_response_analysis",
+          "claim_type": "synthetic",
+          "confidence_label": "limited",
+          "limitations": [
+            "Derived from AI-generated reactions; not a measurement of real people."
+          ]
+        }
+      ],
+      "potential_cultural_risks": [
+        {
+          "id": "cr-1",
+          "category": "cultural_risk",
+          "title": "Escapism may feel dismissive of work",
+          "summary": "One reaction flagged the escapism framing as a possible sensitivity.",
+          "supporting_response_ids": [
+            "6f4cbaa6-40ef-5271-9d18-3eb8766ccbe4"
+          ],
+          "evidence_ids": [],
+          "method": "synthetic_response_analysis",
+          "claim_type": "hypothesis",
+          "confidence_label": "insufficient",
+          "limitations": [
+            "Derived from AI-generated reactions; not a measurement of real people.",
+            "Raised by a single synthetic reaction."
+          ]
+        }
+      ],
+      "disagreements": [
+        {
+          "id": "dg-1",
+          "topic": "What the headline promises",
+          "dimension": "clarity",
+          "interpretations": [
+            {
+              "label": "Gear for the next trip",
+              "summary": "An invitation to plan outdoor trips.",
+              "response_ids": [
+                "13826dc5-ff65-53fc-9750-0b6a50cd3ade",
+                "bc991901-9b2b-537f-ac74-4afe971b2057"
+              ]
+            },
+            {
+              "label": "A holiday or travel offer",
+              "summary": "Reads as travel marketing.",
+              "response_ids": [
+                "b65bcb68-2b17-5a76-be6f-557fd35d0194",
+                "f660dfec-6a8b-5570-9b92-b13575e4e536"
+              ]
+            },
+            {
+              "label": "Escaping obligations",
+              "summary": "Reads as leaving work behind.",
+              "response_ids": [
+                "6f4cbaa6-40ef-5271-9d18-3eb8766ccbe4"
+              ]
+            }
+          ],
+          "possible_explanations": [
+            "Hypothesis: 'escape' carries a 'leaving responsibilities' connotation for some readers.",
+            "Hypothesis: the copy names no product, so readers fill the gap differently."
+          ],
+          "validation_question": "Which reading of the headline do Japanese weekend hikers choose unprompted?",
+          "spread": 0.82
+        }
+      ],
+      "validation_questions": [
+        "Which reading of the headline do Japanese weekend hikers choose unprompted?",
+        "Does naming a concrete product benefit change clarity for technical buyers?"
+      ]
+    }
+  },
+  "adaptations": [
+    {
+      "id": "feb0b592-a0d7-592d-8f5c-f5acb8f05bdc",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "run_id": "38d15f9f-6178-556b-8ffe-238894aa5e30",
+      "source_content_version_id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+      "parent_adaptation_id": null,
+      "origin": "generated",
+      "mode": "demo",
+      "market": {
+        "country_code": "JP",
+        "display_name": "Japan"
+      },
+      "label": "Clearer message",
+      "strategy": "Name the product and anchor the promise in trail use.",
+      "content": {
+        "headline": "Gear for the trails you keep coming back to",
+        "body": "Built for the journeys that change you, from weekend ridgelines to alpine routes.",
+        "call_to_action": "Explore the collection",
+        "reference_terms": [
+          "trails"
+        ]
+      },
+      "changes": [
+        {
+          "field": "headline",
+          "original": "Find your next great escape",
+          "adapted": "Gear for the trails you keep coming back to",
+          "reason": "Replaces the ambiguous 'great escape' with trail framing supported by the Hiking signal.",
+          "reasoning_type": "evidence_supported",
+          "evidence_ids": [
+            "e04b2403-0567-5450-8986-9fc91a7fa414"
+          ]
+        },
+        {
+          "field": "body",
+          "original": "Built for the journeys that change you.",
+          "adapted": "Built for the journeys that change you, from weekend ridgelines to alpine routes.",
+          "reason": "Adds concrete terrain so technical buyers see a product context.",
+          "reasoning_type": "model_interpretation",
+          "evidence_ids": []
+        }
+      ],
+      "checks": {
+        "protected_terms_preserved": true,
+        "missing_protected_terms": [],
+        "prohibited_terms_found": [],
+        "brand_voice_reviewed": true,
+        "cultural_risk_reviewed": true
+      },
+      "warnings": [],
+      "limitations": [
+        "Not reviewed by a native Japanese speaker or local expert.",
+        "Demo fixture output, not a live model response."
+      ],
+      "context": {
+        "discovery_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+        "rehearsal_run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+        "grounded": true,
+        "rehearsal_informed": true
+      },
+      "evidence": [
+        {
+          "id": "e04b2403-0567-5450-8986-9fc91a7fa414",
+          "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+          "evidence_type": "qloo_source",
+          "claim_type": "observed",
+          "title": "Resolved tag: Hiking",
+          "summary": "The term 'hiking' resolved to the Hiking tag (near-exact match).",
+          "source_provider": "qloo",
+          "source_workflow": "find_tags",
+          "source_reference": "fixture:tag:hiking",
+          "subject": {
+            "entity_id": "fixture:tag:hiking",
+            "name": "Hiking",
+            "entity_type": "tag"
+          },
+          "related_entity": null,
+          "attributes": [
+            {
+              "key": "match_rank",
+              "label": "Match rank",
+              "value": 1,
+              "description": "Position in the returned candidates."
+            }
+          ],
+          "method": "provider_result",
+          "retrieval_mode": "fixture",
+          "is_live_data": false,
+          "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+          "retrieved_at": "2026-10-25T08:32:01Z",
+          "limitations": [
+            "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+            "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+          ],
+          "provenance": {
+            "request_hash": null,
+            "response_hash": null,
+            "normalizer_version": "1",
+            "fixture_origin": "hand_authored"
+          },
+          "created_at": "2026-10-25T08:32:01Z"
+        }
+      ],
+      "created_at": "2026-10-25T08:38:32Z"
+    },
+    {
+      "id": "04ae8c97-4195-523a-8fbd-7c74e5a45c37",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "run_id": "38d15f9f-6178-556b-8ffe-238894aa5e30",
+      "source_content_version_id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+      "parent_adaptation_id": null,
+      "origin": "generated",
+      "mode": "demo",
+      "market": {
+        "country_code": "JP",
+        "display_name": "Japan"
+      },
+      "label": "Brand-first",
+      "strategy": "Lead with the brand and replace escapism with a journey metaphor.",
+      "content": {
+        "headline": "Northstar. Built for the long way round.",
+        "body": "Minimal gear for the journeys that change you.",
+        "call_to_action": "Explore the collection",
+        "reference_terms": []
+      },
+      "changes": [
+        {
+          "field": "headline",
+          "original": "Find your next great escape",
+          "adapted": "Northstar. Built for the long way round.",
+          "reason": "Leads with the brand and swaps escapism for a journey metaphor.",
+          "reasoning_type": "model_interpretation",
+          "evidence_ids": []
+        },
+        {
+          "field": "body",
+          "original": "Built for the journeys that change you.",
+          "adapted": "Minimal gear for the journeys that change you.",
+          "reason": "Echoes the brand's minimal voice.",
+          "reasoning_type": "model_interpretation",
+          "evidence_ids": []
+        }
+      ],
+      "checks": {
+        "protected_terms_preserved": true,
+        "missing_protected_terms": [],
+        "prohibited_terms_found": [],
+        "brand_voice_reviewed": true,
+        "cultural_risk_reviewed": true
+      },
+      "warnings": [
+        {
+          "severity": "low",
+          "category": "ambiguity",
+          "description": "'The long way round' is an English idiom whose nuance may not carry over.",
+          "source": "model_assessment"
+        }
+      ],
+      "limitations": [
+        "Not reviewed by a native Japanese speaker or local expert.",
+        "Demo fixture output, not a live model response."
+      ],
+      "context": {
+        "discovery_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+        "rehearsal_run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+        "grounded": true,
+        "rehearsal_informed": true
+      },
+      "evidence": [],
+      "created_at": "2026-10-25T08:38:32Z"
+    }
+  ],
+  "evaluation": {
+    "id": "867be7bb-4ec1-559b-b6b5-fc430a8cb0c3",
+    "run_id": "14780c51-0db1-5e49-8efc-3700dd9ded43",
+    "status": "completed",
+    "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+    "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+    "source_content_version_id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+    "market": {
+      "country_code": "JP",
+      "display_name": "Japan"
+    },
+    "criteria": {
+      "clarity": 0.3,
+      "brand_fidelity": 0.25,
+      "cultural_relevance": 0.3,
+      "cultural_risk": 0.15
+    },
+    "results": [
+      {
+        "candidate_id": "original",
+        "candidate_type": "original",
+        "adaptation_id": null,
+        "label": "Original",
+        "content": {
+          "headline": "Find your next great escape",
+          "body": "Built for the journeys that change you.",
+          "call_to_action": "Explore the collection",
+          "reference_terms": [
+            "great escape"
+          ]
+        },
+        "dimension_scores": {
+          "clarity": 55.0,
+          "brand_fidelity": 84.0,
+          "cultural_relevance": 50.0,
+          "cultural_risk": 30.0
+        },
+        "dimension_rationales": {
+          "clarity": "'Great escape' is open to several readings.",
+          "brand_fidelity": "Confident and minimal, on brand.",
+          "cultural_relevance": "No reference resolved to a supported local signal.",
+          "cultural_risk": "Escapism framing may read as dismissive of work."
+        },
+        "overall_score": 63.0,
+        "risk_flags": [
+          {
+            "severity": "medium",
+            "category": "sensitivity",
+            "description": "Escapism framing could read as dismissive of work commitments.",
+            "source": "model_assessment"
+          }
+        ],
+        "constraint_violations": [],
+        "strengths": [
+          "Distinctive, confident tone"
+        ],
+        "weaknesses": [
+          "No product benefit stated",
+          "Ambiguous headline"
+        ],
+        "tradeoffs": [],
+        "evidence_ids": [
+          "cd677f85-8e20-5806-a7d1-d7221bb615ca"
+        ]
+      },
+      {
+        "candidate_id": "feb0b592-a0d7-592d-8f5c-f5acb8f05bdc",
+        "candidate_type": "adaptation",
+        "adaptation_id": "feb0b592-a0d7-592d-8f5c-f5acb8f05bdc",
+        "label": "Clearer message",
+        "content": {
+          "headline": "Gear for the trails you keep coming back to",
+          "body": "Built for the journeys that change you, from weekend ridgelines to alpine routes.",
+          "call_to_action": "Explore the collection",
+          "reference_terms": [
+            "trails"
+          ]
+        },
+        "dimension_scores": {
+          "clarity": 78.0,
+          "brand_fidelity": 80.0,
+          "cultural_relevance": 70.0,
+          "cultural_risk": 20.0
+        },
+        "dimension_rationales": {
+          "clarity": "States the product and use.",
+          "brand_fidelity": "Slightly less distinctive.",
+          "cultural_relevance": "Anchored in the Hiking signal.",
+          "cultural_risk": "No sensitivity found."
+        },
+        "overall_score": 76.4,
+        "risk_flags": [],
+        "constraint_violations": [],
+        "strengths": [
+          "Clear product category",
+          "Trail framing supported by the Hiking signal"
+        ],
+        "weaknesses": [
+          "Less distinctive than the original"
+        ],
+        "tradeoffs": [
+          "Gains clarity and relevance at a small cost in distinctiveness."
+        ],
+        "evidence_ids": [
+          "e04b2403-0567-5450-8986-9fc91a7fa414"
+        ]
+      },
+      {
+        "candidate_id": "04ae8c97-4195-523a-8fbd-7c74e5a45c37",
+        "candidate_type": "adaptation",
+        "adaptation_id": "04ae8c97-4195-523a-8fbd-7c74e5a45c37",
+        "label": "Brand-first",
+        "content": {
+          "headline": "Northstar. Built for the long way round.",
+          "body": "Minimal gear for the journeys that change you.",
+          "call_to_action": "Explore the collection",
+          "reference_terms": []
+        },
+        "dimension_scores": {
+          "clarity": 70.0,
+          "brand_fidelity": 92.0,
+          "cultural_relevance": 58.0,
+          "cultural_risk": 22.0
+        },
+        "dimension_rationales": {
+          "clarity": "Clear, but the idiom adds ambiguity.",
+          "brand_fidelity": "Strongest brand presence.",
+          "cultural_relevance": "No supported local reference.",
+          "cultural_risk": "Idiom may not carry over."
+        },
+        "overall_score": 73.1,
+        "risk_flags": [
+          {
+            "severity": "low",
+            "category": "ambiguity",
+            "description": "'The long way round' is an English idiom whose nuance may not carry over.",
+            "source": "model_assessment"
+          }
+        ],
+        "constraint_violations": [],
+        "strengths": [
+          "Strongest brand presence"
+        ],
+        "weaknesses": [
+          "Idiom may not translate"
+        ],
+        "tradeoffs": [
+          "Highest brand fidelity, but lower relevance than Clearer message."
+        ],
+        "evidence_ids": []
+      }
+    ],
+    "recommendation": {
+      "decision": "accept",
+      "candidate_id": "feb0b592-a0d7-592d-8f5c-f5acb8f05bdc",
+      "rationale": "Clearer message scores 76.4 against 63.0 for the original, with low assessed risk. It meets the criteria for the next internal review; this is not evidence of market performance. Test it with Japanese consumers before launch.",
+      "rule_id": "R4_meets_review_threshold"
+    },
+    "comparability": {
+      "same_market": true,
+      "same_criteria": true,
+      "same_source_version": true,
+      "same_scoring_version": true,
+      "same_evidence_context": true,
+      "same_model": true,
+      "notes": [
+        "All candidates were assessed in one run with the same criteria, model, and scoring version."
+      ]
+    },
+    "scoring_version": "mvp-1",
+    "scoring_definition": {
+      "version": "mvp-1",
+      "scale": "0-100 per dimension",
+      "dimensions": [
+        {
+          "dimension": "clarity",
+          "label": "Clarity",
+          "definition": "How easily the intended message is understood.",
+          "higher_is_better": true
+        },
+        {
+          "dimension": "brand_fidelity",
+          "label": "Brand fidelity",
+          "definition": "How well the content keeps the brand's voice and protected terms.",
+          "higher_is_better": true
+        },
+        {
+          "dimension": "cultural_relevance",
+          "label": "Cultural relevance",
+          "definition": "How relevant the content's references are to the target market.",
+          "higher_is_better": true
+        },
+        {
+          "dimension": "cultural_risk",
+          "label": "Cultural risk",
+          "definition": "Potential for misinterpretation, offense, or sensitivity issues. Higher means more risk.",
+          "higher_is_better": false
+        }
+      ],
+      "aggregation": "overall = sum(weight_d * utility_d), where utility = score for clarity, brand_fidelity and cultural_relevance, and 100 - score for cultural_risk. Weights sum to 1. Overall is null when any dimension score is missing.",
+      "recommendation_rules": [
+        "R0_missing_scores: a score is missing for the original or the best candidate -> inconclusive",
+        "R1_constraint_or_risk: best candidate has a constraint violation, a high-severity risk flag, or cultural_risk >= 60 -> revise",
+        "R2_no_improvement: best candidate overall < original overall -> revise",
+        "R3_small_margin: best candidate overall - original overall < 5 -> validate",
+        "R4_meets_review_threshold: best candidate overall >= 70 and cultural_risk < 40 -> accept (for the next internal review, not proof of market success)",
+        "R5_default: otherwise -> validate"
+      ]
+    },
+    "evidence": [
+      {
+        "id": "e04b2403-0567-5450-8986-9fc91a7fa414",
+        "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+        "evidence_type": "qloo_source",
+        "claim_type": "observed",
+        "title": "Resolved tag: Hiking",
+        "summary": "The term 'hiking' resolved to the Hiking tag (near-exact match).",
+        "source_provider": "qloo",
+        "source_workflow": "find_tags",
+        "source_reference": "fixture:tag:hiking",
+        "subject": {
+          "entity_id": "fixture:tag:hiking",
+          "name": "Hiking",
+          "entity_type": "tag"
+        },
+        "related_entity": null,
+        "attributes": [
+          {
+            "key": "match_rank",
+            "label": "Match rank",
+            "value": 1,
+            "description": "Position in the returned candidates."
+          }
+        ],
+        "method": "provider_result",
+        "retrieval_mode": "fixture",
+        "is_live_data": false,
+        "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+        "retrieved_at": "2026-10-25T08:32:01Z",
+        "limitations": [
+          "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+          "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+        ],
+        "provenance": {
+          "request_hash": null,
+          "response_hash": null,
+          "normalizer_version": "1",
+          "fixture_origin": "hand_authored"
+        },
+        "created_at": "2026-10-25T08:32:01Z"
+      },
+      {
+        "id": "cd677f85-8e20-5806-a7d1-d7221bb615ca",
+        "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+        "evidence_type": "deterministic_calculation",
+        "claim_type": "derived",
+        "title": "Clarity score from synthetic rehearsal",
+        "summary": "Clarity 50.0 of 100 from 6 synthetic ratings; spread 0.82.",
+        "source_provider": "nativeproof",
+        "source_workflow": null,
+        "source_reference": null,
+        "subject": null,
+        "related_entity": null,
+        "attributes": [
+          {
+            "key": "spread",
+            "label": "Spread (1-5 scale)",
+            "value": 0.82,
+            "description": "Population standard deviation of the ratings."
+          }
+        ],
+        "method": "deterministic_aggregation",
+        "retrieval_mode": "generated",
+        "is_live_data": false,
+        "source_run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+        "retrieved_at": null,
+        "limitations": [
+          "Derived from AI-generated reactions; not a measurement of real people."
+        ],
+        "provenance": null,
+        "created_at": "2026-10-25T08:36:50Z"
+      }
+    ],
+    "limitations": [
+      "Scores are model assessments of the text, aggregated deterministically; not consumer measurements.",
+      "Differences under 5 points are treated as not meaningful.",
+      "Demo fixture output, not a live model response."
+    ],
+    "run_metadata": {
+      "run_id": "14780c51-0db1-5e49-8efc-3700dd9ded43",
+      "mode": "demo",
+      "started_at": "2026-10-25T08:40:00Z",
+      "completed_at": "2026-10-25T08:40:15Z",
+      "steps": [
+        {
+          "stage": "loading_candidates",
+          "agent": "loop",
+          "status": "completed",
+          "provider": "nativeproof",
+          "model_id": null,
+          "prompt_version": null,
+          "schema_version": null,
+          "latency_ms": 12,
+          "retries": 0,
+          "fallback_used": false,
+          "sampling": null,
+          "usage": null,
+          "error_code": null
+        },
+        {
+          "stage": "assessing_candidates",
+          "agent": "loop",
+          "status": "completed",
+          "provider": "fixture",
+          "model_id": null,
+          "prompt_version": "loop-judge-v1",
+          "schema_version": "candidate-assessment-v1",
+          "latency_ms": 12,
+          "retries": 0,
+          "fallback_used": false,
+          "sampling": null,
+          "usage": null,
+          "error_code": null
+        },
+        {
+          "stage": "scoring",
+          "agent": "loop",
+          "status": "completed",
+          "provider": "nativeproof",
+          "model_id": null,
+          "prompt_version": null,
+          "schema_version": null,
+          "latency_ms": 12,
+          "retries": 0,
+          "fallback_used": false,
+          "sampling": null,
+          "usage": null,
+          "error_code": null
+        },
+        {
+          "stage": "recommending",
+          "agent": "loop",
+          "status": "completed",
+          "provider": "nativeproof",
+          "model_id": null,
+          "prompt_version": null,
+          "schema_version": null,
+          "latency_ms": 12,
+          "retries": 0,
+          "fallback_used": false,
+          "sampling": null,
+          "usage": null,
+          "error_code": null
+        }
+      ]
+    },
+    "created_at": "2026-10-25T08:40:15Z"
+  },
+  "evidence_register": [
+    {
+      "id": "e04b2403-0567-5450-8986-9fc91a7fa414",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Resolved tag: Hiking",
+      "summary": "The term 'hiking' resolved to the Hiking tag (near-exact match).",
+      "source_provider": "qloo",
+      "source_workflow": "find_tags",
+      "source_reference": "fixture:tag:hiking",
+      "subject": {
+        "entity_id": "fixture:tag:hiking",
+        "name": "Hiking",
+        "entity_type": "tag"
+      },
+      "related_entity": null,
+      "attributes": [
+        {
+          "key": "match_rank",
+          "label": "Match rank",
+          "value": 1,
+          "description": "Position in the returned candidates."
+        }
+      ],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:01Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:01Z"
+    },
+    {
+      "id": "9212263d-d44a-5dc5-854b-7181b6a2f5f6",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Related brand: Kumo Trail Co. (fictional)",
+      "summary": "A fictional demo brand standing in for a recommend result for audiences with a Hiking affinity.",
+      "source_provider": "qloo",
+      "source_workflow": "recommend",
+      "source_reference": "fixture:brand:kumo-trail",
+      "subject": {
+        "entity_id": "fixture:tag:hiking",
+        "name": "Hiking",
+        "entity_type": "tag"
+      },
+      "related_entity": {
+        "entity_id": "fixture:brand:kumo-trail",
+        "name": "Kumo Trail Co. (fictional)",
+        "entity_type": "brand"
+      },
+      "attributes": [
+        {
+          "key": "affinity",
+          "label": "Affinity",
+          "value": 0.71,
+          "description": "Illustrative fixture value. The live adapter preserves Qloo's own field meaning; not a probability."
+        }
+      ],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:02Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:02Z"
+    },
+    {
+      "id": "e1f2cb2b-6978-5e98-b290-3ab6aee43fe2",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "qloo_source",
+      "claim_type": "observed",
+      "title": "Ambiguous match: 'minimal design'",
+      "summary": "Two plausible tags were returned; Nativeproof did not choose one.",
+      "source_provider": "qloo",
+      "source_workflow": "find_tags",
+      "source_reference": null,
+      "subject": null,
+      "related_entity": null,
+      "attributes": [],
+      "method": "provider_result",
+      "retrieval_mode": "fixture",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": "2026-10-25T08:32:01Z",
+      "limitations": [
+        "Demo fixture: hand-authored in the Qloo result format, not retrieved from Qloo.",
+        "Aggregate affinity; not evidence of demand, purchase intent, or individual preference."
+      ],
+      "provenance": {
+        "request_hash": null,
+        "response_hash": null,
+        "normalizer_version": "1",
+        "fixture_origin": "hand_authored"
+      },
+      "created_at": "2026-10-25T08:32:01Z"
+    },
+    {
+      "id": "5da4aa30-1ac8-5801-aeb9-cc63cd14e6fa",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "model_interpretation",
+      "claim_type": "interpreted",
+      "title": "Interpretation: trail-focused framing",
+      "summary": "The Hiking signal suggests framing the launch around trail use rather than escape.",
+      "source_provider": "fixture",
+      "source_workflow": null,
+      "source_reference": null,
+      "subject": null,
+      "related_entity": null,
+      "attributes": [],
+      "method": "model_interpretation",
+      "retrieval_mode": "generated",
+      "is_live_data": false,
+      "source_run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+      "retrieved_at": null,
+      "limitations": [
+        "Model interpretation of the evidence above; not a Qloo observation.",
+        "Demo fixture output, not a live model response."
+      ],
+      "provenance": null,
+      "created_at": "2026-10-25T08:32:03Z"
+    },
+    {
+      "id": "cd677f85-8e20-5806-a7d1-d7221bb615ca",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "evidence_type": "deterministic_calculation",
+      "claim_type": "derived",
+      "title": "Clarity score from synthetic rehearsal",
+      "summary": "Clarity 50.0 of 100 from 6 synthetic ratings; spread 0.82.",
+      "source_provider": "nativeproof",
+      "source_workflow": null,
+      "source_reference": null,
+      "subject": null,
+      "related_entity": null,
+      "attributes": [
+        {
+          "key": "spread",
+          "label": "Spread (1-5 scale)",
+          "value": 0.82,
+          "description": "Population standard deviation of the ratings."
+        }
+      ],
+      "method": "deterministic_aggregation",
+      "retrieval_mode": "generated",
+      "is_live_data": false,
+      "source_run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+      "retrieved_at": null,
+      "limitations": [
+        "Derived from AI-generated reactions; not a measurement of real people."
+      ],
+      "provenance": null,
+      "created_at": "2026-10-25T08:36:50Z"
+    }
+  ],
+  "limitations": [
+    "Demo mode: every provider result is a fixture.",
+    "Synthetic reactions are not consumer research.",
+    "Cultural affinity does not establish demand."
+  ],
+  "validation_steps": [
+    "Run a small unmoderated test of both headlines with Japanese weekend hikers.",
+    "Ask a local copywriter to review idioms and tone."
+  ],
+  "missing_sections": [],
+  "reproducibility": {
+    "runs": [
+      {
+        "run_id": "a9a9e355-0efe-5d63-b565-a0b0d4fbfa6b",
+        "mode": "demo",
+        "started_at": "2026-10-25T08:32:00Z",
+        "completed_at": "2026-10-25T08:32:04Z",
+        "steps": [
+          {
+            "stage": "resolving_references",
+            "agent": "atlas",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "retrieving_affinities",
+            "agent": "atlas",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "normalizing_evidence",
+            "agent": "atlas",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "generating_brief",
+            "agent": "atlas",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": "atlas-brief-v1",
+            "schema_version": "market-brief-v1",
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          }
+        ]
+      },
+      {
+        "run_id": "77c11ae4-f941-5a8c-974b-2d97e3f1e0e1",
+        "mode": "demo",
+        "started_at": "2026-10-25T08:36:40Z",
+        "completed_at": "2026-10-25T08:36:50Z",
+        "steps": [
+          {
+            "stage": "loading_context",
+            "agent": "audience",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "generating_reactions",
+            "agent": "audience",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": "audience-reactions-v1",
+            "schema_version": "synthetic-reaction-v1",
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "aggregating_results",
+            "agent": "analyst",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "analyzing_reactions",
+            "agent": "analyst",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": "analyst-v1",
+            "schema_version": "rehearsal-summary-v1",
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          }
+        ]
+      },
+      {
+        "run_id": "14780c51-0db1-5e49-8efc-3700dd9ded43",
+        "mode": "demo",
+        "started_at": "2026-10-25T08:40:00Z",
+        "completed_at": "2026-10-25T08:40:15Z",
+        "steps": [
+          {
+            "stage": "loading_candidates",
+            "agent": "loop",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "assessing_candidates",
+            "agent": "loop",
+            "status": "completed",
+            "provider": "fixture",
+            "model_id": null,
+            "prompt_version": "loop-judge-v1",
+            "schema_version": "candidate-assessment-v1",
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "scoring",
+            "agent": "loop",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          },
+          {
+            "stage": "recommending",
+            "agent": "loop",
+            "status": "completed",
+            "provider": "nativeproof",
+            "model_id": null,
+            "prompt_version": null,
+            "schema_version": null,
+            "latency_ms": 12,
+            "retries": 0,
+            "fallback_used": false,
+            "sampling": null,
+            "usage": null,
+            "error_code": null
+          }
+        ]
+      }
+    ],
+    "scoring_version": "mvp-1",
+    "model_ids": [],
+    "prompt_versions": [
+      "atlas-brief-v1",
+      "audience-reactions-v1",
+      "analyst-v1",
+      "loop-judge-v1"
+    ],
+    "generated_at": "2026-10-25T08:45:00Z",
+    "notes": [
+      "Demo mode: provider outputs are fixtures, so reruns reproduce identical results.",
+      "Live runs can differ because model and Qloo outputs may change."
+    ]
+  }
+}

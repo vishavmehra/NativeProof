@@ -1,0 +1,13 @@
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "The supplied request is invalid.",
+    "details": [
+      {
+        "field": "evaluation_criteria",
+        "message": "Weights must sum to 1.0; got 0.950."
+      }
+    ],
+    "request_id": "req_fixture_validation"
+  }
+}

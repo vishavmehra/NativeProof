@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+      "project_id": "f1f8b48d-b0c2-5ed5-9e74-ff99f47001cc",
+      "name": "Autumn Launch Campaign",
+      "campaign_type": "advertisement",
+      "objective": "Evaluate cultural relevance and clarity",
+      "target_markets": [
+        {
+          "country_code": "JP",
+          "display_name": "Japan"
+        }
+      ],
+      "evaluation_criteria": {
+        "clarity": 0.3,
+        "brand_fidelity": 0.25,
+        "cultural_relevance": 0.3,
+        "cultural_risk": 0.15
+      },
+      "current_version": {
+        "id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+        "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+        "version_number": 1,
+        "content": {
+          "headline": "Find your next great escape",
+          "body": "Built for the journeys that change you.",
+          "call_to_action": "Explore the collection",
+          "reference_terms": [
+            "great escape"
+          ]
+        },
+        "created_at": "2026-10-25T08:31:00Z"
+      },
+      "versions": [
+        {
+          "id": "52ec951b-3900-5191-a1d0-65cba08ebb6b",
+          "campaign_id": "183bcafe-452c-5db9-a11b-8973c871ce6e",
+          "version_number": 1,
+          "content": {
+            "headline": "Find your next great escape",
+            "body": "Built for the journeys that change you.",
+            "call_to_action": "Explore the collection",
+            "reference_terms": [
+              "great escape"
+            ]
+          },
+          "created_at": "2026-10-25T08:31:00Z"
+        }
+      ],
+      "created_at": "2026-10-25T08:31:00Z",
+      "updated_at": "2026-10-25T08:31:00Z"
+    }
+  ],
+  "limit": 20,
+  "offset": 0,
+  "total": 1
+}

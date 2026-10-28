@@ -1,0 +1,34 @@
+[project]
+name = "nativeproof-backend"
+version = "0.1.0"
+description = "Nativeproof FastAPI backend"
+requires-python = ">=3.12"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "alembic>=1.20.1",
+    "asyncpg>=0.32.0",
+    "fastapi>=0.115",
+    "httpx>=0.28.1",
+    "langgraph>=1.2.17",
+    "openai>=3.37.0",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.16.1",
+    "pyjwt[crypto]>=2.15.1",
+    "python-multipart>=0.0.32",
+    "sqlalchemy[asyncio]>=2.0",
+    "uvicorn[standard]>=0.30",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.27",
+    "pytest>=8",
+    "pytest-asyncio>=1.4.0",
+    "respx>=0.23.1",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"

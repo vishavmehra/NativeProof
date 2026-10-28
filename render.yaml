@@ -1,0 +1,70 @@
+# Render blueprint for the Nativeproof API (FastAPI, native Python with uv).
+# Free web service: it sleeps after 15 minutes without traffic. A run interrupted by a restart is marked resumable
+# from its saved checkpoints when the service starts again.
+services:
+  - type: web
+    name: nativeproof-api
+    runtime: python
+    plan: free
+    region: singapore        # closest Render region to the Supabase project (ap-southeast-2)
+    rootDir: backend         # Python version from backend/.python-version
+    buildCommand: pip install uv && uv sync --frozen --no-dev
+    # Free instances have no pre-deploy step, so migrations run at start. Alembic is the only migration system.
+    startCommand: uv run --no-sync alembic upgrade head && uv run --no-sync uvicorn app.main:app --host 0.0.0.0 --port $PORT --timeout-graceful-shutdown 10
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: AUTH_MODE
+        value: supabase
+      - key: FRONTEND_ORIGINS
+        sync: false          # the Vercel production origin, e.g. https://<project>.vercel.app (no wildcards)
+      - key: SUPABASE_URL
+        sync: false
+      - key: DATABASE_URL
+        sync: false          # Supabase session pooler (IPv4): postgresql+asyncpg://postgres.<ref>:<password>@aws-0-<region>.pooler.supabase.com:5432/postgres?ssl=require
+      - key: ASSET_STORAGE_BACKEND
+        value: supabase      # private Storage bucket `assets` (migration 0006); the instance disk is ephemeral
+      - key: SUPABASE_SECRET_KEY
+        sync: false          # server-side only; startup fails if it is missing while ASSET_STORAGE_BACKEND=supabase
+      - key: LLM_PRIMARY_PROVIDER
+        value: nebius
+      - key: NEBIUS_API_KEY
+        sync: false
+      - key: NEBIUS_BASE_URL
+        value: https://api.tokenfactory.nebius.com/v1/
+      - key: NEBIUS_DEFAULT_MODEL
+        sync: false
+      - key: NEBIUS_FAST_MODEL
+        sync: false
+      - key: NEBIUS_REASONING_MODEL
+        sync: false
+      - key: LLM_FALLBACK_ENABLED
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
+      - key: OPENROUTER_BASE_URL
+        sync: false
+      - key: OPENROUTER_DEFAULT_MODEL
+        sync: false
+      - key: QLOO_API_KEY
+        sync: false
+      - key: QLOO_BASE_URL
+        sync: false          # https://hackathon.api.qloo.com for the hackathon key
+      - key: QLOO_TRANSPORT
+        value: rest          # no Node runtime on this service, so the harness subprocess is not used
+      - key: EMBEDDING_PROVIDER
+        sync: false
+      - key: EMBEDDING_MODEL
+        sync: false
+      - key: EMBEDDING_DIMENSIONS
+        sync: false
+      - key: VISION_PROVIDER
+        sync: false
+      - key: VISION_MODEL
+        sync: false
+      - key: MAX_ACTIVE_RUNS_PER_USER
+        value: "2"

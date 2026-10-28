@@ -1,0 +1,40 @@
+# Secrets — never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+*.sqlite3
+
+# Uploaded assets, local screenshots, and browser-tool logs
+backend/storage/
+storage/
+.screenshots/
+.playwright-mcp/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+
+# Live Qloo responses (hackathon terms: never store response data in a public repository)
+qloo_live_smoke_report*.md

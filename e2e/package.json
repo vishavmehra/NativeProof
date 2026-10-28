@@ -1,0 +1,13 @@
+{
+  "name": "nativeproof-e2e",
+  "private": true,
+  "description": "Playwright end-to-end tests for Nativeproof. See README.md.",
+  "scripts": {
+    "test": "playwright test",
+    "install-browsers": "playwright install chromium",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0"
+  }
+}
