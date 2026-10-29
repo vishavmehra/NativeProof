@@ -5457,6 +5457,15 @@
       "MarketColumn": {
         "additionalProperties": false,
         "properties": {
+          "ambiguous_references": {
+            "default": [],
+            "description": "References with several Qloo candidates and no confirmation; never used downstream.",
+            "items": {
+              "$ref": "#/components/schemas/CulturalReference"
+            },
+            "title": "Ambiguous References",
+            "type": "array"
+          },
           "brand_compatibility": {
             "anyOf": [
               {
@@ -5535,6 +5544,7 @@
           "market",
           "status",
           "signals",
+          "ambiguous_references",
           "opportunities",
           "risks",
           "hypotheses",
@@ -5593,6 +5603,15 @@
           },
           "comparability": {
             "$ref": "#/components/schemas/MarketComparability"
+          },
+          "confirmed_references": {
+            "default": [],
+            "description": "The person's choices for ambiguous terms that this run used.",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmedReference"
+            },
+            "title": "Confirmed References",
+            "type": "array"
           },
           "created_at": {
             "format": "date-time",
@@ -5698,6 +5717,7 @@
           "product_category",
           "research_question",
           "reference_terms",
+          "confirmed_references",
           "columns",
           "comparability",
           "cross_market_summary",
@@ -5723,6 +5743,16 @@
               }
             ],
             "title": "Campaign Id"
+          },
+          "confirmed_references": {
+            "default": [],
+            "description": "The person's choice for ambiguous terms. Qloo tag resolution does not depend on the market, so one confirmation applies to every market.",
+            "items": {
+              "$ref": "#/components/schemas/ConfirmedReference"
+            },
+            "maxItems": 10,
+            "title": "Confirmed References",
+            "type": "array"
           },
           "markets": {
             "items": {

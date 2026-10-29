@@ -10,7 +10,7 @@ import math
 import random
 import re
 from collections import Counter
-from collections.abc import Collection, Iterable, Sequence
+from collections.abc import Collection, Iterable, Mapping, Sequence
 from datetime import UTC, datetime
 from uuid import NAMESPACE_URL, UUID, uuid5
 
@@ -391,8 +391,14 @@ def reaction_map_view(groups: Sequence[PopulationGroup], interviews: Sequence[In
 
 
 def diffusion_view(groups: Sequence[PopulationGroup], posts: Sequence[SocialPost], round_index: int, *, is_demo: bool,
-                   limit: int | None = None) -> GraphView:
-    """Group-level influence flows for one round, plus that round's bounded post subgraph."""
+                   limit: int | None = None, interview_groups: Mapping[UUID, str] | None = None) -> GraphView:
+    """Group-level influence flows for one round, plus that round's bounded post subgraph.
+
+    A feed (SocialPost.seen_post_ids) cites posts from earlier rounds and, from round 1 on, peers' interviews, so
+    `posts` must hold every round of the simulation and `interview_groups` maps the study's interview ids to their
+    group. A feed item that resolves to neither is skipped, never guessed.
+    """
+    interview_groups = interview_groups or {}
     by_id = {p.id: p for p in posts}
     current = [p for p in posts if p.round_index == round_index]
     nodes = [_node(f"group:{g.id}", "audience_group", g.label, is_demo=is_demo, is_synthetic=True, group_id=g.id,
@@ -400,20 +406,39 @@ def diffusion_view(groups: Sequence[PopulationGroup], posts: Sequence[SocialPost
     flows: Counter[tuple[str, str]] = Counter()
     for post in current:
         for seen in post.seen_post_ids:
-            if seen in by_id:
-                flows[(by_id[seen].group_id, post.group_id)] += 1
-    edges = [_edge(f"group:{a}", f"group:{b}", "influenced", "SocialPost.seen_post_ids (author group -> reader group)",
-                   float(n), "Number of posts from the source group that appeared in the target group's feeds this round.")
+            source = by_id[seen].group_id if seen in by_id else interview_groups.get(seen)
+            if source is not None:
+                flows[(source, post.group_id)] += 1
+    edges = [_edge(f"group:{a}", f"group:{b}", "influenced",
+                   "SocialPost.seen_post_ids (author group of the seen post or interview -> reader group)", float(n),
+                   "Number of feed items from the source group (posts or interviews) shown to the target group this round.")
              for (a, b), n in sorted(flows.items())]
+    shown: set[UUID] = set()
+
+    def add_post(post: SocialPost) -> None:
+        if post.id in shown:
+            return
+        shown.add(post.id)
+        label = (post.text or post.action)[:80]
+        nodes.append(_node(f"post:{post.id}", "post", label if post.round_index == round_index else
+                           f"Round {post.round_index}: {label}"[:80], is_demo=is_demo, is_synthetic=True,
+                           group_id=post.group_id, facts={"action": post.action, "stance": post.stance, "round": post.round_index}))
+
     for post in current:
         if post.action == "ignore":
             continue
-        nodes.append(_node(f"post:{post.id}", "post", (post.text or post.action)[:80], is_demo=is_demo, is_synthetic=True,
-                           group_id=post.group_id, facts={"action": post.action, "stance": post.stance, "round": post.round_index}))
+        add_post(post)
         if post.parent_post_id and post.parent_post_id in by_id:
+            add_post(by_id[post.parent_post_id])
             edges.append(_edge(f"post:{post.id}", f"post:{post.parent_post_id}", "replied_to", "SocialPost.parent_post_id"))
+        interviews_seen = Counter(interview_groups[s] for s in post.seen_post_ids if s in interview_groups)
+        for group_id, n in sorted(interviews_seen.items()):
+            edges.append(_edge(f"group:{group_id}", f"post:{post.id}", "influenced",
+                               "SocialPost.seen_post_ids (interviews by the source group)", float(n),
+                               "Number of the source group's interviews in this post's feed."))
         for seen in post.seen_post_ids:
-            if seen in by_id and by_id[seen].round_index == round_index:
+            if seen in by_id:
+                add_post(by_id[seen])
                 edges.append(_edge(f"post:{seen}", f"post:{post.id}", "influenced", "SocialPost.seen_post_ids"))
     nodes, edges, truncated = _bounded(nodes, edges, limit)
     limitations = ["Simulated social dynamics: illustrative, not a forecast. Agents share one model."]

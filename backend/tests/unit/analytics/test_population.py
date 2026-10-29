@@ -133,3 +133,29 @@ def test_views_explain_every_weight_and_edge():
     assert ("group:grp-1", "influenced", "group:grp-2") in rel and (f"post:{reply.id}", "replied_to", f"post:{first.id}") in rel
     bounded = landscape_view(groups, is_demo=False, limit=2)
     assert bounded.truncated and len(bounded.nodes) == 2
+
+
+def test_diffusion_resolves_feeds_from_earlier_rounds_and_interviews():
+    """Round-1 feeds are peers' interviews and later feeds mix in earlier posts; both must become edges."""
+    groups, _ = expand_participants(uuid4(), GROUPS, 20, seed=1)
+    interview_id, unknown_id = uuid4(), uuid4()
+    earlier = SocialPost(id=uuid4(), round_index=1, participant_id=uuid4(), group_id="grp-1", action="post",
+                         parent_post_id=None, text="Packed one for the ridge", previous_stance="neutral", stance="positive",
+                         reason="peers liked it", seen_post_ids=[interview_id])
+    later = SocialPost(id=uuid4(), round_index=2, participant_id=uuid4(), group_id="grp-2", action="comment",
+                       parent_post_id=earlier.id, text="Same here", previous_stance="mixed", stance="positive",
+                       reason="the feed was upbeat", seen_post_ids=[earlier.id, interview_id, unknown_id])
+    view = diffusion_view(groups, [earlier, later], 2, is_demo=False, interview_groups={interview_id: "grp-1"})
+    rel = {(e.source, e.relation, e.target) for e in view.edges}
+    assert ("group:grp-1", "influenced", "group:grp-2") in rel  # one post and one interview from grp-1
+    assert (f"post:{earlier.id}", "influenced", f"post:{later.id}") in rel
+    assert ("group:grp-1", "influenced", f"post:{later.id}") in rel
+    assert (f"post:{later.id}", "replied_to", f"post:{earlier.id}") in rel
+    flow = next(e for e in view.edges if (e.source, e.target) == ("group:grp-1", "group:grp-2"))
+    assert flow.weight == 2  # the unresolvable feed item is skipped, not guessed
+    assert all(e.provenance for e in view.edges)
+    earlier_node = next(n for n in view.nodes if n.id == f"post:{earlier.id}")
+    assert earlier_node.label.startswith("Round 1:")
+    # Without the interview map, round 1 still draws nothing it cannot resolve.
+    round_one = diffusion_view(groups, [earlier], 1, is_demo=False)
+    assert not [e for e in round_one.edges if e.target == f"post:{earlier.id}"]

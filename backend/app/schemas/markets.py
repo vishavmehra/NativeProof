@@ -7,7 +7,7 @@ from uuid import UUID
 from pydantic import Field, StringConstraints, model_validator
 
 from app.schemas.common import ApiModel, ConfidenceLabel, DataMode, Market, Page, RunMetadata, Term
-from app.schemas.discovery import BriefFinding, CulturalReference
+from app.schemas.discovery import BriefFinding, ConfirmedReference, CulturalReference
 from app.schemas.evidence import EvidenceRecord
 from app.schemas.runs import RunStatus
 
@@ -20,12 +20,19 @@ class MarketComparisonCreate(ApiModel):
     product_category: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=200)]
     research_question: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
     reference_terms: Annotated[list[Term], Field(max_length=10)] = []
+    confirmed_references: Annotated[list[ConfirmedReference], Field(
+        max_length=10, description="The person's choice for ambiguous terms. Qloo tag resolution does not depend on "
+                                   "the market, so one confirmation applies to every market.")] = []
 
     @model_validator(mode="after")
     def _unique_markets(self) -> "MarketComparisonCreate":
         codes = [market.country_code for market in self.markets]
         if len(set(codes)) != len(codes):
             raise ValueError("markets must be unique.")
+        allowed = {t.casefold() for t in self.reference_terms} | {self.product_category.casefold()}
+        missing = sorted({c.term for c in self.confirmed_references if c.term.casefold() not in allowed})
+        if missing:
+            raise ValueError(f"confirmed_references terms must be the product category or a reference term: {', '.join(missing)}.")
         return self
 
 
@@ -51,6 +58,8 @@ class MarketColumn(ApiModel):
     market: Market
     status: Literal["completed", "partial", "failed", "unavailable"]
     signals: list[CulturalReference]
+    ambiguous_references: list[CulturalReference] = Field(
+        default=[], description="References with several Qloo candidates and no confirmation; never used downstream.")
     opportunities: list[BriefFinding]
     risks: list[BriefFinding]
     hypotheses: list[BriefFinding]
@@ -82,6 +91,8 @@ class MarketComparison(MarketComparisonSummary):
     product_category: str
     research_question: str
     reference_terms: list[str]
+    confirmed_references: list[ConfirmedReference] = Field(
+        default=[], description="The person's choices for ambiguous terms that this run used.")
     columns: list[MarketColumn]
     comparability: MarketComparability
     cross_market_summary: str | None = Field(

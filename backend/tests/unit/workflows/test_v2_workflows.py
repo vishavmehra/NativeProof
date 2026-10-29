@@ -4,6 +4,7 @@ from uuid import uuid4
 
 from app.schemas.campaigns import DEFAULT_EVALUATION_CRITERIA, CampaignContent
 from app.schemas.common import Market
+from app.schemas.discovery import ConfirmedReference
 from app.schemas.markets import MarketComparisonCreate
 from app.schemas.profiles import CulturalProfileCreate
 from app.schemas.projects import BrandExample
@@ -69,6 +70,42 @@ async def test_market_comparison_demo_marks_other_markets_unavailable():
     assert kr.status == "unavailable" and kr.signals == [] and kr.brand_compatibility is None and kr.message
     assert out.comparability.market_specific_signals is False
     assert out.cross_market_summary and out.status == "partial"
+
+
+async def test_market_comparison_lists_ambiguous_terms_and_applies_confirmations(monkeypatch):
+    deps = demo_deps()
+    request = MarketComparisonCreate(markets=[JP, KR], product_category="outdoor lifestyle apparel",
+                                     research_question="Where should we launch first?", reference_terms=TERMS)
+    out = await run_market_comparison(MarketComparisonInput(context=context(), comparison_id=uuid4(), request=request), deps)
+    jp = out.columns[0]
+    ambiguous_gaps = {g.split("'")[1] for g in jp.gaps if "ambiguous" in g}
+    assert {r.query_term for r in jp.ambiguous_references} == ambiguous_gaps
+    assert all(r.match_status == "ambiguous" and r.candidates for r in jp.ambiguous_references)
+
+    calls = []
+    original = deps.qloo.resolve_concept
+
+    async def spy(query, **kwargs):
+        calls.append((query, kwargs.get("confirmed")))
+        return await original(query, **kwargs)
+
+    monkeypatch.setattr(deps.qloo, "resolve_concept", spy)
+    choice = ConfirmedReference(term="Outdoor Lifestyle Apparel", ref_id="urn:tag:example:qloo:apparel", ref_kind="tag")
+    confirmed = request.model_copy(update={"confirmed_references": [choice]})
+    await run_market_comparison(MarketComparisonInput(context=context(), comparison_id=uuid4(), request=confirmed), deps)
+    # The product category is confirmed once and applied to every market that runs discovery (demo runs only JP).
+    # (The confirmed path re-runs the plain candidate lookup internally, which the spy also records.)
+    assert [c for q, c in calls if q.casefold() == "outdoor lifestyle apparel" and c is not None] == [choice]
+
+
+def test_market_comparison_rejects_confirmations_for_unlisted_terms():
+    import pytest
+    from pydantic import ValidationError
+
+    with pytest.raises(ValidationError, match="confirmed_references"):
+        MarketComparisonCreate(markets=[JP, KR], product_category="apparel", research_question="Where?",
+                               reference_terms=["hiking"],
+                               confirmed_references=[ConfirmedReference(term="sushi", ref_id="urn:tag:x", ref_kind="tag")])
 
 
 async def test_arena_demo_scores_fixture_variants_and_nulls_custom_text():

@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { hasResult, useRunFlow } from "@/features/atlas/api";
 import { PageHeader } from "@/features/atlas/page-header";
+import type { ConfirmCandidate } from "@/features/atlas/reference-table";
 import { useProject } from "@/features/project/project-context";
 import { formatDateTime } from "@/lib/format";
 
@@ -47,6 +48,38 @@ export function MarketsWorkspace() {
       },
     });
   }
+
+  /** Rerun with the person's choice for an ambiguous term, as Atlas does. Qloo tag matching does not depend on the
+   * market, so one confirmation applies to every market; a later choice for the same term replaces it. */
+  const confirm: ConfirmCandidate = (term, candidate) => {
+    const c = comparisonQuery.data;
+    const base: MarketComparisonCreate | null =
+      lastBody ??
+      (c
+        ? {
+            markets: c.markets,
+            campaign_id: c.campaign_id,
+            product_category: c.product_category,
+            research_question: c.research_question,
+            reference_terms: c.reference_terms,
+            confirmed_references: c.confirmed_references ?? [],
+          }
+        : null);
+    if (!base || !candidate.entity_id) return;
+    const kind = candidate.entity_type?.toLowerCase().includes("tag") ? "tag" : "entity";
+    const terms = base.reference_terms ?? [];
+    const listed = terms.find((t) => t.toLowerCase() === term.toLowerCase());
+    const isCategory = base.product_category.toLowerCase() === term.toLowerCase();
+    const confirmedTerm = listed ?? (isCategory ? base.product_category : term);
+    submit({
+      ...base,
+      reference_terms: listed || isCategory ? terms : [...terms, term],
+      confirmed_references: [
+        ...(base.confirmed_references ?? []).filter((x) => x.term.toLowerCase() !== confirmedTerm.toLowerCase()),
+        { term: confirmedTerm, ref_id: candidate.entity_id, ref_kind: kind },
+      ],
+    });
+  };
 
   const header = (
     <PageHeader
@@ -127,7 +160,14 @@ export function MarketsWorkspace() {
       )}
       {comparisonQuery.isError && <ErrorState error={comparisonQuery.error} onRetry={() => comparisonQuery.refetch()} />}
       {comparisonId && comparisonQuery.isPending && <LoadingState label="Loading comparison…" />}
-      {comparisonQuery.data && <ComparisonView comparison={comparisonQuery.data} />}
+      {comparisonQuery.data && (
+        <ComparisonView
+          comparison={comparisonQuery.data}
+          onConfirm={confirm}
+          onRefine={() => setFormOpen(true)}
+          busy={flow.busy || start.isPending}
+        />
+      )}
     </div>
   );
 }

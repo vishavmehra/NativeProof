@@ -63,8 +63,12 @@ async def discovering_markets(state: State, config: RunnableConfig) -> dict:
         if inp.context.mode == "demo" and market.country_code != DEMO_MARKET_CODE:
             outcomes[market.country_code] = None
             continue
+        # A confirmed product category is listed as a reference term too, because discovery requires that.
+        listed = {t.casefold() for t in req.reference_terms}
+        terms = req.reference_terms + [c.term for c in req.confirmed_references if c.term.casefold() not in listed]
         request = DiscoveryCreate(campaign_id=req.campaign_id, product_category=req.product_category, market=market,
-                                  research_question=req.research_question, reference_terms=req.reference_terms)
+                                  research_question=req.research_question, reference_terms=terms,
+                                  confirmed_references=req.confirmed_references)
         outcome = await run_discovery(DiscoveryInput(context=inp.context, request=request,
                                                      campaign_content=inp.campaign_content), deps)
         outcomes[market.country_code] = outcome
@@ -104,7 +108,7 @@ def _column(market, outcome) -> MarketColumn:
     else:
         status, message = outcome.status, ("Some lookups failed; see gaps." if outcome.status == "partial" else None)
     return MarketColumn(
-        market=market, status=status, signals=resolved,
+        market=market, status=status, signals=resolved, ambiguous_references=ambiguous,
         opportunities=[f for f in (brief.opportunities if brief else []) if f.claim_type != "hypothesis"],
         risks=[f for f in (brief.risks if brief else []) if f.claim_type != "hypothesis"],
         hypotheses=[f for f in findings if f.claim_type == "hypothesis"], brand_compatibility=None,

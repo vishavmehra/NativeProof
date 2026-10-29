@@ -38,8 +38,11 @@ class RetrievalStore(Protocol):
     async def replace_source(self, project_id: UUID, kind: SearchKind, source_id: str, chunks: list[IndexedChunk]) -> None:
         """Replace every chunk of one source; an empty list deletes the source."""
 
-    async def list_chunks(self, project_id: UUID, kinds: Sequence[SearchKind] | None = None) -> list[IndexedChunk]:
-        """All chunks of a project, optionally only the given kinds."""
+    async def list_chunks(
+        self, project_id: UUID, kinds: Sequence[SearchKind] | None = None, *, vectors: bool = True
+    ) -> list[IndexedChunk]:
+        """All chunks of a project, optionally only the given kinds. With `vectors=False` every chunk's vector is
+        None but its `space` is kept, for callers that only compare hashes or spaces."""
 
 
 class InMemoryRetrievalStore:
@@ -52,9 +55,11 @@ class InMemoryRetrievalStore:
         else:
             self.sources.pop((project_id, kind, source_id), None)
 
-    async def list_chunks(self, project_id: UUID, kinds: Sequence[SearchKind] | None = None) -> list[IndexedChunk]:
+    async def list_chunks(
+        self, project_id: UUID, kinds: Sequence[SearchKind] | None = None, *, vectors: bool = True
+    ) -> list[IndexedChunk]:
         return [
-            chunk
+            chunk if vectors else chunk.model_copy(update={"vector": None})
             for (project, kind, _), chunks in self.sources.items()
             if project == project_id and (kinds is None or kind in kinds)
             for chunk in chunks

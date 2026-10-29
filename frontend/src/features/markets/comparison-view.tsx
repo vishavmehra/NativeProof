@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BriefFindingList } from "@/features/atlas/market-brief";
-import { SignalList } from "@/features/atlas/reference-table";
+import { ReferenceTable, SignalList, type ConfirmCandidate } from "@/features/atlas/reference-table";
 import { RunProvenance } from "@/features/atlas/run-provenance";
 import { flag } from "@/features/population/audience-library";
 import type { MarketColumn, MarketComparison } from "@/lib/api/types";
@@ -246,10 +246,24 @@ function MarketDetail({ column: c, evidence }: { column: MarketColumn; evidence:
   );
 }
 
-export function ComparisonView({ comparison }: { comparison: MarketComparison }) {
+export function ComparisonView({
+  comparison,
+  onConfirm,
+  onRefine,
+  busy,
+}: {
+  comparison: MarketComparison;
+  onConfirm?: ConfirmCandidate;
+  onRefine: () => void;
+  busy?: boolean;
+}) {
   const { comparability } = comparison;
   const [metric, setMetric] = useState<Metric>("observed");
   const [code, setCode] = useState<string | null>(null);
+  // Tag matching does not depend on the market, so each ambiguous term is listed once.
+  const ambiguous = [
+    ...new Map(comparison.columns.flatMap((c) => c.ambiguous_references).map((r) => [r.query_term.toLowerCase(), r])).values(),
+  ];
   const selected =
     comparison.columns.find((c) => c.market.country_code === code) ?? comparison.columns.find(withData) ?? comparison.columns[0];
   const max = (m: Metric) => Math.max(1, ...comparison.columns.map((c) => metricOf(c, m)));
@@ -261,7 +275,27 @@ export function ComparisonView({ comparison }: { comparison: MarketComparison })
         {comparison.status !== "completed" && <span className="font-medium text-warning">· {comparison.status}</span>}
         <ModeBadge mode={comparison.mode} />
         <span className="basis-full text-ink">{comparison.research_question}</span>
+        {comparison.confirmed_references.length > 0 && (
+          <span className="basis-full text-xs">
+            Your confirmed matches: {comparison.confirmed_references.map((c) => `“${c.term}” → ${c.ref_id}`).join("; ")}
+          </span>
+        )}
       </p>
+
+      {ambiguous.length > 0 && (
+        <section aria-labelledby="mx-ambiguous-h" className={card}>
+          <div>
+            <h2 id="mx-ambiguous-h" className="font-serif text-2xl">
+              Resolve ambiguous terms
+            </h2>
+            <p className="max-w-prose text-sm text-ink-secondary">
+              Qloo returned several candidates for these terms, so none was used in any market. Qloo tag matching does not
+              depend on the market: one choice applies to every market, and the comparison runs again with it.
+            </p>
+          </div>
+          <ReferenceTable references={ambiguous} evidence={comparison.evidence} onRefine={onRefine} onConfirm={onConfirm} busy={busy} />
+        </section>
+      )}
 
       {comparability.market_specific_signals ? (
         <p className="flex items-start gap-2 text-xs text-ink-secondary">

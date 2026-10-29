@@ -199,7 +199,8 @@ class RetrievalService:
         if self._unavailable is not None or not documents:
             return IndexReport(stored=0, unchanged=0, embedded=False)
         kinds = sorted({document.kind for document in documents})
-        stored_hashes = {(c.kind, c.source_id): c.content_hash for c in await self._store.list_chunks(project_id, kinds)}
+        stored = await self._store.list_chunks(project_id, kinds, vectors=False)
+        stored_hashes = {(c.kind, c.source_id): c.content_hash for c in stored}
         changed: list[tuple[SearchDocument, list[IndexedChunk]]] = []
         for document in documents:
             digest = _digest(document)
@@ -234,7 +235,7 @@ class RetrievalService:
         documents = brand_example_documents(project_id, brand)
         if self._unavailable is None:
             current = {document.source_id for document in documents}
-            for chunk in await self._store.list_chunks(project_id, ["brand_example"]):
+            for chunk in await self._store.list_chunks(project_id, ["brand_example"], vectors=False):
                 if chunk.source_id not in current:
                     await self._store.replace_source(project_id, "brand_example", chunk.source_id, [])
         return await self.index_documents(project_id, documents)
@@ -261,8 +262,9 @@ class RetrievalService:
             return 0
         assert self._embedder is not None and self._embedder.space is not None
         space = self._embedder.space.key
-        chunks = await self._store.list_chunks(project_id)
-        stale_sources = {(c.kind, c.source_id) for c in chunks if c.vector is None or c.space != space}
+        # A chunk has a space exactly when it has a vector, so the check never loads the vectors themselves.
+        chunks = await self._store.list_chunks(project_id, vectors=False)
+        stale_sources = {(c.kind, c.source_id) for c in chunks if c.space != space}
         if not stale_sources:
             return 0
         to_embed = [c for c in chunks if (c.kind, c.source_id) in stale_sources]

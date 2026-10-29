@@ -14,6 +14,7 @@ from uuid import UUID
 from pydantic import ValidationError
 from sqlalchemy import delete, select
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import defer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import get_settings
@@ -68,10 +69,14 @@ class DbRetrievalStore:
         except IntegrityError:
             log.info("concurrent index write for one source; keeping the stored copy")
 
-    async def list_chunks(self, project_id: UUID, kinds: Sequence[SearchKind] | None = None) -> list[IndexedChunk]:
+    async def list_chunks(
+        self, project_id: UUID, kinds: Sequence[SearchKind] | None = None, *, vectors: bool = True
+    ) -> list[IndexedChunk]:
         stmt = select(m.Embedding).where(m.Embedding.project_id == project_id)
         if kinds is not None:
             stmt = stmt.where(m.Embedding.source_kind.in_(list(kinds)))
+        if not vectors:
+            stmt = stmt.options(defer(m.Embedding.vector))  # thousands of floats as JSON per chunk; only ranking reads them
         async with session() as s:
             rows = (await s.execute(stmt)).scalars().all()
         chunks = []
@@ -83,7 +88,7 @@ class DbRetrievalStore:
                 chunk_index=meta["chunk_index"], title=meta["title"], text=row.text, content_hash=meta["content_hash"],
                 ref=GraphRef(**meta["ref"]), evidence_type=meta.get("evidence_type"), claim_type=meta.get("claim_type"),
                 retrieval_mode=meta.get("retrieval_mode"), created_at=datetime.fromisoformat(created) if created else None,
-                space=meta.get("space"), vector=list(row.vector) if row.vector else None,
+                space=meta.get("space"), vector=list(row.vector) if vectors and row.vector else None,
             ))
         return chunks
 
@@ -134,7 +139,7 @@ async def sync_index(service: RetrievalService, store: DbRetrievalStore, project
                      documents: list[SearchDocument]) -> None:
     await service.index_documents(project_id, documents)
     present = {(document.kind, document.source_id) for document in documents}
-    stale = {(c.kind, c.source_id) for c in await store.list_chunks(project_id)} - present
+    stale = {(c.kind, c.source_id) for c in await store.list_chunks(project_id, vectors=False)} - present
     for kind, source_id in stale:
         await service.remove(project_id, kind, source_id)  # type: ignore[arg-type]
 

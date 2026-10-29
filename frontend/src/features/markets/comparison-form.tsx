@@ -55,6 +55,7 @@ export function ComparisonForm({
       product_category: productCategory.trim(),
       research_question: researchQuestion.trim(),
       reference_terms: terms,
+      confirmed_references: [],
       markets,
       campaign_id: campaign && linkCampaign ? campaign.id : null,
     });

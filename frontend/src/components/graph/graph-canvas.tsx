@@ -192,13 +192,22 @@ function GraphCanvasInner({ nodes, edges, legend, isLoading, error, onRetry, tru
         };
       })
     : [];
-  const flowEdges: Edge[] = visibleEdges.map((e) => ({
-    id: e.id,
-    source: e.source,
-    target: e.target,
-    style: { stroke: focusNeighbours && !(focusNeighbours.has(e.source) && focusNeighbours.has(e.target)) ? "#e7e3dc" : "#a8a29e", strokeWidth: 1.25 },
-    markerEnd: { type: MarkerType.ArrowClosed, width: 12, height: 12, color: "#a8a29e" },
-  }));
+  const flowEdges: Edge[] = visibleEdges.map((e) => {
+    const focused = Boolean(focusNeighbours?.has(e.source) && focusNeighbours.has(e.target));
+    const muted = Boolean(focusNeighbours) && !focused;
+    // Hex, not a CSS variable: React Flow writes the marker colour into SVG attributes.
+    const color = muted ? "#e7e3dc" : focused ? PALETTE[0] : "#78716c";
+    // Heavier edges carry more (a stored count or weight); log-scaled and capped so one edge never dominates.
+    const width = (muted ? 1 : 1.6) + Math.min(2.4, Math.log2(1 + Math.max(0, e.weight ?? 0)));
+    return {
+      id: e.id,
+      source: e.source,
+      target: e.target,
+      zIndex: focused ? 1 : 0,
+      style: { stroke: color, strokeWidth: width },
+      markerEnd: { type: MarkerType.ArrowClosed, width: 14, height: 14, color },
+    };
+  });
 
   function select(id: string | null) {
     setSelectedId(id);

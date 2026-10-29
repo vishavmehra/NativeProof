@@ -236,6 +236,7 @@ async def _comparison(s: AsyncSession, row: m.MarketComparison, summary_only: bo
     return MarketComparison.model_validate(base | {
         "product_category": row.product_category, "research_question": row.research_question,
         "reference_terms": row.reference_terms, "columns": stored.get("columns", []),
+        "confirmed_references": run.inputs.get("request", {}).get("confirmed_references", []),
         "comparability": stored.get("comparability") or MarketComparability(market_specific_signals=False, notes=[PENDING]),
         "cross_market_summary": stored.get("cross_market_summary"),
         "evidence": await evidence_by_ids(s, row.project_id, stored.get("evidence_ids", [])),

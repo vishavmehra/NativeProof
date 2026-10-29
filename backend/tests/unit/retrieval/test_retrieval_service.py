@@ -87,6 +87,26 @@ async def test_search_ranks_one_hit_per_source_with_provenance() -> None:
     assert len((await svc.search(PROJECT, "hiking", limit=1)).hits) == 1
 
 
+class CountingStore(InMemoryRetrievalStore):
+    def __init__(self) -> None:
+        super().__init__()
+        self.loads: list[bool] = []
+
+    async def list_chunks(self, project_id, kinds=None, *, vectors=True):  # type: ignore[no-untyped-def]
+        self.loads.append(vectors)
+        return await super().list_chunks(project_id, kinds, vectors=vectors)
+
+
+async def test_indexing_never_reads_vectors_and_search_reads_them_once() -> None:
+    store = CountingStore()
+    svc = RetrievalService(FakeEmbedder(), store)  # type: ignore[arg-type]
+    await svc.index_documents(PROJECT, [doc("ev-1", "Hiking trail."), doc("ev-2", "Brand color.")])
+    assert store.loads == [False]
+    store.loads.clear()
+    assert (await svc.search(PROJECT, "hiking")).hits[0].id == "ev-1"
+    assert store.loads == [False, True]  # the space check skips vectors; ranking reads them once
+
+
 async def test_unchanged_sources_are_not_re_embedded() -> None:
     svc, _, embedder = service()
     first = await svc.index_documents(PROJECT, [doc("ev-1", "Hiking trail.")])

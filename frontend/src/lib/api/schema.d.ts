@@ -1177,7 +1177,8 @@ export interface paths {
         post?: never;
         delete?: never;
         options?: never;
-        head?: never;
+        /** Health */
+        head: operations["health"];
         patch?: never;
         trace?: never;
     };
@@ -3182,6 +3183,12 @@ export interface components {
         };
         /** MarketColumn */
         MarketColumn: {
+            /**
+             * Ambiguous References
+             * @description References with several Qloo candidates and no confirmation; never used downstream.
+             * @default []
+             */
+            ambiguous_references: components["schemas"]["CulturalReference"][];
             brand_compatibility: components["schemas"]["BrandCompatibility"] | null;
             evidence_quality: components["schemas"]["EvidenceQuality"];
             /** Gaps */
@@ -3223,6 +3230,12 @@ export interface components {
             /** Columns */
             columns: components["schemas"]["MarketColumn"][];
             comparability: components["schemas"]["MarketComparability"];
+            /**
+             * Confirmed References
+             * @description The person's choices for ambiguous terms that this run used.
+             * @default []
+             */
+            confirmed_references: components["schemas"]["ConfirmedReference"][];
             /**
              * Created At
              * Format: date-time
@@ -3279,6 +3292,12 @@ export interface components {
         MarketComparisonCreate: {
             /** Campaign Id */
             campaign_id?: string | null;
+            /**
+             * Confirmed References
+             * @description The person's choice for ambiguous terms. Qloo tag resolution does not depend on the market, so one confirmation applies to every market.
+             * @default []
+             */
+            confirmed_references: components["schemas"]["ConfirmedReference"][];
             /** Markets */
             markets: components["schemas"]["Market"][];
             /** Product Category */
@@ -15902,6 +15921,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    health: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Health"];
                 };
             };
         };

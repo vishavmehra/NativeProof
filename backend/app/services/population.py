@@ -400,9 +400,11 @@ async def comparison(user_id: UUID, campaign_id: UUID, population_id: UUID, stud
             numbers[row.id] = version.version_number if version else None
             depths.add(row.interview_depth)
             mode = project.mode
-            interviews = await _interviews(s, row.id)
+            # The tally needs only group, status, and reaction; skipping the answer payloads keeps this fast.
+            tallies = (await s.execute(select(m.Interview.group_id, m.Interview.status, m.Interview.reaction).where(
+                m.Interview.run_id == row.id))).all()
             for group in population.groups:
-                mine = [i for i in interviews if i.group_id == group["id"]]
+                mine = [t for t in tallies if t.group_id == group["id"]]
                 results.append(ps.VersionGroupResult(content_version_id=row.content_version_id, population_study_id=row.id,
                                                      group_id=group["id"], distribution=_pa().distribution(mine)))
     same_population = all(x.population_id == population.id for x in summaries)
@@ -443,9 +445,13 @@ async def diffusion(user_id: UUID, simulation_id: UUID, round_index: int | None,
         population = await s.get(m.Population, study.population_id) if study and study.population_id else None
         rounds = row.checkpoint.get("completed_rounds", [])
         chosen = round_index or (max(rounds) if rounds else 1)
-        posts = await _posts(s, row.id, m.SocialPost.round_index == chosen)
+        # Feeds cite earlier rounds' posts and peers' interviews, so load both to resolve every influence edge.
+        posts = await _posts(s, row.id, m.SocialPost.round_index <= chosen)
+        interview_groups = {interview_id: group_id for interview_id, group_id in (await s.execute(
+            select(m.Interview.id, m.Interview.group_id).where(m.Interview.run_id == row.population_study_id))).all()}
     groups = [ps.PopulationGroup.model_validate(g) for g in (population.groups if population else [])]
-    return _pa().diffusion_view(groups, posts, chosen, is_demo=bool(run and run.mode == "demo"), limit=limit)
+    return _pa().diffusion_view(groups, posts, chosen, is_demo=bool(run and run.mode == "demo"), limit=limit,
+                                interview_groups=interview_groups)
 
 
 # --- participants: state, memories, questions (README section 14.9) -----------------------------------------

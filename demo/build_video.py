@@ -1,7 +1,9 @@
 """Assemble the narrated walkthrough from the raw screen recordings in demo/raw.
 
 Each segment gets a title card, a synthetic voiceover (edge-tts), burned-in captions, and a label with the real
-elapsed time and the playback speed whenever footage is sped up. Requires ffmpeg on PATH and `uvx` (edge-tts).
+elapsed time and the playback speed whenever footage is sped up. Segment options: `trim` (seconds kept), `crop`
+(zoom into a region), `image` (hold a diagram instead of footage), `no_card`, `card_only`.
+Requires ffmpeg on PATH and `uvx` (edge-tts).
 Usage: python demo/build_video.py
 """
 
@@ -71,9 +73,27 @@ def card(name: str, title: str, subtitle: str, seconds: float, audio: Path | Non
     return out
 
 
+def still(seg: dict, audio: Path, vtt: Path, target: float) -> Path:
+    """A diagram or screenshot held for the narration (`image` is relative to the repository root)."""
+    out = OUT / f"{seg['name']}.mp4"
+    if out.exists() and out.stat().st_size > 0:
+        return out
+    chain = (f"[0:v]scale={W - 80}:{VH - 70}:force_original_aspect_ratio=decrease,pad={W}:{VH}:(ow-iw)/2:56+(oh-56-ih)/2:"
+             f"color=white,pad={W}:{H}:0:0:color={BG},setsar=1,"
+             f"drawtext=fontfile='{FONT_BOLD}':text='{esc(seg['title'])}':fontcolor=white:fontsize=22:box=1:"
+             f"boxcolor=0x4f46e5dd:boxborderw=10:x=24:y=20,{subtitle_filter(vtt)}[v]")
+    run(["ffmpeg", "-y", "-loop", "1", "-framerate", "30", "-i", str(DEMO.parent / seg["image"]), "-i", str(audio),
+         "-filter_complex", chain, "-map", "[v]", "-map", "1:a", "-t", f"{target:.2f}", "-c:v", "libx264",
+         "-preset", "medium", "-crf", "24", "-pix_fmt", "yuv420p", "-r", "30", "-c:a", "aac", "-ar", "24000", "-ac", "1",
+         str(out)])
+    return out
+
+
 def clip(seg: dict, audio: Path, vtt: Path, target: float) -> Path:
     out = OUT / f"{seg['name']}.mp4"
     sources = [RAW / f for f in seg["files"]]
+    # optional [w, h, x, y] in source pixels: zooms into one region (a graph canvas) so its lines stay legible
+    crop = "crop={}:{}:{}:{},".format(*seg["crop"]) if seg.get("crop") else ""
     trim = seg.get("trim")  # optional: keep only the first N seconds of a single-file segment
     raw_total = min(trim, duration(sources[0])) if trim else sum(duration(s) for s in sources)
     factor = max(1.0, raw_total / target)
@@ -83,7 +103,7 @@ def clip(seg: dict, audio: Path, vtt: Path, target: float) -> Path:
     label = f"Real time {int(raw_total // 60)}:{int(raw_total % 60):02d}" + (f" · shown at {factor:.1f}x" if factor > 1.05 else "")
     parts = []
     for i in range(len(sources)):
-        parts.append(f"[{i}:v]fps=30,scale={W}:{VH}:force_original_aspect_ratio=decrease,"
+        parts.append(f"[{i}:v]fps=30,{crop}scale={W}:{VH}:force_original_aspect_ratio=decrease,"
                      f"pad={W}:{VH}:(ow-iw)/2:0:color={BG},setsar=1[v{i}]")
     chain = ";".join(parts) + ";" + "".join(f"[v{i}]" for i in range(len(sources)))
     chain += f"concat=n={len(sources)}:v=1:a=0[cat];[cat]setpts=PTS/{factor:.4f},tpad=stop_mode=clone:stop_duration=30,"
@@ -119,9 +139,10 @@ def main() -> None:
         if seg.get("card_only"):
             video = card(seg["name"], seg["title"], seg["subtitle"], target, audio, vtt)
         else:
-            pieces.append(card(seg["name"] + "-card", seg["title"], seg["subtitle"], 2.5))
-            clock += 2.5
-            video = clip(seg, audio, vtt, target)
+            if not seg.get("no_card"):  # a run of diagrams shares one title card
+                pieces.append(card(seg["name"] + "-card", seg["title"], seg["subtitle"], 2.5))
+                clock += 2.5
+            video = still(seg, audio, vtt, target) if seg.get("image") else clip(seg, audio, vtt, target)
         pieces.append(video)
         for block in vtt.read_text(encoding="utf-8").split("\n\n"):
             lines = [l for l in block.strip().splitlines() if l.strip()]
