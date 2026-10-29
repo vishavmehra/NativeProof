@@ -359,8 +359,6 @@ code path. `Run.failed.json` shows the failure state of a live run.
 ## 14. Contract v3: population studies, social simulation, and graph views
 
 Schemas live in `backend/app/schemas/population.py`; routes in `routes/populations.py` and `routes/runs.py`.
-Concepts are adapted from MiroFish (AGPL-3.0) without copying its code: evidence-seeded personas, persistent agents,
-bounded multi-round interaction, and post-simulation analysis (docs/14 D-044).
 
 ### 14.1 Endpoints
 

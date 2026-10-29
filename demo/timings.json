@@ -48,6 +48,12 @@
     "speed": 5.51
   },
   {
+    "name": "22-diffusion",
+    "title": "Social diffusion graph",
+    "real_seconds": 40.9,
+    "speed": 2.51
+  },
+  {
     "name": "08-follow-ups",
     "title": "Participant memory and follow-ups",
     "real_seconds": 132.3,
@@ -76,6 +82,12 @@
     "title": "Versions on identical participants",
     "real_seconds": 86.6,
     "speed": 3.0
+  },
+  {
+    "name": "21-cancel-resume",
+    "title": "Cancel and recovery",
+    "real_seconds": 500.5,
+    "speed": 14.06
   },
   {
     "name": "18-arena",
@@ -112,6 +124,12 @@
     "title": "Proof report",
     "real_seconds": 85.7,
     "speed": 3.92
+  },
+  {
+    "name": "20-home",
+    "title": "Home dashboard",
+    "real_seconds": 18,
+    "speed": 1.21
   },
   {
     "name": "99-outro",

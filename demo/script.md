@@ -65,7 +65,15 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 2 min 45 s; shown at 5.51x
 - **Voiceover:** Next, a three round social simulation. In each round, twenty percent of the participants read a feed of five peer posts, then post, comment, share or ignore. It completed in seventy seconds, with nine, four and eight stance changes across the rounds. Each post records the stance before and after, the participant's stated reason, and the exact posts it reacted to, so every claimed influence can be traced back to its source.
 
-## 9. Participant memory and follow-ups
+## 9. Social diffusion graph
+
+*Audience groups and posts, round by round*
+
+- **Recording:** `22-diffusion.mp4`
+- **Real time:** 0 min 40 s; shown at 2.51x
+- **Voiceover:** The diffusion view draws the simulation as a graph of audience groups and their posts, round by round, and the feed browser filters every post by round and by group. The view is labeled as illustrative. It is not a forecast of real reach.
+
+## 10. Participant memory and follow-ups
 
 *Answers cite stored memories and become memories*
 
@@ -73,7 +81,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 2 min 12 s; shown at 5.58x
 - **Voiceover:** Participants keep memory. This participant's current stance comes from round one, and its memories are its interview and its own post. We ask a follow-up about carrying the empty can back down. The answer cites one stored memory and is saved as a new memory. We can also question a whole group. A seeded sample of five answered, and the tally covers only that sample.
 
-## 10. Risk Radar with vision
+## 11. Risk Radar with vision
 
 *Observations kept apart from interpretations*
 
@@ -81,7 +89,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 2 min 8 s; shown at 3.64x
 - **Voiceover:** Risk Radar scans the copy and the image together. A vision model, MiniCPM-V, analyzed the uploaded creative. In twenty-seven seconds the scan found five potential issues, one moderate and four low. The moderate one is the line, crack one open at the summit, which the model reads as a possible clash with etiquette at sacred peaks in Japan. That reading is labeled as model interpretation. Applying the suggested change creates a new adaptation. The campaign itself is never edited in place.
 
-## 11. Voice adaptations
+## 12. Voice adaptations
 
 *Every change shows what it replaces and why*
 
@@ -89,7 +97,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 1 min 30 s; shown at 4.15x
 - **Voiceover:** Voice writes market adaptations, grounded in the discovery evidence and the rehearsal findings. It produced two variants in about fifteen seconds. Each change shows what it replaces, why, and whether evidence supports it, and deterministic checks confirm that protected terms were kept and prohibited terms avoided.
 
-## 12. Loop evaluation
+## 13. Loop evaluation
 
 *Deterministic decision rules, no invented winner*
 
@@ -97,7 +105,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 0 min 44 s; shown at 2.32x
 - **Voiceover:** Loop scores the original and three candidates under one scoring version. The best candidate scored ninety point five against eighty-five point eight. Because the margin is under five points, the decision rule recommends validating with real people instead of declaring a winner.
 
-## 13. Versions on identical participants
+## 14. Versions on identical participants
 
 *Same 100-person population, version 2 against version 3*
 
@@ -105,7 +113,15 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 1 min 26 s; shown at 3.0x
 - **Voiceover:** Loop can also compare versions on identical participants. We saved the risk fix as version three and interviewed the same one hundred participants again. Reusing the population skipped all Qloo and construction work. The result is honest: positive reactions fell from seventy-one to sixty-six percent. The fix may remove a cultural risk but cost emotional pull, and the app states that no statistical significance is claimed.
 
-## 14. Campaign Arena
+## 15. Cancel and recovery
+
+*A run stops at a checkpoint and keeps its finished work*
+
+- **Recording:** `21-cancel-resume.mp4`
+- **Real time:** 8 min 20 s; shown at 14.06x
+- **Voiceover:** Long runs can be cancelled. We start another study on the same population and cancel it after the first batch. It stops at the next checkpoint and keeps what was finished: forty of one hundred interviews, saved and readable. A cancelled run is final. Resume is for runs that failed or were interrupted, for example by a server restart. When we restarted the server during the next run, Render kept the old instance running until the new one was healthy, so that run simply completed. Recovery after a hard stop is covered by the automated tests.
+
+## 16. Campaign Arena
 
 *Concepts side by side for one audience and one set of criteria*
 
@@ -113,7 +129,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 2 min 6 s; shown at 7.74x
 - **Voiceover:** Campaign Arena puts concepts side by side for the same synthetic audience and the same criteria. In eighty seconds, variant B led with ninety-three point eight out of a hundred, and the original was marked as within five points of the leader.
 
-## 15. Cultural DNA
+## 17. Cultural DNA
 
 *A versioned profile where every item cites evidence*
 
@@ -121,7 +137,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 0 min 51 s; shown at 32.79x
 - **Voiceover:** Cultural DNA turns the discovery evidence into a versioned cultural profile, in under thirty seconds. Every item cites its Qloo source, and items without support are labeled as hypotheses.
 
-## 16. Market Expansion
+## 18. Market Expansion
 
 *A real limitation, reported instead of filled in*
 
@@ -129,7 +145,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 3 min 55 s; shown at 11.08x
 - **Voiceover:** Market Expansion runs the same discovery across several markets. Here it shows a real limitation. Its terms came back ambiguous in both Japan and South Korea, and this screen does not yet have a confirmation step, so both markets are reported as unavailable instead of being ranked on missing data.
 
-## 17. Brand Memory and Trend Watch
+## 19. Brand Memory and Trend Watch
 
 *Rules every workflow reads; snapshots compared deterministically*
 
@@ -137,7 +153,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 1 min 22 s; shown at 4.1x
 - **Voiceover:** Brand Memory stores the rules every workflow reads. Trend Watch compares two saved discovery snapshots without calling a model. It shows which signals appeared and disappeared, and it warns that two snapshots are not a trend line, and that a difference can come from matching changes rather than culture.
 
-## 18. Evidence Graph
+## 20. Evidence Graph
 
 *Only stored links are drawn*
 
@@ -145,7 +161,7 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 1 min 37 s; shown at 5.01x
 - **Voiceover:** The Evidence Graph draws only links the system stored: one hundred and fifty-three nodes and one hundred and seventy edges from this session. Selecting a node shows its provenance. This one is a cached Qloo source signal, produced by a discovery run, with its limitations attached.
 
-## 19. Proof report
+## 21. Proof report
 
 *Assembled from stored results, with reproducibility details*
 
@@ -153,7 +169,15 @@ One real session on https://nativeproof.vercel.app (October 29, 2026), live mode
 - **Real time:** 1 min 25 s; shown at 3.92x
 - **Voiceover:** Finally, Proof assembles a report in thirteen seconds without calling a model. It carries the verdict, the evidence register, the limitations, and a reproducibility section with model identifiers, prompt versions, and each stage's provider and latency. It exports as Markdown, JSON or PDF.
 
-## 20. Validate with real people
+## 22. Home dashboard
+
+*Counts of stored records across the account*
+
+- **Recording:** `20-home-search.mp4` (first 18 s)
+- **Real time:** 0 min 18 s; shown at 1.21x
+- **Voiceover:** Back on Home, the dashboard counts what this session produced: one project, one market researched, one hundred and nine evidence records, and the recent completed runs. Each number is a count of stored records, not an estimate.
+
+## 23. Validate with real people
 
 *github.com/vishavmehra/NativeProof*
 

@@ -2,8 +2,7 @@
 
 An evidence-grounded synthetic population is interviewed about the actual campaign, then optionally exposed to
 peers' reactions over a few bounded social rounds. Everything here is simulated: it is never measured opinion, and a
-participant count is a generation target, not a human sample size. Concepts adapted (not code) from MiroFish
-(AGPL-3.0): graph-seeded personas, persistent agents, bounded multi-round interaction, post-simulation analysis.
+participant count is a generation target, not a human sample size.
 """
 
 from datetime import datetime

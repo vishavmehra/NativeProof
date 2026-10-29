@@ -74,7 +74,8 @@ def card(name: str, title: str, subtitle: str, seconds: float, audio: Path | Non
 def clip(seg: dict, audio: Path, vtt: Path, target: float) -> Path:
     out = OUT / f"{seg['name']}.mp4"
     sources = [RAW / f for f in seg["files"]]
-    raw_total = sum(duration(s) for s in sources)
+    trim = seg.get("trim")  # optional: keep only the first N seconds of a single-file segment
+    raw_total = min(trim, duration(sources[0])) if trim else sum(duration(s) for s in sources)
     factor = max(1.0, raw_total / target)
     seg["real_seconds"], seg["speed"] = round(raw_total, 1), round(factor, 2)
     if out.exists() and out.stat().st_size > 0:  # already built by an earlier run
@@ -94,7 +95,7 @@ def clip(seg: dict, audio: Path, vtt: Path, target: float) -> Path:
               f"{subtitle_filter(vtt)}[v]")
     args = ["ffmpeg", "-y"]
     for s in sources:
-        args += ["-i", str(s)]
+        args += (["-t", str(trim)] if trim else []) + ["-i", str(s)]
     args += ["-i", str(audio), "-filter_complex", chain, "-map", "[v]", "-map", f"{len(sources)}:a",
              "-t", f"{target:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "24", "-pix_fmt", "yuv420p",
              "-r", "30", "-c:a", "aac", "-ar", "24000", "-ac", "1", str(out)]

@@ -39,7 +39,6 @@ Thumbs.db
 # Live Qloo responses (hackathon terms: never store response data in a public repository)
 qloo_live_smoke_report*.md
 
-# Demo build outputs (the final video is published as a GitHub release asset)
+# Demo recording sources and intermediate build files (the final video is committed)
 demo/raw/
 demo/build/
-demo/*.mp4

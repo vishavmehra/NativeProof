@@ -16,7 +16,9 @@ The judging account is a shared email-and-password account created for reviewers
 
 ## Walkthrough video
 
-**[Watch the narrated walkthrough (MP4)](https://github.com/vishavmehra/NativeProof/releases/download/v1.0.0/nativeproof-walkthrough.mp4)**: one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models. Long runs are sped up, and a label on screen shows the real elapsed time and the playback speed. The voiceover is synthetic. The script, the shot list with measured timings, the captions, and the build script are in [`demo/`](demo/).
+**[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (9 min 52 s, 33 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models.
+
+**Architecture and workflow diagrams:** all 12 are in [`diagrams/`](diagrams/), as editable draw.io sources (`diagrams/src/`), SVG (`diagrams/svg/`) and PNG (`diagrams/png/`), and each is embedded in the matching section below. Long runs are sped up, and a label on screen shows the real elapsed time and the playback speed. The voiceover is synthetic. The script, the shot list with measured timings, the captions, and the build script are in [`demo/`](demo/).
 
 Measured in that session (production, October 29, 2026):
 
@@ -70,7 +72,7 @@ NativeProof makes the pre-launch work explicit and inspectable:
 
 ## How a study flows
 
-![Campaign lifecycle](docs/diagrams/svg/04-campaign-lifecycle.svg)
+![Campaign lifecycle](diagrams/svg/04-campaign-lifecycle.svg)
 
 1. **Create a project.** Its mode is fixed at creation: a live project calls Qloo and the model providers; a demo project runs the same pipeline on labeled fixtures. Each project has one Brand Memory.
 2. **Add a campaign** with its original content: headline, body, call to action, and reference terms. Every content edit creates a new, immutable content version, so results always point to the exact text they assessed.
@@ -227,14 +229,14 @@ A request larger than the deployment's work limit (`POPULATION_MAX_PARTICIPANTS`
 
 Run type `population_study` has four stages:
 
-![Synthetic population generation](docs/diagrams/svg/07-population-generation.svg)
+![Synthetic population generation](diagrams/svg/07-population-generation.svg)
 
 1. **`preparing_evidence`.** Qloo seeds are the references the discovery resolved or the person confirmed, then the concept and reference terms under the near-exact rule; ambiguous or unresolved terms are never used. For each region, related brands come from Qloo Insights with the region as the audience-location signal, filtered by the relevance check. Demographic data from Qloo is aggregate audience data: it may ground a group, never a participant. If every Qloo call fails, the run stops before any model call and saves nothing. If no usable evidence exists, the population is marked ungrounded (`grounded = false`) and every group is labeled a hypothesis.
 2. **`constructing_population`.** A model writes 3 to 12 audience groups (archetypes): a label, interests weighted by evidence rank, and the evidence ids they cite. Group text that names a demographic or sensitive trait fails validation, and the gateway's single repair asks the model to remove it. Participants are then expanded deterministically from the groups with the run seed: each participant gets a subset of its group's interests and one value for each of four trait knobs (`adoption_style`, `price_sensitivity`, `media_habit`, `tone_preference`). No age, gender, ethnicity, religion, health, income, or other sensitive or demographic trait is ever assigned to a participant. A group's `share` is an allocation choice, not a market share.
 3. **`running_interviews`.** See the next diagram. Participants are interviewed in batches of 10, up to three batches at a time, on the fast model tier. Every participant answers the core protocol about the actual content version: first impression, comprehension, relevance, appeal, confusion, trust, concerns, and improvement. `standard` depth adds one adaptive follow-up and `deep` adds two. A creative is shown only as verified vision observations. Each batch is saved as a checkpoint; a failed batch is stored as failed interviews and is not retried in a loop.
 4. **`analysing_results`.** Tallies are deterministic counts over stored interviews: reaction distribution (positive, mixed, neutral, negative, confused) as `rates = counts / completed interviews`, with failed interviews reported beside them; themes, concerns, and misunderstandings; and the same by group and by region. A model then interprets the tallies (group differences and next actions), and that text is labeled interpretation.
 
-![Interviews and follow-ups](docs/diagrams/svg/08-interviews-follow-ups.svg)
+![Interviews and follow-ups](diagrams/svg/08-interviews-follow-ups.svg)
 
 The Audience page shows the population form, the run's progress with **Cancel run** and **Resume from last checkpoint**, the reaction distributions, a world map of synthetic participants per region, the landscape graph and reaction map, and the stored interviews (`GET /api/v1/population-studies/{id}/interviews`, filterable by group, region, and reaction).
 
@@ -263,7 +265,7 @@ The Audience page shows the population form, the run's progress with **Cancel ru
 
 **How it works.** Request (`POST /api/v1/social-simulations`): a completed or partial population study, `rounds` 1 to 5 (default 3), `active_share` 0.05 to 0.5 (default 0.2), `feed_size` 2 to 10 (default 5), and a seed (default 42). Run type `social_simulation`, stages `building_network`, `simulating_rounds`, `analysing_dynamics`, and `summarizing`.
 
-![Multi-round social simulation](docs/diagrams/svg/09-social-simulation.svg)
+![Multi-round social simulation](diagrams/svg/09-social-simulation.svg)
 
 - **Peer network.** Seeded: each participant links to 6 peers ranked by the Jaccard overlap of their interest ids, about three quarters within its own group. The method is stored with the result.
 - **Feeds.** In each round a seeded `active_share` of participants acts. Each sees up to `feed_size` items from its neighbours: their interview answers in round 1, and their latest posts first in later rounds.
@@ -290,7 +292,7 @@ The page shows a feed browser by round and group, the before-and-after distribut
 - **Social diffusion** (`GET /api/v1/social-simulations/{id}/diffusion`): group-to-group influence derived from `seen_post_ids`, plus a bounded participant and post subgraph for one round (`influenced` and `replied_to` edges).
 - **Evidence Graph** (`GET /api/v1/projects/{id}/evidence-graph`, filters for campaign, region, evidence type, and node limit): campaigns, content versions, adaptations, evaluations, risk findings, cultural profiles, arenas, market comparisons, reports, runs, and evidence, linked by `variant_of`, `derived_from`, `generated_by`, `supports`, `evaluates`, `recommends`, `flags`, `references`, and `produced`.
 
-![Evidence graph and relationships](docs/diagrams/svg/11-evidence-graph.svg)
+![Evidence graph and relationships](diagrams/svg/11-evidence-graph.svg)
 
 All graphs share one canvas: force, hierarchical, and regional layouts that are deterministic (the same input gives the same picture), layer toggles from the legend, label density control, a detail panel with each node's stored facts and its relations with their weight definitions and provenance, and keyboard traversal (arrow keys move between neighbours, Enter opens). On narrow screens the Evidence Graph opens as a text list, with the canvas one tap away.
 
@@ -395,7 +397,7 @@ The UI shows a persistent DEMO DATA indicator, and evidence is labeled Fixture.
 
 **How it works.**
 
-![Background runs, checkpoints, recovery, and tests](docs/diagrams/svg/12-runs-checkpoints-testing.svg)
+![Background runs, checkpoints, recovery, and tests](diagrams/svg/12-runs-checkpoints-testing.svg)
 
 - Starting a run returns `202` with a `RunAccepted` body. Clients poll `GET /api/v1/runs/{id}` every 1.5 s for the first 30 s, then every 5 s, until a terminal status: `completed`, `partial`, `failed`, or `cancelled`. A `partial` run has a result whose limitations name the missing parts; a `failed` run carries `Run.error` with a code, message, stage, and a retryable flag.
 - Runs execute as in-process tasks: at most 4 at a time per process, and at most `MAX_ACTIVE_RUNS_PER_USER` active runs per user (429 `RATE_LIMITED` beyond that). Standard runs time out after 15 minutes; population studies and social simulations after 60.
@@ -408,7 +410,7 @@ The UI shows a persistent DEMO DATA indicator, and evidence is labeled Fixture.
 
 ## Architecture
 
-![System architecture](docs/diagrams/svg/01-system-architecture.svg)
+![System architecture](diagrams/svg/01-system-architecture.svg)
 
 - **Web app** ([`frontend/`](frontend/)): Next.js 16 (App Router, Cache Components), React 19, TypeScript, Tailwind CSS 4, shadcn/ui on Base UI, TanStack Query, and openapi-fetch. API types are generated from [`contracts/openapi.json`](contracts/openapi.json) with openapi-typescript. Graphs use @xyflow/react with deterministic d3-force layouts; maps use d3-geo with Natural Earth shapes from world-atlas. The browser receives only `NEXT_PUBLIC_*` settings.
 - **API** ([`backend/`](backend/)): FastAPI on Python 3.13, Pydantic request and response models, SQLAlchemy 2 (async), Alembic, LangGraph workflows, the OpenAI SDK against OpenAI-compatible providers, and PyJWT. Layers: routes, an auth dependency, services (ownership checks, persistence, results, graph views), the run engine, workflows, agents (model calls with strict schemas), deterministic analytics (scoring, tallies, constraint checks), and adapters for Qloo, the model gateway, retrieval, and storage. Routes live under `/api/v1`; `/health` (GET and HEAD) and `/ready` have no prefix. `/ready` reports the database, providers, and optional capabilities, and returns 503 when the service is not ready. Interactive API docs are served in development only.
@@ -434,11 +436,10 @@ Each run type is a LangGraph state graph with four named stages. A stage either 
 | `population_study` | Audience Intelligence | preparing_evidence, constructing_population, running_interviews, analysing_results | default (groups, analysis); fast (interviews) |
 | `social_simulation` | Social simulation | building_network, simulating_rounds, analysing_dynamics, summarizing | fast (rounds); default (influence paths) |
 
-The division of labor is deliberate: models write language (briefs, reactions, adaptations, interpretations), and code does everything that can be computed (resolution rules, relevance checks, scoring, tallies, constraint checks, excerpt verification, graph edges, report assembly). Model output and retrieved content are treated as untrusted input: prompts wrap source material as data, and every output is validated against a strict schema before it is used. Concepts for the population and social simulation features are adapted from MiroFish; see [Acknowledgments](#acknowledgments).
-
+The division of labor is deliberate: models write language (briefs, reactions, adaptations, interpretations), and code does everything that can be computed (resolution rules, relevance checks, scoring, tallies, constraint checks, excerpt verification, graph edges, report assembly). Model output and retrieved content are treated as untrusted input: prompts wrap source material as data, and every output is validated against a strict schema before it is used.
 ## Qloo integration
 
-![Qloo evidence pipeline and provenance](docs/diagrams/svg/05-qloo-evidence-pipeline.svg)
+![Qloo evidence pipeline and provenance](diagrams/svg/05-qloo-evidence-pipeline.svg)
 
 - **Workflows.** Only an allowlist of verified workflows ever runs: tag search, entity search, related-entity recommendations through Insights, aggregate audience demographics, and popularity trends. Inputs are validated before any call: search terms must be 1 to 100 characters without control characters, terms that look like an email address or phone number are refused, and workflow names never come from user input.
 - **Transports.** The official hackathon harness (`qloo exec`, `@qloo/qloo-harness` pinned in [`backend/qloo/`](backend/qloo/)) when Node and the harness are installed, or direct REST otherwise; `QLOO_TRANSPORT` can force either. The hosted API runs on Render with `QLOO_TRANSPORT=rest`. Each call gets up to three attempts with bounded output. The harness subprocess receives only `PATH` and basic OS variables (no database URL or model keys) and a fresh, empty `QLOO_HOME` per run.
@@ -448,7 +449,7 @@ The division of labor is deliberate: models write language (briefs, reactions, a
 
 ## Model gateway and routing
 
-![AI model gateway and routing](docs/diagrams/svg/06-model-gateway.svg)
+![AI model gateway and routing](diagrams/svg/06-model-gateway.svg)
 
 **What it does.** Every model call in the product goes through one gateway ([`backend/app/llm/gateway.py`](backend/app/llm/gateway.py)) that routes the task, calls the provider with bounded retries and timeouts, falls back when explicitly enabled, validates structured output, and records usage.
 
@@ -477,7 +478,7 @@ Capabilities beyond chat go through the same gateway: embeddings (`EMBEDDING_*`)
 
 ## Data model
 
-![Database entity relationships](docs/diagrams/svg/10-database-er.svg)
+![Database entity relationships](diagrams/svg/10-database-er.svg)
 
 The schema is defined in [`backend/app/db/models.py`](backend/app/db/models.py) and created by the Alembic migrations in [`backend/migrations/versions/`](backend/migrations/versions/).
 
@@ -500,7 +501,7 @@ Conventions:
 
 ## Authentication
 
-![Authentication](docs/diagrams/svg/03-authentication.svg)
+![Authentication](diagrams/svg/03-authentication.svg)
 
 - **Sign-in** happens in the browser with Supabase Auth: **Continue with Google** (OAuth with PKCE; Supabase returns to `/auth/callback`, where the code is exchanged for a session), email and password, or **Try the demo**, which signs in anonymously and seeds a demo project.
 - **Session.** `@supabase/ssr` keeps the session in cookies. A token provider adds `Authorization: Bearer <access token>` to every API request; the API never uses cookies.
@@ -650,7 +651,7 @@ Migrations that depend on Postgres or Supabase features are no-ops on SQLite. Do
 
 ## Deployment
 
-![Deployment](docs/diagrams/svg/02-deployment.svg)
+![Deployment](diagrams/svg/02-deployment.svg)
 
 | Component | Host | Notes |
 |---|---|---|
@@ -746,15 +747,14 @@ backend/               FastAPI service (uv project): app/, migrations/, scripts/
 frontend/              Next.js web app: src/app (routes), src/features (feature modules), src/components, src/lib
 contracts/             openapi.json (generated) and fixtures/ (one labeled demo journey)
 e2e/                   Playwright end-to-end tests
-docs/diagrams/         src/ (draw.io sources), svg/ and png/ (exports)
+diagrams/         src/ (draw.io sources), svg/ and png/ (exports)
 scripts/               export-diagrams.ps1 re-exports every diagram with the draw.io CLI
 render.yaml            Render blueprint for the API
 ```
 
-To change a diagram, edit its source in `docs/diagrams/src/` with draw.io and run `powershell -ExecutionPolicy Bypass -File scripts/export-diagrams.ps1`.
+To change a diagram, edit its source in `diagrams/src/` with draw.io and run `powershell -ExecutionPolicy Bypass -File scripts/export-diagrams.ps1`.
 
 ## Acknowledgments
 
 - Cultural affinity data comes from [Qloo](https://www.qloo.com/) through the official hackathon kit.
-- The population study and social simulation features adapt concepts from MiroFish (AGPL-3.0): evidence-seeded personas, persistent agents, bounded multi-round interaction, and post-simulation analysis. No MiroFish code is included.
 - Map shapes come from world-atlas (Natural Earth, public domain).

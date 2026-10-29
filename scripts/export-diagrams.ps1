@@ -1,11 +1,11 @@
 <#
 .SYNOPSIS
-    Re-export every draw.io source in docs/diagrams/src to SVG and PNG.
+    Re-export every draw.io source in diagrams/src to SVG and PNG.
 
 .DESCRIPTION
     Uses the draw.io desktop CLI. By default it looks for
     %LOCALAPPDATA%\Programs\draw.io\draw.io.exe; pass -Drawio or set DRAWIO_EXE to override.
-    Writes docs/diagrams/svg/<name>.svg and docs/diagrams/png/<name>.png (scale 2) and fails
+    Writes diagrams/svg/<name>.svg and diagrams/png/<name>.png (scale 2) and fails
     when any export is missing or empty.
 
 .EXAMPLE
@@ -18,9 +18,9 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$srcDir = Join-Path $root 'docs\diagrams\src'
-$svgDir = Join-Path $root 'docs\diagrams\svg'
-$pngDir = Join-Path $root 'docs\diagrams\png'
+$srcDir = Join-Path $root 'diagrams\src'
+$svgDir = Join-Path $root 'diagrams\svg'
+$pngDir = Join-Path $root 'diagrams\png'
 
 if (-not $Drawio) {
     $Drawio = Join-Path $env:LOCALAPPDATA 'Programs\draw.io\draw.io.exe'

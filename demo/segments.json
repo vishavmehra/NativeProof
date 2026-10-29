@@ -56,6 +56,13 @@
     "narration": "Next, a three round social simulation. In each round, twenty percent of the participants read a feed of five peer posts, then post, comment, share or ignore. It completed in seventy seconds, with nine, four and eight stance changes across the rounds. Each post records the stance before and after, the participant's stated reason, and the exact posts it reacted to, so every claimed influence can be traced back to its source."
   },
   {
+    "name": "22-diffusion",
+    "title": "Social diffusion graph",
+    "subtitle": "Audience groups and posts, round by round",
+    "files": ["22-diffusion.mp4"],
+    "narration": "The diffusion view draws the simulation as a graph of audience groups and their posts, round by round, and the feed browser filters every post by round and by group. The view is labeled as illustrative. It is not a forecast of real reach."
+  },
+  {
     "name": "08-follow-ups",
     "title": "Participant memory and follow-ups",
     "subtitle": "Answers cite stored memories and become memories",
@@ -89,6 +96,13 @@
     "subtitle": "Same 100-person population, version 2 against version 3",
     "files": ["09-version-rerun.mp4", "13-version-comparison.mp4"],
     "narration": "Loop can also compare versions on identical participants. We saved the risk fix as version three and interviewed the same one hundred participants again. Reusing the population skipped all Qloo and construction work. The result is honest: positive reactions fell from seventy-one to sixty-six percent. The fix may remove a cultural risk but cost emotional pull, and the app states that no statistical significance is claimed."
+  },
+  {
+    "name": "21-cancel-resume",
+    "title": "Cancel and recovery",
+    "subtitle": "A run stops at a checkpoint and keeps its finished work",
+    "files": ["21-cancel-resume.mp4"],
+    "narration": "Long runs can be cancelled. We start another study on the same population and cancel it after the first batch. It stops at the next checkpoint and keeps what was finished: forty of one hundred interviews, saved and readable. A cancelled run is final. Resume is for runs that failed or were interrupted, for example by a server restart. When we restarted the server during the next run, Render kept the old instance running until the new one was healthy, so that run simply completed. Recovery after a hard stop is covered by the automated tests."
   },
   {
     "name": "18-arena",
@@ -131,6 +145,14 @@
     "subtitle": "Assembled from stored results, with reproducibility details",
     "files": ["15-proof-report.mp4"],
     "narration": "Finally, Proof assembles a report in thirteen seconds without calling a model. It carries the verdict, the evidence register, the limitations, and a reproducibility section with model identifiers, prompt versions, and each stage's provider and latency. It exports as Markdown, JSON or PDF."
+  },
+  {
+    "name": "20-home",
+    "title": "Home dashboard",
+    "subtitle": "Counts of stored records across the account",
+    "files": ["20-home-search.mp4"],
+    "trim": 18,
+    "narration": "Back on Home, the dashboard counts what this session produced: one project, one market researched, one hundred and nine evidence records, and the recent completed runs. Each number is a count of stored records, not an estimate."
   },
   {
     "name": "99-outro",

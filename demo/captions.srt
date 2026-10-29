@@ -147,169 +147,217 @@ It completed in seventy seconds, with nine, four and eight stance changes across
 Each post records the stance before and after, the participant's stated reason, and the exact posts it reacted to, so every claimed influence can be traced back to its source.
 
 38
-00:04:05,074 --> 00:04:06,636
-Participants keep memory.
+00:04:05,074 --> 00:04:15,211
+The diffusion view draws the simulation as a graph of audience groups and their posts, round by round, and the feed browser filters every post by round and by group.
 
 39
-00:04:06,636 --> 00:04:12,799
-This participant's current stance comes from round one, and its memories are its interview and its own post.
+00:04:15,211 --> 00:04:17,874
+The view is labeled as illustrative.
 
 40
-00:04:12,799 --> 00:04:16,411
-We ask a follow-up about carrying the empty can back down.
+00:04:17,874 --> 00:04:20,074
+It is not a forecast of real reach.
 
 41
-00:04:16,411 --> 00:04:20,536
-The answer cites one stored memory and is saved as a new memory.
+00:04:23,894 --> 00:04:25,456
+Participants keep memory.
 
 42
-00:04:20,536 --> 00:04:22,399
-We can also question a whole group.
+00:04:25,456 --> 00:04:31,619
+This participant's current stance comes from round one, and its memories are its interview and its own post.
 
 43
-00:04:22,399 --> 00:04:27,461
-A seeded sample of five answered, and the tally covers only that sample.
+00:04:31,619 --> 00:04:35,231
+We ask a follow-up about carrying the empty can back down.
 
 44
-00:04:31,262 --> 00:04:34,812
-Risk Radar scans the copy and the image together.
+00:04:35,231 --> 00:04:39,356
+The answer cites one stored memory and is saved as a new memory.
 
 45
-00:04:34,812 --> 00:04:39,662
-A vision model, MiniCPM-V, analyzed the uploaded creative.
+00:04:39,356 --> 00:04:41,219
+We can also question a whole group.
 
 46
-00:04:39,662 --> 00:04:45,474
-In twenty-seven seconds the scan found five potential issues, one moderate and four low.
+00:04:41,219 --> 00:04:46,281
+A seeded sample of five answered, and the tally covers only that sample.
 
 47
-00:04:45,474 --> 00:04:54,587
-The moderate one is the line, crack one open at the summit, which the model reads as a possible clash with etiquette at sacred peaks in Japan.
+00:04:50,082 --> 00:04:53,632
+Risk Radar scans the copy and the image together.
 
 48
-00:04:54,587 --> 00:04:57,974
-That reading is labeled as model interpretation.
+00:04:53,632 --> 00:04:58,482
+A vision model, MiniCPM-V, analyzed the uploaded creative.
 
 49
-00:04:57,974 --> 00:05:01,837
-Applying the suggested change creates a new adaptation.
+00:04:58,482 --> 00:05:04,294
+In twenty-seven seconds the scan found five potential issues, one moderate and four low.
 
 50
-00:05:01,837 --> 00:05:05,224
-The campaign itself is never edited in place.
+00:05:04,294 --> 00:05:13,407
+The moderate one is the line, crack one open at the summit, which the model reads as a possible clash with etiquette at sacred peaks in Japan.
 
 51
-00:05:09,042 --> 00:05:14,967
-Voice writes market adaptations, grounded in the discovery evidence and the rehearsal findings.
+00:05:13,407 --> 00:05:16,794
+That reading is labeled as model interpretation.
 
 52
-00:05:14,967 --> 00:05:18,517
-It produced two variants in about fifteen seconds.
+00:05:16,794 --> 00:05:20,657
+Applying the suggested change creates a new adaptation.
 
 53
-00:05:18,517 --> 00:05:29,554
-Each change shows what it replaces, why, and whether evidence supports it, and deterministic checks confirm that protected terms were kept and prohibited terms avoided.
+00:05:20,657 --> 00:05:24,044
+The campaign itself is never edited in place.
 
 54
-00:05:33,358 --> 00:05:38,370
-Loop scores the original and three candidates under one scoring version.
+00:05:27,862 --> 00:05:33,787
+Voice writes market adaptations, grounded in the discovery evidence and the rehearsal findings.
 
 55
-00:05:38,370 --> 00:05:43,283
-The best candidate scored ninety point five against eighty-five point eight.
+00:05:33,787 --> 00:05:37,337
+It produced two variants in about fifteen seconds.
 
 56
-00:05:43,283 --> 00:05:50,983
-Because the margin is under five points, the decision rule recommends validating with real people instead of declaring a winner.
+00:05:37,337 --> 00:05:48,374
+Each change shows what it replaces, why, and whether evidence supports it, and deterministic checks confirm that protected terms were kept and prohibited terms avoided.
 
 57
-00:05:54,794 --> 00:05:58,344
-Loop can also compare versions on identical participants.
+00:05:52,178 --> 00:05:57,190
+Loop scores the original and three candidates under one scoring version.
 
 58
-00:05:58,344 --> 00:06:04,294
-We saved the risk fix as version three and interviewed the same one hundred participants again.
+00:05:57,190 --> 00:06:02,103
+The best candidate scored ninety point five against eighty-five point eight.
 
 59
-00:06:04,294 --> 00:06:08,706
-Reusing the population skipped all Qloo and construction work.
+00:06:02,103 --> 00:06:09,803
+Because the margin is under five points, the decision rule recommends validating with real people instead of declaring a winner.
 
 60
-00:06:08,706 --> 00:06:14,856
-The result is honest: positive reactions fell from seventy-one to sixty-six percent.
+00:06:13,614 --> 00:06:17,164
+Loop can also compare versions on identical participants.
 
 61
-00:06:14,856 --> 00:06:22,369
-The fix may remove a cultural risk but cost emotional pull, and the app states that no statistical significance is claimed.
+00:06:17,164 --> 00:06:23,114
+We saved the risk fix as version three and interviewed the same one hundred participants again.
 
 62
-00:06:26,190 --> 00:06:32,077
-Campaign Arena puts concepts side by side for the same synthetic audience and the same criteria.
+00:06:23,114 --> 00:06:27,526
+Reusing the population skipped all Qloo and construction work.
 
 63
-00:06:32,077 --> 00:06:41,252
-In eighty seconds, variant B led with ninety-three point eight out of a hundred, and the original was marked as within five points of the leader.
+00:06:27,526 --> 00:06:33,676
+The result is honest: positive reactions fell from seventy-one to sixty-six percent.
 
 64
-00:06:49,118 --> 00:06:54,030
-Market Expansion runs the same discovery across several markets.
+00:06:33,676 --> 00:06:41,189
+The fix may remove a cultural risk but cost emotional pull, and the app states that no statistical significance is claimed.
 
 65
-00:06:54,030 --> 00:06:56,355
-Here it shows a real limitation.
+00:06:45,010 --> 00:06:46,685
+Long runs can be cancelled.
 
 66
-00:06:56,355 --> 00:07:09,055
-Its terms came back ambiguous in both Japan and South Korea, and this screen does not yet have a confirmation step, so both markets are reported as unavailable instead of being ranked on missing data.
+00:06:46,685 --> 00:06:51,860
+We start another study on the same population and cancel it after the first batch.
 
 67
-00:07:12,858 --> 00:07:16,958
-Brand Memory stores the rules every workflow reads.
+00:06:51,860 --> 00:06:58,785
+It stops at the next checkpoint and keeps what was finished: forty of one hundred interviews, saved and readable.
 
 68
-00:07:16,958 --> 00:07:22,095
-Trend Watch compares two saved discovery snapshots without calling a model.
+00:06:58,785 --> 00:07:00,985
+A cancelled run is final.
 
 69
-00:07:22,095 --> 00:07:31,608
-It shows which signals appeared and disappeared, and it warns that two snapshots are not a trend line, and that a difference can come from matching changes rather than culture.
+00:07:00,985 --> 00:07:06,610
+Resume is for runs that failed or were interrupted, for example by a server restart.
 
 70
-00:07:35,422 --> 00:07:43,972
-The Evidence Graph draws only links the system stored: one hundred and fifty-three nodes and one hundred and seventy edges from this session.
+00:07:06,610 --> 00:07:15,197
+When we restarted the server during the next run, Render kept the old instance running until the new one was healthy, so that run simply completed.
 
 71
-00:07:43,972 --> 00:07:46,847
-Selecting a node shows its provenance.
+00:07:15,197 --> 00:07:19,285
+Recovery after a hard stop is covered by the automated tests.
 
 72
-00:07:46,847 --> 00:07:53,634
-This one is a cached Qloo source signal, produced by a discovery run, with its limitations attached.
+00:07:23,102 --> 00:07:28,989
+Campaign Arena puts concepts side by side for the same synthetic audience and the same criteria.
 
 73
-00:07:57,434 --> 00:08:02,659
-Finally, Proof assembles a report in thirteen seconds without calling a model.
+00:07:28,989 --> 00:07:38,164
+In eighty seconds, variant B led with ninety-three point eight out of a hundred, and the original was marked as within five points of the leader.
 
 74
-00:08:02,659 --> 00:08:14,059
-It carries the verdict, the evidence register, the limitations, and a reproducibility section with model identifiers, prompt versions, and each stage's provider and latency.
+00:07:46,030 --> 00:07:50,942
+Market Expansion runs the same discovery across several markets.
 
 75
-00:08:14,059 --> 00:08:17,959
-It exports as Markdown, JSON or PDF.
+00:07:50,942 --> 00:07:53,267
+Here it shows a real limitation.
 
 76
-00:08:19,274 --> 00:08:27,586
-Nativeproof helps teams find cultural risks and opportunities before launch, and it says clearly when the evidence is not enough.
+00:07:53,267 --> 00:08:05,967
+Its terms came back ambiguous in both Japan and South Korea, and this screen does not yet have a confirmation step, so both markets are reported as unavailable instead of being ranked on missing data.
 
 77
-00:08:27,586 --> 00:08:31,836
-Synthetic participants are a tool for forming hypotheses.
+00:08:09,770 --> 00:08:13,870
+Brand Memory stores the rules every workflow reads.
 
 78
-00:08:31,836 --> 00:08:35,224
-Decisions still need validation with real people.
+00:08:13,870 --> 00:08:19,007
+Trend Watch compares two saved discovery snapshots without calling a model.
 
 79
-00:08:35,224 --> 00:08:38,699
+00:08:19,007 --> 00:08:28,520
+It shows which signals appeared and disappeared, and it warns that two snapshots are not a trend line, and that a difference can come from matching changes rather than culture.
+
+80
+00:08:32,334 --> 00:08:40,884
+The Evidence Graph draws only links the system stored: one hundred and fifty-three nodes and one hundred and seventy edges from this session.
+
+81
+00:08:40,884 --> 00:08:43,759
+Selecting a node shows its provenance.
+
+82
+00:08:43,759 --> 00:08:50,546
+This one is a cached Qloo source signal, produced by a discovery run, with its limitations attached.
+
+83
+00:08:54,346 --> 00:08:59,571
+Finally, Proof assembles a report in thirteen seconds without calling a model.
+
+84
+00:08:59,571 --> 00:09:10,971
+It carries the verdict, the evidence register, the limitations, and a reproducibility section with model identifiers, prompt versions, and each stage's provider and latency.
+
+85
+00:09:10,971 --> 00:09:14,871
+It exports as Markdown, JSON or PDF.
+
+86
+00:09:18,686 --> 00:09:28,548
+Back on Home, the dashboard counts what this session produced: one project, one market researched, one hundred and nine evidence records, and the recent completed runs.
+
+87
+00:09:28,548 --> 00:09:32,261
+Each number is a count of stored records, not an estimate.
+
+88
+00:09:33,566 --> 00:09:41,878
+Nativeproof helps teams find cultural risks and opportunities before launch, and it says clearly when the evidence is not enough.
+
+89
+00:09:41,878 --> 00:09:46,128
+Synthetic participants are a tool for forming hypotheses.
+
+90
+00:09:46,128 --> 00:09:49,516
+Decisions still need validation with real people.
+
+91
+00:09:49,516 --> 00:09:52,991
 The code, diagrams and setup guide are on GitHub.
