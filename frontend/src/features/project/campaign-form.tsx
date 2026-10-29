@@ -90,7 +90,7 @@ function WeightsEditor({ draft, onChange }: { draft: WeightDraft; onChange(next:
           role="status"
           className={cn("rounded-sm px-2 py-1 text-[13px] tabular-nums", valid ? "bg-accent text-primary" : "bg-danger-soft text-danger")}
         >
-          Total {total.toFixed(3)} — {valid ? "valid" : wellFormed ? "must equal 1.000 (±0.001) before saving" : "each weight must be a number from 0 to 1"}
+          Total {total.toFixed(3)}: {valid ? "valid" : wellFormed ? "must equal 1.000 (±0.001) before saving" : "each weight must be a number from 0 to 1"}
         </p>
         <Button type="button" variant="ghost" size="sm" onClick={() => onChange(toDraft(DEFAULT_WEIGHTS))}>
           Reset to defaults
@@ -233,7 +233,7 @@ export function CampaignForm({
 
       <fieldset className="space-y-4 rounded-lg border border-border bg-surface-muted p-4" disabled={contentLocked} aria-describedby={contentLocked ? "content-locked" : undefined}>
         <legend className="px-1 text-[13px] font-medium text-ink">
-          Original content{campaign && !contentLocked && <span className="font-normal text-ink-secondary"> — saving a change creates a new version</span>}
+          Original content{campaign && !contentLocked && <span className="font-normal text-ink-secondary"> (saving a change creates a new version)</span>}
         </legend>
         {contentLocked && (
           <p id="content-locked" className="flex items-start gap-2 text-[13px] text-ink-secondary">

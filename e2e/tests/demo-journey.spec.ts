@@ -66,7 +66,7 @@ test("demo journey through the UI", async ({ page, request }) => {
     if (format === "Export Markdown") {
       const text = await (await download.createReadStream()).toArray().then((chunks) => Buffer.concat(chunks).toString("utf8"));
       expect(text.trimStart().split("\n").slice(0, 3).join("\n"), "demo exports start with the banner (C4)").toContain(
-        "DEMO DATA — fixture results, not live research",
+        "DEMO DATA: fixture results, not live research",
       );
     }
   }

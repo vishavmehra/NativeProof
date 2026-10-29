@@ -120,9 +120,9 @@ export function ConfidenceBadge({ label }: { label: ConfidenceLabel }) {
 /** Persistent disclosure for AI-generated reactions (docs/08_UI_UX_SPEC.md §7.3). */
 export function SyntheticBadge() {
   return (
-    <Tag className="border-dashed border-ink-secondary/50 bg-surface-muted text-ink-secondary">
+    <Tag className="h-auto min-h-5 max-w-full border-dashed border-ink-secondary/50 bg-surface-muted py-0.5 leading-tight whitespace-normal text-ink-secondary">
       <Bot aria-hidden />
-      AI-generated reaction — not a real participant response
+      AI-generated reaction, not a real participant
     </Tag>
   );
 }

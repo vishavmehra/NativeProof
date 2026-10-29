@@ -287,12 +287,12 @@ export function ComparisonEditor({
               <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-start gap-2 text-xs">
                 <div className="grid gap-1">
                   <span className="text-ink-secondary">Original</span>
-                  <p className="rounded-lg border border-border p-2 text-ink">{source?.content.headline ?? "—"}</p>
+                  <p className="rounded-lg border border-border p-2 text-ink">{source?.content.headline ?? "No headline"}</p>
                 </div>
                 <ArrowRight aria-hidden className="mt-6 size-4 text-primary" />
                 <div className="grid gap-1">
                   <span className="text-ink-secondary">Selected</span>
-                  <p className="rounded-lg border border-primary/30 bg-accent/50 p-2 text-ink">{selected.content.headline ?? "—"}</p>
+                  <p className="rounded-lg border border-primary/30 bg-accent/50 p-2 text-ink">{selected.content.headline ?? "No headline"}</p>
                 </div>
               </div>
               <ul className="flex flex-wrap gap-1.5">

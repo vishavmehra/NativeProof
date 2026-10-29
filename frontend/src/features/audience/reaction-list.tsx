@@ -77,7 +77,7 @@ function ReactionCard({
                 <li key={rating.dimension}>
                   {DIMENSION_LABEL[rating.dimension]} <span className="font-semibold">{rating.value}</span>/5
                   {rating.dimension === "cultural_risk" && <span className="text-muted-foreground"> (5 = most risk)</span>}
-                  {rating.rationale && <span className="text-muted-foreground"> — {rating.rationale}</span>}
+                  {rating.rationale && <span className="text-muted-foreground">: {rating.rationale}</span>}
                 </li>
               ))}
             </ul>

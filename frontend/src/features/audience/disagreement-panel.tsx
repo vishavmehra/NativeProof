@@ -42,7 +42,7 @@ export function DisagreementPanel({
               {d.possible_explanations.length > 0 && (
                 <div className="grid gap-1">
                   <p className="text-xs font-medium text-muted-foreground">
-                    Possible explanations — hypotheses, not established causes
+                    Possible explanations (hypotheses, not established causes)
                   </p>
                   <ul className="list-disc space-y-0.5 pl-5 text-sm">
                     {d.possible_explanations.map((explanation) => (

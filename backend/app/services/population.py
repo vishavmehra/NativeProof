@@ -523,7 +523,7 @@ def _answerer(name: str) -> Any:
 
     function = getattr(workflows, name, None)
     if function is None:
-        raise UnsupportedCapability("Asking participants questions is not available on this server yet.")
+        raise UnsupportedCapability("Asking participants questions is not configured on this server.")
     return function
 
 

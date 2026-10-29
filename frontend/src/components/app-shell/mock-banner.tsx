@@ -12,7 +12,7 @@ export function MockBanner() {
       className="fixed inset-x-0 bottom-0 z-40 flex h-6 items-center justify-center gap-2 bg-ink px-3 text-[11px] text-surface"
     >
       <span className="font-semibold tracking-wide">MOCK API</span>
-      <span className="truncate">— fixture responses for UI development</span>
+      <span className="truncate">Fixture responses for UI development</span>
     </div>
   );
 }

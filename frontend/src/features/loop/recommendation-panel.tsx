@@ -16,7 +16,7 @@ const DECISION_MEANING: Record<Decision, string> = {
   accept: "Meets the documented criteria for the next internal review.",
   revise: "The identified issues should be addressed before going further.",
   validate: "The evidence is insufficient for a responsible decision. Test with real people.",
-  inconclusive: "Inconclusive — required scores are missing; rerun the evaluation.",
+  inconclusive: "Inconclusive: required scores are missing, so rerun the evaluation.",
 };
 
 const DECISION_ICON = { accept: CircleCheck, revise: PencilLine, validate: Users, inconclusive: CircleHelp } as const;

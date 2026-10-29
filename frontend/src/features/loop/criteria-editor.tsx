@@ -93,7 +93,7 @@ export function CriteriaEditor({
             <CircleAlert aria-hidden className="size-4" />
           )}
           <span>
-            Total <span className="tabular-nums">{Number.isFinite(sum) ? sum.toFixed(2) : "—"}</span>.{" "}
+            Total <span className="tabular-nums">{Number.isFinite(sum) ? sum.toFixed(2) : "n/a"}</span>.{" "}
             {valid
               ? "Weights are valid."
               : outOfRange

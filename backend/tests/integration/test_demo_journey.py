@@ -24,7 +24,7 @@ from tests.integration.journey import (
     rehearse,
 )
 
-DEMO_BANNER = "DEMO DATA — fixture results, not live research"
+DEMO_BANNER = "DEMO DATA: fixture results, not live research"
 
 
 async def test_demo_journey_end_to_end(qa_client: httpx.AsyncClient, alice: dict[str, str]) -> None:

@@ -125,10 +125,10 @@ function StepTable({ steps }: { steps: StepTrace[] }) {
               <td className="py-1.5 pr-3">{humanize(s.stage)}</td>
               <td className="py-1.5 pr-3">{s.agent}</td>
               <td className="py-1.5 pr-3">{humanize(s.status)}</td>
-              <td className="py-1.5 pr-3 font-mono">{s.provider ?? "—"}</td>
-              <td className="py-1.5 pr-3 font-mono">{s.model_id ?? "—"}</td>
-              <td className="py-1.5 pr-3 font-mono">{s.prompt_version ?? "—"}</td>
-              <td className="py-1.5 pr-3 tabular-nums">{s.latency_ms === null ? "—" : `${s.latency_ms} ms`}</td>
+              <td className="py-1.5 pr-3 font-mono">{s.provider ?? "n/a"}</td>
+              <td className="py-1.5 pr-3 font-mono">{s.model_id ?? "n/a"}</td>
+              <td className="py-1.5 pr-3 font-mono">{s.prompt_version ?? "n/a"}</td>
+              <td className="py-1.5 pr-3 tabular-nums">{s.latency_ms === null ? "n/a" : `${s.latency_ms} ms`}</td>
               <td className="py-1.5 pr-3 tabular-nums">
                 {s.retries}
                 {s.fallback_used && " · fallback"}
@@ -346,7 +346,7 @@ export function ReportViewer({ reportId }: { reportId: string }) {
                     value={d.score}
                     higherIsBetter={d.higher_is_better}
                     definition={d.definition}
-                    note={`${d.n} synthetic ratings · spread ${d.spread ?? "—"}${d.disagreement ? " · disagreement" : ""}`}
+                    note={`${d.n} synthetic ratings · spread ${d.spread ?? "n/a"}${d.disagreement ? " · disagreement" : ""}`}
                   />
                 ) : [],
               )}

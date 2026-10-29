@@ -29,7 +29,7 @@ npx playwright show-report               # HTML report (playwright-report/); tra
 | Spec | Checks |
 |---|---|
 | `try-demo.spec.ts` | "Try the demo" creates a demo project; it survives a reload and stays listed; a second anonymous visitor cannot list or open it (Supabase mode only). |
-| `demo-journey.spec.ts` | Discover → Simulate → Adapt → Compare → Prove on the seeded scenario: "Discover cultural signals", "Run campaign rehearsal" (every reaction labeled "AI-generated reaction — not a real participant response"), "Generate adaptations", "Evaluate selected versions" → "Run evaluation", "Create report", Markdown and JSON exports (the Markdown starts with the DEMO DATA banner). |
+| `demo-journey.spec.ts` | Discover → Simulate → Adapt → Compare → Prove on the seeded scenario: "Discover cultural signals", "Run campaign rehearsal" (every reaction labeled "AI-generated reaction, not a real participant"), "Generate adaptations", "Evaluate selected versions" → "Run evaluation", "Create report", Markdown and JSON exports (the Markdown starts with the DEMO DATA banner). |
 | `v2-pages.spec.ts` | Each v2 page (brand, cultural-dna, market-expansion, trend-watch, arena, risk-radar, graph) renders without page errors, keeps the DEMO DATA indicator, shows no Live label, and search reports "unavailable" when embeddings are not configured. |
 
 Every spec fails if the "MOCK API" banner is visible: these tests are only meaningful against the real API.

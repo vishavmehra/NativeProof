@@ -215,7 +215,7 @@ next stage. Stages take whole run ids, so the UI must not render those controls.
 - `insufficient`: fewer than 2 supporting reactions and no source evidence, or no support at all.
 - There is no `high` label until observed real-world outcomes exist.
 
-UI copy for the decision `inconclusive`: "Inconclusive — required scores are missing; rerun the evaluation."
+UI copy for the decision `inconclusive`: "Inconclusive: required scores are missing, so rerun the evaluation."
 
 ## 9. Limits
 

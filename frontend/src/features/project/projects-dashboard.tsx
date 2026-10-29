@@ -54,7 +54,7 @@ export function ProjectTable({ projects }: { projects: ProjectSummary[] }) {
                     {p.description && ` · ${p.description}`}
                   </span>
                 </span>
-                <span className="text-[13px] text-ink-body">{marketNames(p.target_markets, "—")}</span>
+                <span className="text-[13px] text-ink-body">{marketNames(p.target_markets, "No markets yet")}</span>
                 <span className="text-[13px] text-ink-secondary" title={formatDateTime(activity)}>
                   {p.last_activity_at ? `Active ${formatRelative(activity)}` : `Updated ${formatRelative(activity)}`}
                 </span>

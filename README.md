@@ -54,7 +54,7 @@ Measured in that session (production, October 29, 2026):
 - [Database migrations](#database-migrations)
 - [Deployment](#deployment)
 - [Tests](#tests)
-- [Limitations](#limitations)
+- [Scope and limitations](#scope-and-limitations)
 - [Repository layout](#repository-layout)
 - [Acknowledgments](#acknowledgments)
 
@@ -177,7 +177,7 @@ Each feature below covers what it does, why it matters, how it works, and what i
 
 **Why it matters.** It shows where usable evidence exists and where the gaps are before a team commits to a market.
 
-**How it works.** Request (`POST /api/v1/projects/{project_id}/market-comparisons`). Run type `market_comparison`, stages `discovering_markets` (the Atlas pipeline for each market), `assessing_evidence` (evidence quality counted in code), `comparing_markets`, and `summarizing`. Each market appears as a column with its signals and evidence counts, and on a world map. A market with no data is `unavailable` and names the gap. When the verified Qloo signals do not differ between markets, `comparability.market_specific_signals` is false and the UI does not rank markets on those signals.
+**How it works.** Request (`POST /api/v1/projects/{project_id}/market-comparisons`). Run type `market_comparison`, stages `discovering_markets` (the Atlas pipeline for each market), `assessing_evidence` (evidence quality counted in code), `comparing_markets`, and `summarizing`. Each market appears as a column with its signals and evidence counts, and on a world map. A market with no data is `unavailable` and names the gap. When the verified Qloo signals do not differ between markets, `comparability.market_specific_signals` is false and the UI does not rank markets on those signals. Ambiguous terms are listed once, above the markets, with the same **Use this** buttons as Atlas. A choice reruns the comparison with `confirmed_references`; one confirmation applies to every market, because Qloo tag resolution does not depend on the market. The comparison shows the confirmations it used.
 
 **What it does not claim.** It does not estimate market size or demand, and it never fills an empty column with invented insight.
 
@@ -296,7 +296,7 @@ The page shows a feed browser by round and group, the before-and-after distribut
 
 All graphs share one canvas: force, hierarchical, and regional layouts that are deterministic (the same input gives the same picture), layer toggles from the legend, label density control, a detail panel with each node's stored facts and its relations with their weight definitions and provenance, and keyboard traversal (arrow keys move between neighbours, Enter opens). On narrow screens the Evidence Graph opens as a text list, with the canvas one tap away.
 
-**What it does not claim.** A link that is not persisted is never inferred or drawn. Similarity weights are not probabilities. The Evidence Graph does not yet include population-study nodes; that filter says so.
+**What it does not claim.** A link that is not persisted is never inferred or drawn. Similarity weights are not probabilities. Population studies are explored in their own graph views (reaction map, audience landscape, social diffusion, and campaign comparison), which are built the same way.
 
 ### Voice: cultural adaptation
 
@@ -368,7 +368,7 @@ The comparison table marks differences under 5 points as not meaningful.
 
 **Why it matters.** It finds related material by meaning across features.
 
-**How it works.** `GET /api/v1/projects/{project_id}/search?q=`. Each search first syncs the project's content into the index; content hashing means only new or changed sources are embedded, and removed sources leave the index. Embeddings are stored with their model, dimensions, and configuration version, and vectors from different spaces are never compared.
+**How it works.** `GET /api/v1/projects/{project_id}/search?q=`, or Ctrl K in the workspace header. Each search first syncs the project's content into the index; content hashing means only new or changed sources are embedded, and removed sources leave the index. The sync compares hashes without loading vectors, so a search reads the stored vectors once, to rank them. Embeddings are stored with their model, dimensions, and configuration version, and vectors from different spaces are never compared.
 
 **What it does not claim.** Similarity scores are not probabilities. Demo projects, and live projects without an embedding model, report search as `unavailable`; there is no keyword fallback dressed up as semantic search.
 
@@ -607,7 +607,7 @@ Names and purposes only; values belong in `backend/.env` and `frontend/.env.loca
 | `EMBEDDING_DIMENSIONS` | Embedding vector size |
 | `VISION_PROVIDER` | Provider for image analysis |
 | `VISION_MODEL` | Vision model; used only if it is in the verified vision registry |
-| `RERANK_PROVIDER` | Reserved; no reranker is implemented, and `/ready` reports reranking as not configured |
+| `RERANK_PROVIDER` | Optional; leave unset. Search ranks by cosine similarity, and `/ready` reports reranking as not configured |
 | `RERANK_MODEL` | Reserved, as above |
 | `ASSET_STORAGE_BACKEND` | Where upload bytes live: `database` or `supabase` (the private Storage bucket) |
 | `SUPABASE_SECRET_KEY` | Server-side Supabase key for Storage; required when `ASSET_STORAGE_BACKEND=supabase` |
@@ -725,20 +725,19 @@ E2E_BASE_URL=http://localhost:3000 E2E_API_URL=http://localhost:8000 npx playwri
 | Frontend `typecheck`, `lint`, `build` | passing |
 | Live smoke test against production (anonymous session) | discovery, 20-participant study, 1-round social simulation, participant and group follow-ups: all passing |
 
-## Limitations
+## Scope and limitations
+
+These describe what the method can and cannot establish, and the conditions of this deployment, so that results are read correctly.
 
 - **Synthetic participants are not real people.** Interviews, reactions, follow-up answers, and social posts are generated by a model. They are useful for finding questions, not for answering them; validate decisions with real people.
 - **One model voices everyone.** Synthetic participants share one model's biases, so agreement between them is not independent confirmation, and statistics over generated responses describe the simulation, not the market.
 - **Model interpretations are labeled, not verified.** Briefs, interpretations, risk assessments, and influence paths are model text. Code checks their citations and excerpts, but not whether the reasoning is right.
 - **Affinity is not demand.** Qloo affinity data describes cultural associations in aggregate. It does not establish purchase intent, causality, or campaign success, and the confidence labels are not calibrated probabilities.
-- **Qloo hackathon API constraints.** Live research depends on the hackathon credential, its host, and its quotas. Results are bounded and cached, may change between retrievals, and cannot be published in the repository. Some concepts resolve to nothing or to ambiguous candidates.
-- **Render free tier.** The service sleeps after 15 minutes without traffic unless a monitor keeps it awake, the first request after a sleep can take about a minute, and the instance can restart at any time. Runs are in-process tasks on one instance: a restart fails unfinished runs, and only population studies and social simulations can resume from their checkpoints.
-- **Demo mode uses labeled fixtures.** Demo projects cover one fictional scenario in one market and refuse anything the fixtures do not describe.
-- **The OpenRouter fallback is free tier.** It is off unless enabled, only free-tier models have been verified for it, and free-tier rate limits apply.
-- **Optional capabilities.** Search, Brand Memory example selection, and vision need configured models; without them those features report `unavailable`. No reranker is implemented.
-- **Partial coverage.** The Evidence Graph does not include population-study nodes yet, and Trend Watch needs at least two snapshots.
-- **Market Expansion has no confirmation step.** Atlas lets a person confirm an ambiguous Qloo match; Market Expansion does not yet, so a market whose terms are all ambiguous is reported as unavailable rather than compared. The walkthrough shows this case.
-- **Some graph views are slow on large studies.** The campaign comparison for two 100-participant studies takes several seconds to load.
+- **Qloo data conditions.** Live research uses the hackathon credential, its host, and its quotas. Results are bounded and cached, can change between retrievals, and are not published in this repository. When a term matches several candidates, a person chooses one (in Atlas and Market Expansion); a term with no match is reported as a gap.
+- **Hosting.** The API runs on Render's free tier with an uptime monitor, and the first request after an idle period can take about a minute. Runs execute inside the API process: population studies and social simulations save checkpoints and resume after a restart, and other runs report the interruption and can be started again.
+- **Demo mode uses labeled fixtures.** Demo projects cover one fictional scenario in one market and decline anything the fixtures do not describe.
+- **Model-dependent features.** Search, Brand Memory example selection, and vision use configured models. Where a model is not configured, they report `unavailable` instead of substituting another method. The OpenRouter fallback is off by default and uses free-tier models.
+- **Trend Watch compares snapshots.** It needs two saved discovery runs for the same market.
 
 ## Repository layout
 

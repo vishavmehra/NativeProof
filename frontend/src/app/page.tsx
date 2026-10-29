@@ -7,7 +7,7 @@ import { FEATURES, type FeatureKey } from "@/features/project/features";
 import { LABEL_MEANING, type EvidenceUiLabel } from "@/lib/evidence";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = { title: { absolute: "Nativeproof — evidence-aware campaign research" } };
+export const metadata: Metadata = { title: { absolute: "Nativeproof: evidence-aware campaign research" } };
 
 const STEPS: { key: FeatureKey; verb: string; text: string }[] = [
   { key: "atlas", verb: "Discover", text: "Resolve your campaign's cultural references against Qloo affinity data and read a market brief that separates source data from interpretation." },

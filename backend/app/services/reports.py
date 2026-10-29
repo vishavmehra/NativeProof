@@ -39,7 +39,7 @@ from app.services.results import discovery_result, evaluation_result, rehearsal_
 from app.services.runs import USABLE, brand_of
 
 SECTIONS = ("discovery", "rehearsal", "adaptations", "evaluation")
-DEMO_BANNER = "DEMO DATA — fixture results, not live research."
+DEMO_BANNER = "DEMO DATA: fixture results, not live research."
 VERSION_NOTICE = "Version notice:"
 
 
@@ -61,7 +61,7 @@ def evidence_label(e: EvidenceRecord) -> str:
 def retrieval_badge(e: EvidenceRecord) -> str:
     if e.retrieval_mode == "cached":
         return f"Cached ({e.retrieved_at.isoformat() if e.retrieved_at else 'time unknown'})"
-    return {"live": "Live", "fixture": "Fixture", "user_input": "User input"}.get(e.retrieval_mode, "—")
+    return {"live": "Live", "fixture": "Fixture", "user_input": "User input"}.get(e.retrieval_mode, "n/a")
 
 
 def _norm(text: str) -> str:
@@ -337,7 +337,7 @@ async def get_report(user_id: UUID, report_id: UUID) -> Report:
 
 
 def _cell(value: Any) -> str:
-    return str("—" if value is None else value).replace("|", "\\|").replace("\n", " ")
+    return str("n/a" if value is None else value).replace("|", "\\|").replace("\n", " ")
 
 
 def _content_lines(content: CampaignContent) -> list[str]:
@@ -391,7 +391,7 @@ def to_markdown(report: Report) -> str:
             for heading, items in (("Observations", d.market_brief.observations),
                                    ("Opportunities", d.market_brief.opportunities), ("Risks", d.market_brief.risks)):
                 out += [f"**{heading}**"] + _bullets([
-                    f"{f.title} — {f.explanation} [{f.claim_type}; {f.confidence_label} confidence; "
+                    f"{f.title}: {f.explanation} [{f.claim_type}; {f.confidence_label} confidence; "
                     f"evidence: {cites(f.evidence_ids)}]" for f in items
                 ]) + [""]
     else:
@@ -418,7 +418,7 @@ def to_markdown(report: Report) -> str:
                                       ("Potential confusions", r.summary.potential_confusions),
                                       ("Potential cultural risks", r.summary.potential_cultural_risks)):
                 out += ["", f"**{heading}** (synthetic)"] + _bullets([
-                    f"{f.title} — {f.summary} [{f.claim_type}; {f.confidence_label} confidence; "
+                    f"{f.title}: {f.summary} [{f.claim_type}; {f.confidence_label} confidence; "
                     f"{len(f.supporting_response_ids)} supporting synthetic reactions]" for f in findings
                 ])
             out += ["", "**Disagreements**"] + _bullets([
@@ -475,7 +475,7 @@ def to_markdown(report: Report) -> str:
             f"- Prompt versions: {', '.join(report.reproducibility.prompt_versions) or 'none recorded'}",
             *[f"- Run {meta.run_id} ({meta.mode}): {meta.started_at} to {meta.completed_at}" for meta in report.reproducibility.runs],
             *[f"- {note}" for note in report.reproducibility.notes], ""]
-    return "\n".join(out)
+    return re.sub(r" *— *", ", ", "\n".join(out))  # model text uses em dashes; the export reads them as commas, like the app
 
 
 def export(report: Report, fmt: str) -> tuple[bytes, str, str]:

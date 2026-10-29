@@ -20,7 +20,7 @@ export function savedDemoProject(): string {
 /** Backend used by the frontend under test; only probed so a down server is reported, not mistaken for a UI bug. */
 export const API_URL = process.env.E2E_API_URL ?? "http://localhost:8010";
 export const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
-export const SYNTHETIC_LABEL = "AI-generated reaction — not a real participant response";
+export const SYNTHETIC_LABEL = "AI-generated reaction, not a real participant";
 const RUN_TIMEOUT = 120_000;
 
 export async function backendIsUp(request: APIRequestContext): Promise<boolean> {

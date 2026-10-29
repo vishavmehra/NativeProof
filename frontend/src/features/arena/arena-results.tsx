@@ -91,7 +91,7 @@ function VariantColumn({ v, rank, arena }: { v: ArenaVariantResult; rank: number
                 label={humanize(d.dimension)}
                 value={d.score}
                 higherIsBetter={d.higher_is_better}
-                note={`${d.n} synthetic ratings · spread ${d.spread ?? "—"}${d.disagreement ? " · disagreement" : ""}`}
+                note={`${d.n} synthetic ratings · spread ${d.spread ?? "n/a"}${d.disagreement ? " · disagreement" : ""}`}
               />
             ))}
           </div>
@@ -137,7 +137,7 @@ function VariantColumn({ v, rank, arena }: { v: ArenaVariantResult; rank: number
                 </span>
                 <span className="text-xs text-ink-secondary tabular-nums">
                   {Object.entries(s.dimension_scores)
-                    .map(([k, val]) => `${humanize(k)} ${val === null ? "—" : formatScore(val)}`)
+                    .map(([k, val]) => `${humanize(k)} ${val === null ? "n/a" : formatScore(val)}`)
                     .join(" · ")}
                 </span>
               </li>
@@ -267,7 +267,7 @@ export function ArenaResults({ arena, projectId }: { arena: ArenaResult; project
                           <span className="h-1.5 overflow-hidden rounded-full bg-surface-muted" aria-hidden>
                             {r?.score != null && <span className={cn("block h-full rounded-full", d === "cultural_risk" ? "bg-danger" : "bg-primary")} style={{ width: `${r.score}%` }} />}
                           </span>
-                          <span className="text-right text-ink tabular-nums">{r?.score != null ? formatScore(r.score) : "—"}</span>
+                          <span className="text-right text-ink tabular-nums">{r?.score != null ? formatScore(r.score) : "n/a"}</span>
                         </li>
                       );
                     })}

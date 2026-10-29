@@ -167,7 +167,7 @@ export function LoopIterations({ projectId, campaign, nextSteps }: { projectId: 
   const keyChanges = versionsDesc.slice(0, 2).length === 2
     ? FIELDS.flatMap(([f, label]) => {
         const [newer, older] = versionsDesc;
-        return newer.content[f] !== older.content[f] ? [`${label}: “${older.content[f] ?? "—"}” → “${newer.content[f] ?? "—"}”`] : [];
+        return newer.content[f] !== older.content[f] ? [`${label}: “${older.content[f] ?? "(empty)"}” → “${newer.content[f] ?? "(empty)"}”`] : [];
       })
     : [];
 

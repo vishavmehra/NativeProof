@@ -163,26 +163,26 @@ export function TrendView({ comparison }: { comparison: TrendComparison }) {
                     </span>
                   </td>
                   <td data-label="Attribute" className={CELL}>
-                    {c.attribute ?? "—"}
+                    {c.attribute ?? "n/a"}
                   </td>
                   <td data-label="Before" className={cn(CELL, "tabular-nums")}>
-                    {c.before ?? "—"}
+                    {c.before ?? "n/a"}
                   </td>
                   <td data-label="After" className={cn(CELL, "tabular-nums")}>
-                    {c.after ?? "—"}
+                    {c.after ?? "n/a"}
                   </td>
                   <td data-label="Δ" className={cn(CELL, "tabular-nums md:text-right")}>
-                    {c.delta === null ? "—" : `${c.delta > 0 ? "+" : ""}${c.delta}`}
+                    {c.delta === null ? "n/a" : `${c.delta > 0 ? "+" : ""}${c.delta}`}
                   </td>
                   <td data-label="Evidence" className={cn(CELL, "pr-0")}>
                     <span className="flex flex-wrap gap-1">
                       {c.evidence_ids_before.length > 0 && (
-                        <Button variant="outline" size="xs" onClick={() => openEvidence(`${c.reference_key} — before`, c.evidence_ids_before)}>
+                        <Button variant="outline" size="xs" onClick={() => openEvidence(`${c.reference_key}: before`, c.evidence_ids_before)}>
                           Before ({c.evidence_ids_before.length})
                         </Button>
                       )}
                       {c.evidence_ids_after.length > 0 && (
-                        <Button variant="outline" size="xs" onClick={() => openEvidence(`${c.reference_key} — after`, c.evidence_ids_after)}>
+                        <Button variant="outline" size="xs" onClick={() => openEvidence(`${c.reference_key}: after`, c.evidence_ids_after)}>
                           After ({c.evidence_ids_after.length})
                         </Button>
                       )}

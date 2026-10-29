@@ -121,7 +121,7 @@ export function MarketsWorkspace() {
                 >
                   {summaries.map((s) => (
                     <option key={s.id} value={s.id}>
-                      {s.markets.map((m) => m.country_code).join(" · ")} — {formatDateTime(s.created_at)}
+                      {s.markets.map((m) => m.country_code).join(" · ")} · {formatDateTime(s.created_at)}
                       {s.status !== "completed" ? ` (${s.status})` : ""}
                     </option>
                   ))}

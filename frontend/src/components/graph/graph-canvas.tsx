@@ -397,7 +397,7 @@ function GraphCanvasInner({ nodes, edges, legend, isLoading, error, onRetry, tru
                 {Object.entries(shown.facts).map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-3 px-3 py-2">
                     <dt className="text-ink-secondary">{humanize(k)}</dt>
-                    <dd className="text-right text-ink tabular-nums">{v ?? "—"}</dd>
+                    <dd className="text-right text-ink tabular-nums">{v ?? "n/a"}</dd>
                   </div>
                 ))}
               </dl>
@@ -418,7 +418,7 @@ function GraphCanvasInner({ nodes, edges, legend, isLoading, error, onRetry, tru
                       {e.weight !== null && e.weight !== undefined && (
                         <span className="block text-ink-body">
                           Weight {e.weight}
-                          {e.weightDefinition && <span className="text-ink-secondary"> — {e.weightDefinition}</span>}
+                          {e.weightDefinition && <span className="text-ink-secondary">: {e.weightDefinition}</span>}
                         </span>
                       )}
                       <span className="block font-mono text-[11px] text-ink-secondary">{e.provenance}</span>

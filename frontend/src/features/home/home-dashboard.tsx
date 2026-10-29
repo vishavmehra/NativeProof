@@ -193,7 +193,7 @@ export function HomeDashboard() {
                 ].map(([label, value]) => (
                   <div key={label as string} className="flex items-baseline justify-between gap-3 border-b border-border pb-3 last:border-0 last:pb-0">
                     <dt className="text-[14px] text-ink-secondary">{label}</dt>
-                    <dd className="font-serif text-[26px] leading-none font-semibold text-ink tabular-nums">{value ?? "—"}</dd>
+                    <dd className="font-serif text-[26px] leading-none font-semibold text-ink tabular-nums">{value ?? "n/a"}</dd>
                   </div>
                 ))}
               </dl>

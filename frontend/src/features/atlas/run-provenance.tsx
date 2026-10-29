@@ -70,14 +70,14 @@ export function RunProvenance({ metadata }: { metadata: RunMetadata }) {
                     {step.fallback_used && ", fallback used"}
                     {step.error_code && <span className="font-mono"> {step.error_code}</span>}
                   </TableCell>
-                  <TableCell className="font-mono">{step.provider ?? "—"}</TableCell>
+                  <TableCell className="font-mono">{step.provider ?? "n/a"}</TableCell>
                   <TableCell>
-                    <span className="font-mono">{step.model_id ?? "—"}</span>
+                    <span className="font-mono">{step.model_id ?? "n/a"}</span>
                     {sampling(step) && <span className="block text-muted-foreground">{sampling(step)}</span>}
                   </TableCell>
-                  <TableCell className="font-mono">{step.prompt_version ?? "—"}</TableCell>
+                  <TableCell className="font-mono">{step.prompt_version ?? "n/a"}</TableCell>
                   <TableCell className="text-right tabular-nums">
-                    {step.latency_ms === null ? "—" : `${step.latency_ms} ms`}
+                    {step.latency_ms === null ? "n/a" : `${step.latency_ms} ms`}
                   </TableCell>
                 </TableRow>
               ))}

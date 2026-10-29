@@ -221,7 +221,7 @@ export function RehearsalResults({
                   <TableCell className="text-right tabular-nums">{s.response_count}</TableCell>
                   {DIMENSIONS.map((d) => (
                     <TableCell key={d} className="text-right tabular-nums">
-                      {s.dimension_scores[d]?.toFixed(1) ?? "—"}
+                      {s.dimension_scores[d]?.toFixed(1) ?? "n/a"}
                     </TableCell>
                   ))}
                 </TableRow>

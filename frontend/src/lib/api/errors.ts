@@ -1,3 +1,5 @@
+import { plainText } from "@/lib/format";
+
 import type { components } from "./schema";
 
 export type ErrorCode = components["schemas"]["ErrorBody"]["code"];
@@ -34,5 +36,5 @@ export async function unwrap<R extends FetchResult>(call: Promise<R>): Promise<E
     throw new ApiError(0, "NETWORK_ERROR", "Could not reach the Nativeproof API.");
   }
   if (!result.response.ok || result.error !== undefined) throw toApiError(result.error, result.response);
-  return result.data as Exclude<R["data"], undefined>;
+  return plainText(result.data) as Exclude<R["data"], undefined>;
 }

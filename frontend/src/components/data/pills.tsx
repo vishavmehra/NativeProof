@@ -16,7 +16,7 @@ const TONE: Record<PillTone, string> = {
 
 /**
  * Status pill (reference: green "High relevance" with check, orange "Medium", red/orange/blue risk levels).
- * The level must come from real data (e.g. a confidence label or risk severity) — never decorative.
+ * The level must come from real data (e.g. a confidence label or risk severity), never decorative.
  */
 export function Pill({ tone, icon: Icon, children, className }: { tone: PillTone; icon?: LucideIcon | "check"; children: ReactNode; className?: string }) {
   return (

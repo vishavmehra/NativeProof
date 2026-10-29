@@ -46,7 +46,7 @@ export function DimensionSummary({ results }: { results: RehearsalResult["dimens
               <span className="font-medium text-foreground">Method:</span> Deterministic aggregation of synthetic ratings
               (score = (mean − 1) / 4 × 100).{" "}
               <span className="tabular-nums">
-                Spread {r.spread ?? "—"} (standard deviation on the 1–5 scale).
+                Spread {r.spread ?? "n/a"} (standard deviation on the 1–5 scale).
               </span>
             </p>
             {r.disagreement && (

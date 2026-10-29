@@ -272,7 +272,7 @@ export function ProjectOverview() {
         <section aria-label="Next step" className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-primary/25 bg-accent px-4 py-3">
           <div className="text-sm">
             <p className="font-medium text-ink">
-              Next: {next.label} — {next.state === "running" ? "in progress" : next.state === "failed" ? "the last run needs attention" : next.action.toLowerCase()}
+              Next: {next.label} · {next.state === "running" ? "in progress" : next.state === "failed" ? "the last run needs attention" : next.action.toLowerCase()}
             </p>
             <p className="text-[13px] text-ink-secondary">{next.detail}</p>
           </div>

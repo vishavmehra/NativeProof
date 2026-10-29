@@ -214,7 +214,7 @@ async def evidence_graph(
             g.nodes.pop(node_id)
         filters.append(f"Evidence filtered to type {evidence_type}; other node kinds are unaffected.")
     if population_study_id is not None:
-        filters.append("Population study nodes are not available yet.")  # wired with the v3 tables
+        filters.append("Population studies have their own graph views: reaction map, audience landscape, and social diffusion.")
 
     # Links whose two ends are both in this view; a node cap then also drops the links touching cut nodes.
     links = list(dict.fromkeys(e for e in g.edges if e[0] in g.nodes and e[1] in g.nodes))

@@ -183,7 +183,7 @@ function BrandMemoryEditor({ brand, projectId, demo, markets }: { brand: Brand; 
           </Section>
         )}
         {tab === "audience" && (
-          <Section readOnly={demo} title="Audience" subtitle="Stated assumptions about who you want to reach — not verified demographic facts.">
+          <Section readOnly={demo} title="Audience" subtitle="Stated assumptions about who you want to reach, not verified demographic facts.">
             <Field label="Primary audience" htmlFor="b-audience">
               <Input id="b-audience" value={draft.target_audience} onChange={(e) => set("target_audience", e.target.value)} disabled={demo} className="bg-surface" />
             </Field>
@@ -250,7 +250,7 @@ function BrandMemoryEditor({ brand, projectId, demo, markets }: { brand: Brand; 
 function Section({ title, subtitle, readOnly, children }: { title: string; subtitle: string; readOnly: boolean; children: ReactNode }) {
   return (
     <Card title={title} subtitle={subtitle}>
-      {/* Demo: the same fields read as plain text — full opacity (disabled:opacity-50 would fail contrast), no borders,
+      {/* Demo: the same fields read as plain text: full opacity (disabled:opacity-50 would fail contrast), no borders,
           no placeholders, no add/remove controls. */}
       <div
         className={cn(

@@ -82,7 +82,7 @@ function StudyDetails({ study }: { study: Study }) {
               {study.segments.map((s) => (
                 <li key={s.label}>
                   <span className="font-medium">{s.label}</span>
-                  <span className="text-muted-foreground"> — {s.description}</span>
+                  <span className="text-muted-foreground">: {s.description}</span>
                 </li>
               ))}
             </ul>

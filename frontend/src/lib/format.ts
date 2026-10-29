@@ -5,11 +5,11 @@ const dateOnly = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 const relative = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
 
 export function formatDateTime(iso: string | null | undefined) {
-  return iso ? dateTime.format(new Date(iso)) : "—";
+  return iso ? dateTime.format(new Date(iso)) : "n/a";
 }
 
 export function formatDate(iso: string | null | undefined) {
-  return iso ? dateOnly.format(new Date(iso)) : "—";
+  return iso ? dateOnly.format(new Date(iso)) : "n/a";
 }
 
 const UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
@@ -23,7 +23,7 @@ const UNITS: [Intl.RelativeTimeFormatUnit, number][] = [
 
 /** "3 minutes ago", "yesterday". Falls back to "just now" under a minute. */
 export function formatRelative(iso: string | null | undefined, now = Date.now()) {
-  if (!iso) return "—";
+  if (!iso) return "n/a";
   const seconds = Math.round((Date.parse(iso) - now) / 1000);
   for (const [unit, size] of UNITS) {
     if (Math.abs(seconds) >= size) return relative.format(Math.round(seconds / size), unit);
@@ -46,6 +46,21 @@ export function formatElapsed(ms: number) {
 export function humanize(value: string) {
   const text = value.replace(/_/g, " ").trim();
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/**
+ * Every string in an API payload, with em dashes read as commas ("useful—exactly" → "useful, exactly"). Model text
+ * is full of them; the UI shows none. Arrays and plain objects are copied, anything else passes through.
+ */
+export function plainText<T>(value: T): T {
+  if (typeof value === "string") {
+    return (value.includes("—") ? value.replace(/ *— */g, ", ").replace(/,(?:\s*,)+/g, ",").replace(/^, |, $/gm, "") : value) as T;
+  }
+  if (Array.isArray(value)) return value.map(plainText) as T;
+  if (value !== null && typeof value === "object" && Object.getPrototypeOf(value) === Object.prototype) {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, plainText(v)])) as T;
+  }
+  return value;
 }
 
 /** First 8 characters of a UUID, for compact monospace display. */

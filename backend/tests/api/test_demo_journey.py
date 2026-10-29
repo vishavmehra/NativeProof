@@ -96,7 +96,7 @@ async def test_demo_journey_over_http(client: httpx.AsyncClient, offline: Any) -
     assert report["status"] == "completed" and report["missing_sections"] == [] and report["mode"] == "demo"
     assert_demo_labels(report["evidence_register"], [s for r in report["reproducibility"]["runs"] for s in r["steps"]])
     markdown = (await client.get(f"{API}/reports/{report['id']}/export")).text
-    assert markdown.startswith("# Japan Launch Cultural Review\n\n> **DEMO DATA — fixture results, not live research.**")
+    assert markdown.startswith("# Japan Launch Cultural Review\n\n> **DEMO DATA: fixture results, not live research.**")
     assert "**Synthetic data:**" in markdown
 
     runs = (await client.get(f"{API}/projects/{pid}/runs")).json()

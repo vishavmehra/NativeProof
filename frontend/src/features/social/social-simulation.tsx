@@ -20,7 +20,7 @@ import { DistributionBar } from "./distribution";
 import { FeedBrowser } from "./feed-browser";
 import { GraphCanvas, fromGraphView } from "@/components/graph/graph-canvas";
 
-export const SOCIAL_DISCLOSURE = "Simulated social dynamics — illustrative, not a forecast";
+export const SOCIAL_DISCLOSURE = "Simulated social dynamics: illustrative, not a forecast";
 const UUID = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/gi;
 
 function Disclosure({ sim }: { sim?: SocialSimulationResult }) {

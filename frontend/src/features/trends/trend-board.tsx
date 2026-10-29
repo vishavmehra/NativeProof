@@ -84,7 +84,7 @@ export function TrendBoard({ comparison, atlasHref, audienceHref }: { comparison
                     <span className="min-w-0">
                       <span className="block truncate font-serif text-[15px] font-semibold">{c.entity?.name ?? c.reference_key}</span>
                       <span className="block truncate text-xs text-ink-secondary">
-                        {c.attribute ? `${c.attribute}: ${c.before ?? "—"} → ${c.after ?? "—"}` : c.kind.replace("_", " ")}
+                        {c.attribute ? `${c.attribute}: ${c.before ?? "none"} → ${c.after ?? "none"}` : c.kind.replace("_", " ")}
                       </span>
                     </span>
                     <span className="max-sm:hidden">{<Spark c={c} />}</span>
@@ -120,9 +120,9 @@ export function TrendBoard({ comparison, atlasHref, audienceHref }: { comparison
                 : selected.c.kind === "removed"
                   ? "This signal was in the earlier snapshot and is missing from the later one."
                   : selected.c.kind === "status_changed"
-                    ? `Its match status changed from ${selected.c.before ?? "—"} to ${selected.c.after ?? "—"}.`
+                    ? `Its match status changed from ${selected.c.before ?? "none"} to ${selected.c.after ?? "none"}.`
                     : selected.c.kind === "attribute_changed"
-                      ? `${selected.c.attribute} moved from ${selected.c.before ?? "—"} to ${selected.c.after ?? "—"}${selected.c.delta !== null ? ` (${selected.c.delta > 0 ? "+" : ""}${selected.c.delta}, in the source's own units)` : ""}.`
+                      ? `${selected.c.attribute} moved from ${selected.c.before ?? "none"} to ${selected.c.after ?? "none"}${selected.c.delta !== null ? ` (${selected.c.delta > 0 ? "+" : ""}${selected.c.delta}, in the source's own units)` : ""}.`
                       : "No change between these snapshots."}
             </p>
             <Spark c={selected.c} large />

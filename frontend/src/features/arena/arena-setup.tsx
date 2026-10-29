@@ -406,7 +406,7 @@ function SetupForm({ project, campaign, busy, pending, error, onSubmit, onFormMo
                     </span>
                     <span className="grid">
                       <span className="text-sm font-medium text-ink">
-                        {DIMENSION_LABEL[d]} <span className="font-normal text-ink-secondary tabular-nums">· weight {Number.isFinite(criteria[d]) ? criteria[d].toFixed(2) : "—"}</span>
+                        {DIMENSION_LABEL[d]} <span className="font-normal text-ink-secondary tabular-nums">· weight {Number.isFinite(criteria[d]) ? criteria[d].toFixed(2) : "n/a"}</span>
                       </span>
                       <span className="text-xs text-ink-secondary">{CRITERIA_HINT[d]}</span>
                     </span>

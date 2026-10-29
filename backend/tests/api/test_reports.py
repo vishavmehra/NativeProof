@@ -66,8 +66,8 @@ async def test_full_report_snapshot_versions_and_exports(client: httpx.AsyncClie
     assert markdown.status_code == 200 and markdown.headers["content-type"].startswith("text/markdown")
     assert markdown.headers["content-disposition"] == 'attachment; filename="nativeproof-japan-launch-cultural-review-v1.md"'
     text = markdown.text
-    assert text.startswith("# Japan Launch Cultural Review\n\n> **DEMO DATA — fixture results, not live research.**")
-    for expected in ("**Synthetic data:**", "| Source data | Fixture |", "| Calculated | — |", "Model interpretation",
+    assert text.startswith("# Japan Launch Cultural Review\n\n> **DEMO DATA: fixture results, not live research.**")
+    for expected in ("**Synthetic data:**", "| Source data | Fixture |", "| Calculated | n/a |", "Model interpretation",
                      "## Limitations", "## Evidence register", "not an independent human sample", "R4_meets_review_threshold"):
         assert expected in text, expected
     exported = await client.get(f"{API}/reports/{report['id']}/export", params={"format": "json"})

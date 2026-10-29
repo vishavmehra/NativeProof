@@ -98,7 +98,7 @@ function SupabaseLogin() {
       // Supabase rate-limits anonymous sign-ins per network; say so in plain words instead of provider text.
       const limited = error.status === 429 || /rate limit/i.test(error.message);
       return setDemoError(
-        limited ? "Too many demo sessions from this network — try again in a few minutes." : "Could not start a demo session. Try again in a moment.",
+        limited ? "Too many demo sessions from this network. Try again in a few minutes." : "Could not start a demo session. Try again in a moment.",
       );
     }
     demo.mutate(undefined, { onSettled: () => setPending(null) });
