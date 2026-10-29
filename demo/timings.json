@@ -1,0 +1,122 @@
+[
+  {
+    "name": "00-intro",
+    "title": "Nativeproof",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "01-sign-in",
+    "title": "Sign in",
+    "real_seconds": 34.3,
+    "speed": 2.51
+  },
+  {
+    "name": "02-project",
+    "title": "Project, brand kit and campaign",
+    "real_seconds": 103.2,
+    "speed": 3.97
+  },
+  {
+    "name": "03-atlas",
+    "title": "Atlas: Qloo evidence",
+    "real_seconds": 406.6,
+    "speed": 10.58
+  },
+  {
+    "name": "04-rehearsal",
+    "title": "Quick rehearsal",
+    "real_seconds": 187.0,
+    "speed": 8.12
+  },
+  {
+    "name": "05-population-start",
+    "title": "Population study: 100 participants",
+    "real_seconds": 105.7,
+    "speed": 4.11
+  },
+  {
+    "name": "06-population-results",
+    "title": "Population results",
+    "real_seconds": 181.8,
+    "speed": 4.41
+  },
+  {
+    "name": "07-social-simulation",
+    "title": "Multi-round social simulation",
+    "real_seconds": 165.1,
+    "speed": 5.51
+  },
+  {
+    "name": "08-follow-ups",
+    "title": "Participant memory and follow-ups",
+    "real_seconds": 132.3,
+    "speed": 5.58
+  },
+  {
+    "name": "10-risk-radar",
+    "title": "Risk Radar with vision",
+    "real_seconds": 128.4,
+    "speed": 3.64
+  },
+  {
+    "name": "11-voice",
+    "title": "Voice adaptations",
+    "real_seconds": 90.6,
+    "speed": 4.15
+  },
+  {
+    "name": "12-loop-evaluation",
+    "title": "Loop evaluation",
+    "real_seconds": 44.0,
+    "speed": 2.32
+  },
+  {
+    "name": "13-version-comparison",
+    "title": "Versions on identical participants",
+    "real_seconds": 86.6,
+    "speed": 3.0
+  },
+  {
+    "name": "18-arena",
+    "title": "Campaign Arena",
+    "real_seconds": 126.8,
+    "speed": 7.74
+  },
+  {
+    "name": "16-cultural-dna",
+    "title": "Cultural DNA",
+    "real_seconds": 51.2,
+    "speed": 32.79
+  },
+  {
+    "name": "17-market-expansion",
+    "title": "Market Expansion",
+    "real_seconds": 235.4,
+    "speed": 11.08
+  },
+  {
+    "name": "19-brand-trend",
+    "title": "Brand Memory and Trend Watch",
+    "real_seconds": 82.3,
+    "speed": 4.1
+  },
+  {
+    "name": "14-evidence-graph",
+    "title": "Evidence Graph",
+    "real_seconds": 97.8,
+    "speed": 5.01
+  },
+  {
+    "name": "15-proof-report",
+    "title": "Proof report",
+    "real_seconds": 85.7,
+    "speed": 3.92
+  },
+  {
+    "name": "99-outro",
+    "title": "Validate with real people",
+    "real_seconds": null,
+    "speed": null
+  }
+]
