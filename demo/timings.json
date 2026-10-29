@@ -6,130 +6,220 @@
     "speed": null
   },
   {
+    "name": "d01-architecture",
+    "title": "How it is built",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "d02-deployment",
+    "title": "Deployment",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
     "name": "01-sign-in",
     "title": "Sign in",
     "real_seconds": 34.3,
-    "speed": 2.51
+    "speed": 2.09
+  },
+  {
+    "name": "d03-authentication",
+    "title": "Authentication",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "02-project",
     "title": "Project, brand kit and campaign",
     "real_seconds": 103.2,
-    "speed": 3.97
+    "speed": 3.65
+  },
+  {
+    "name": "d04-lifecycle",
+    "title": "The research workflow",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "d05-qloo",
+    "title": "Qloo evidence pipeline",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "03-atlas",
     "title": "Atlas: Qloo evidence",
     "real_seconds": 406.6,
-    "speed": 10.58
+    "speed": 9.59
   },
   {
     "name": "04-rehearsal",
     "title": "Quick rehearsal",
     "real_seconds": 187.0,
-    "speed": 8.12
+    "speed": 7.69
+  },
+  {
+    "name": "d07-population",
+    "title": "How a synthetic population is built",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "05-population-start",
     "title": "Population study: 100 participants",
     "real_seconds": 105.7,
-    "speed": 4.11
+    "speed": 4.69
   },
   {
     "name": "06-population-results",
     "title": "Population results",
     "real_seconds": 181.8,
-    "speed": 4.41
+    "speed": 6.13
+  },
+  {
+    "name": "24-population-browse",
+    "title": "Reaction graph and interviews",
+    "real_seconds": 77.8,
+    "speed": 2.81
+  },
+  {
+    "name": "d09-social",
+    "title": "How the social simulation works",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "07-social-simulation",
     "title": "Multi-round social simulation",
     "real_seconds": 165.1,
-    "speed": 5.51
+    "speed": 7.18
   },
   {
-    "name": "22-diffusion",
+    "name": "25-diffusion",
     "title": "Social diffusion graph",
-    "real_seconds": 40.9,
-    "speed": 2.51
+    "real_seconds": 71.0,
+    "speed": 2.18
+  },
+  {
+    "name": "d08-interviews",
+    "title": "Interviews, memory and follow-ups",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "08-follow-ups",
     "title": "Participant memory and follow-ups",
     "real_seconds": 132.3,
-    "speed": 5.58
+    "speed": 5.84
+  },
+  {
+    "name": "d06-gateway",
+    "title": "The model gateway",
+    "real_seconds": null,
+    "speed": null
   },
   {
     "name": "10-risk-radar",
     "title": "Risk Radar with vision",
     "real_seconds": 128.4,
-    "speed": 3.64
+    "speed": 3.3
   },
   {
     "name": "11-voice",
     "title": "Voice adaptations",
     "real_seconds": 90.6,
-    "speed": 4.15
+    "speed": 4.17
   },
   {
     "name": "12-loop-evaluation",
     "title": "Loop evaluation",
     "real_seconds": 44.0,
-    "speed": 2.32
+    "speed": 1.76
   },
   {
     "name": "13-version-comparison",
     "title": "Versions on identical participants",
     "real_seconds": 86.6,
-    "speed": 3.0
+    "speed": 3.01
   },
   {
-    "name": "21-cancel-resume",
-    "title": "Cancel and recovery",
-    "real_seconds": 500.5,
-    "speed": 14.06
+    "name": "d12-runs",
+    "title": "Runs, checkpoints and recovery",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "21-cancel",
+    "title": "Cancel",
+    "real_seconds": 155,
+    "speed": 8.54
+  },
+  {
+    "name": "27-resume",
+    "title": "Resume after a server restart",
+    "real_seconds": 751.6,
+    "speed": 16.22
   },
   {
     "name": "18-arena",
     "title": "Campaign Arena",
     "real_seconds": 126.8,
-    "speed": 7.74
+    "speed": 6.62
   },
   {
     "name": "16-cultural-dna",
     "title": "Cultural DNA",
     "real_seconds": 51.2,
-    "speed": 32.79
+    "speed": 2.85
   },
   {
-    "name": "17-market-expansion",
+    "name": "28-market-expansion",
     "title": "Market Expansion",
-    "real_seconds": 235.4,
-    "speed": 11.08
+    "real_seconds": 292.6,
+    "speed": 4.8
   },
   {
     "name": "19-brand-trend",
     "title": "Brand Memory and Trend Watch",
     "real_seconds": 82.3,
-    "speed": 4.1
+    "speed": 3.42
   },
   {
-    "name": "14-evidence-graph",
+    "name": "d10-database",
+    "title": "Where the evidence lives",
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "d11-evidence-graph",
     "title": "Evidence Graph",
-    "real_seconds": 97.8,
-    "speed": 5.01
+    "real_seconds": null,
+    "speed": null
+  },
+  {
+    "name": "29-evidence-graph",
+    "title": "Evidence Graph",
+    "real_seconds": 154.5,
+    "speed": 5.65
+  },
+  {
+    "name": "30-search",
+    "title": "Project search",
+    "real_seconds": 39.1,
+    "speed": 1.62
   },
   {
     "name": "15-proof-report",
     "title": "Proof report",
     "real_seconds": 85.7,
-    "speed": 3.92
+    "speed": 13.23
   },
   {
     "name": "20-home",
     "title": "Home dashboard",
     "real_seconds": 18,
-    "speed": 1.21
+    "speed": 1.24
   },
   {
     "name": "99-outro",

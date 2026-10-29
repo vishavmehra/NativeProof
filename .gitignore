@@ -42,3 +42,4 @@ qloo_live_smoke_report*.md
 # Demo recording sources and intermediate build files (the final video is committed)
 demo/raw/
 demo/build/
+demo/build-old-*/

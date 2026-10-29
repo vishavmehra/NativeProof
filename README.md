@@ -16,7 +16,7 @@ The judging account is a shared email-and-password account created for reviewers
 
 ## Walkthrough video
 
-**[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (9 min 52 s, 33 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models.
+**[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (18 min 39 s, 48 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models. It explains each feature and narrates the twelve architecture diagrams next to the features they describe, including Market Expansion's confirmation step, the zoomed diffusion and evidence graphs, project search, and a real restart of the production API followed by Resume.
 
 **Architecture and workflow diagrams:** all 12 are in [`diagrams/`](diagrams/), as editable draw.io sources (`diagrams/src/`), SVG (`diagrams/svg/`) and PNG (`diagrams/png/`), and each is embedded in the matching section below. Long runs are sped up, and a label on screen shows the real elapsed time and the playback speed. The voiceover is synthetic. The script, the shot list with measured timings, the captions, and the build script are in [`demo/`](demo/).
 
@@ -35,6 +35,9 @@ Measured in that session (production, October 29, 2026):
 | Campaign Arena, 2 concepts | 93.8 against 92.5 (within 5 points) | 80 s |
 | Cultural DNA profile | 8 evidence-backed items | 29 s |
 | Proof report (no model call) | 8 sections with reproducibility details | 13 s |
+| Market Expansion, Japan and South Korea | 3 ambiguous terms listed once; after 2 confirmations, 4 signals per market; not ranked, because the signals are identical | about 1 min per run |
+| Production API restarted 12 s into a 100-participant study | Marked interrupted with 81 interviews saved and 9 failed in flight; resumed from the checkpoint to 91 completed | resumed, not restarted |
+| Project search (Ctrl K), first search after new records | 8 hits across evidence, adaptations and Cultural DNA items | about 7 s |
 
 ## Contents
 
@@ -720,7 +723,7 @@ E2E_BASE_URL=http://localhost:3000 E2E_API_URL=http://localhost:8000 npx playwri
 
 | Check | Result |
 |---|---|
-| Backend suite (`uv run pytest -q`, SQLite) | 489 passed, 8 skipped (opt-in live and Postgres tests) |
+| Backend suite (`uv run pytest -q`, SQLite) | 494 passed, 7 skipped (opt-in live and Postgres tests) |
 | GitHub Actions on `main` | backend, postgres (Alembic sequence, data safety, RLS, API and security suites on PostgreSQL 17), frontend (typecheck, lint, build) and gitleaks: all passing |
 | Frontend `typecheck`, `lint`, `build` | passing |
 | Live smoke test against production (anonymous session) | discovery, 20-participant study, 1-round social simulation, participant and group follow-ups: all passing |
