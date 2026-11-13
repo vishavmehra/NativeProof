@@ -1,8 +1,29 @@
+<div align="center">
+
 # NativeProof
+
+### Test how a campaign lands in another market before it launches
 
 NativeProof is a research workspace for testing how a campaign may be received in another market before it launches. It grounds each step in cultural affinity data from Qloo, rehearses campaign versions with labeled synthetic audiences, adapts the copy for the market, compares versions with a deterministic scoring rule, and assembles a report in which every claim points to its source.
 
-NativeProof is decision support, not a forecast. Synthetic participants are AI personas, not people. Every record says whether it is source data, a calculation, a model interpretation, synthetic output, or an unverified hypothesis, so a reader can tell observed signals from generated text.
+[![License: MIT](https://img.shields.io/badge/license-MIT-2ea44f.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-3776AB.svg?logo=python&logoColor=white)](backend/pyproject.toml)
+[![FastAPI](https://img.shields.io/badge/FastAPI-009688.svg?logo=fastapi&logoColor=white)](backend/pyproject.toml)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-000000.svg?logo=nextdotjs&logoColor=white)](frontend/package.json)
+[![LangGraph workflows](https://img.shields.io/badge/LangGraph-workflows-1C3C3C.svg)](#ai-workflows)
+[![Qloo](https://img.shields.io/badge/data-Qloo%20cultural%20affinity-E8590C.svg)](#qloo-integration)
+[![Nebius Token Factory](https://img.shields.io/badge/AI-Nebius%20Token%20Factory-1F6FEB.svg)](#model-gateway-and-routing)
+[![Supabase PostgreSQL](https://img.shields.io/badge/Supabase-PostgreSQL%20%2B%20Auth-3FCF8E.svg?logo=supabase&logoColor=white)](#deployment)
+[![OpenAPI contract](https://img.shields.io/badge/contract-OpenAPI-6BA539.svg?logo=openapiinitiative&logoColor=white)](contracts/openapi.json)
+[![Synthetic audiences](https://img.shields.io/badge/audiences-synthetic%2C%20labeled-7B61FF.svg)](#scope-and-limitations)
+
+[Live demo](https://nativeproof.vercel.app) · [Judge login](#live-deployment) · [Film](#walkthrough-video) · [Why we built it](#the-problem) · [Measured results](#measured-results) · [Set it up](#local-setup)
+
+</div>
+
+> **NativeProof is decision support, not a forecast.** Synthetic participants are AI personas, not people, and Qloo affinity data describes cultural associations, not demand. Every record says whether it is source data, a calculation, a model interpretation, synthetic output, or an unverified hypothesis. Validate decisions with real people. See [Scope and limitations](#scope-and-limitations).
+
+---
 
 ## Live deployment
 
@@ -19,6 +40,8 @@ The judging account is a shared email-and-password account created for reviewers
 **[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (18 min 39 s, 48 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models. It explains each feature and narrates the twelve architecture diagrams next to the features they describe, including Market Expansion's confirmation step, the zoomed diffusion and evidence graphs, project search, and a real restart of the production API followed by Resume.
 
 **Architecture and workflow diagrams:** all 12 are in [`diagrams/`](diagrams/), as editable draw.io sources (`diagrams/src/`), SVG (`diagrams/svg/`) and PNG (`diagrams/png/`), and each is embedded in the matching section below. Long runs are sped up, and a label on screen shows the real elapsed time and the playback speed. The voiceover is synthetic. The script, the shot list with measured timings, the captions, and the build script are in [`demo/`](demo/).
+
+<a id="measured-results"></a>
 
 Measured in that session (production, October 29, 2026):
 
