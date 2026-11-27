@@ -17,7 +17,7 @@ NativeProof is a research workspace for testing how a campaign may be received i
 [![OpenAPI contract](https://img.shields.io/badge/contract-OpenAPI-6BA539.svg?logo=openapiinitiative&logoColor=white)](contracts/openapi.json)
 [![Synthetic audiences](https://img.shields.io/badge/audiences-synthetic%2C%20labeled-7B61FF.svg)](#scope-and-limitations)
 
-[Live demo](https://nativeproof.vercel.app) · [Judge login](#live-deployment) · [Film](#walkthrough-video) · [Why we built it](#the-problem) · [Measured results](#measured-results) · [Set it up](#local-setup)
+[Live demo](https://nativeproof.vercel.app) · [Judge login](#live-deployment) · [Film](#demo-and-walkthrough) · [Why we built it](#the-problem) · [Measured results](#measured-results) · [Set it up](#local-setup)
 
 </div>
 
@@ -35,7 +35,7 @@ NativeProof is a research workspace for testing how a campaign may be received i
 
 The judging account is a shared email-and-password account created for reviewers; it already contains the project recorded in the walkthrough ("Trailhead Coffee · Japan launch"). Google sign-in and an anonymous demo session (labeled fixture data, no provider calls) are also on the sign-in page. The API runs on Render's free plan in Singapore, next to the Supabase project in ap-southeast-2; an UptimeRobot monitor calls `/health` every five minutes to keep it awake, and a cold start, if one happens, takes about a minute.
 
-## Walkthrough video
+## Demo and walkthrough
 
 **3-minute demo:** [Watch on YouTube](https://youtu.be/aT7I2XzV3Og)
 
