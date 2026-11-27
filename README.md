@@ -37,7 +37,9 @@ The judging account is a shared email-and-password account created for reviewers
 
 ## Walkthrough video
 
-**[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (18 min 39 s, 48 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models. It explains each feature and narrates the twelve architecture diagrams next to the features they describe, including Market Expansion's confirmation step, the zoomed diffusion and evidence graphs, project search, and a real restart of the production API followed by Resume.
+**3-minute demo:** [Watch on YouTube](https://youtu.be/aT7I2XzV3Og)
+
+**[Watch the narrated walkthrough: demo/nativeproof-walkthrough.mp4](demo/nativeproof-walkthrough.mp4)** (18 min 39 s, 48 MB; also attached to the [v1.0.0 release](https://github.com/vishavmehra/NativeProof/releases/tag/v1.0.0)). It is one real session on the deployed app, from sign-in to the final report, using live Qloo data and live models. It explains each feature and narrates the twelve architecture diagrams next to the features they describe, including Market Expansion's confirmation step, the zoomed diffusion and evidence graphs, project search, and a real restart of the production API followed by Resume. · [Watch on YouTube](https://youtu.be/z5Idb9nVNRc)
 
 **Architecture and workflow diagrams:** all 12 are in [`diagrams/`](diagrams/), as editable draw.io sources (`diagrams/src/`), SVG (`diagrams/svg/`) and PNG (`diagrams/png/`), and each is embedded in the matching section below. Long runs are sped up, and a label on screen shows the real elapsed time and the playback speed. The voiceover is synthetic. The script, the shot list with measured timings, the captions, and the build script are in [`demo/`](demo/).
 
